@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a separate ESO compatibility tool from the exact tested BNet build."""
+"""Create a separate ESO tool from the exact tested Valve Proton 11 ARM64 build."""
 import argparse
 import hashlib
 import json
@@ -7,13 +7,18 @@ from pathlib import Path
 import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOL_ID = 'GE-Proton11-7-ESO-Hotpatch-arm64'
-PATCHED = '5b9c2d116f93a307e7b69c31544e52b7a5081fa7caa384020b1c09f948664d5b'
+TOOL_ID = 'Proton-11.0-ESO-Official-Hotpatch-arm64'
+PATCHED = 'dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257'
 BASE_HASHES = {
-    'kernel32.dll': 'fed36267d61204658b96a976e4cf19ab1053c49a466ca58c2bde6089148773cb',
-    'libarm64ecfex.dll': '27e2b27b7c11e847ac4687614ebcedc02854938427b43eefb5e64b099bad2733',
-    'ntdll.dll': 'e28f25f21ecf34a32ee2ce24672f023e436da08a88a01c6d4e93757633c9ba47',
-    'kernelbase.dll': '37530751e58f312a2f6aa0d72a9005b86d5e75c347b3c7ec52dca1051f33f5f1',
+    'kernel32.dll': '472d5a6b9906e90262dfacb5ed7ced11c76e8dbdd95037e424cf4fd7412299c6',
+    'libarm64ecfex.dll': 'fb9e057a719540626a1399c8b91501ebc57cdde7a623d280616a67234808c3fe',
+    'libwow64fex.dll': 'e7cdc7e0df3f1f222238cb7d16ac35257bfcd6ecf417d7ac7fdf2083a581d948',
+    'ntdll.dll': '5bab1f413ea1032ba9d1fd8a500b83d0248092e1911ba487a96d797fe062b71f',
+    'kernelbase.dll': '79c431521972199646099466da254993e278f7e2053245dfb741f116cd96586c',
+}
+BASE_UNIX_HASHES = {
+    'libarm64ecfex.so': 'dc8f21f75ee11c3829b346d5a8d60ee87d24091f5e6ed901b5c36c739832ac53',
+    'libwow64fex.so': '257041413ae02eb5e2ba31fd16d991478f3a3b53f8ed48b3cc356e42f77649be',
 }
 
 
@@ -23,7 +28,7 @@ def digest(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--base', type=Path, required=True)
+    parser.add_argument('--base', type=Path, default=Path.home() / '.local/share/Steam/steamapps/common/Proton 11.0 (ARM64)')
     parser.add_argument('--destination', type=Path, default=Path.home() / '.local/share/Steam/compatibilitytools.d' / TOOL_ID)
     args = parser.parse_args()
     base, destination = args.base.expanduser().resolve(), args.destination.expanduser().resolve()
@@ -34,9 +39,14 @@ def main():
     compiled = ROOT / 'bin/kernel32-eso-hotpatch.dll'
     if digest(compiled) != PATCHED:
         parser.error('Bundled DLL checksum failed.')
+    if (base / 'version').read_text().strip() != '1791559733 proton-11.0-2e-arm64':
+        parser.error('Only the tested Valve Proton 11.0-2e ARM64 build is supported.')
     for name, expected in BASE_HASHES.items():
         if digest(base / 'files/lib/wine/aarch64-windows' / name) != expected:
-            parser.error(f'Unrecognized baseline {name}; only the exact BNet1 build is supported.')
+            parser.error(f'Unrecognized baseline {name}; only Valve Proton 11.0-2e ARM64 is supported.')
+    for name, expected in BASE_UNIX_HASHES.items():
+        if digest(base / 'files/lib/wine/aarch64-unix' / name) != expected:
+            parser.error(f'Unrecognized baseline Unix component {name}.')
     if not (base / 'proton').is_file():
         parser.error('Base does not contain the Proton launcher.')
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -47,21 +57,25 @@ def main():
         target = destination / relative
         if not target.parent.resolve().is_relative_to(destination):
             raise SystemExit(f'Unexpected external directory symlink: {target.parent}')
+        if target.is_symlink() and target.resolve() == (destination / 'files/lib/wine/aarch64-windows/kernel32.dll').resolve():
+            if digest(target) != PATCHED:
+                raise SystemExit('Template symlink did not resolve to the patched DLL.')
+            continue
         if digest(target) != BASE_HASHES['kernel32.dll']:
             raise SystemExit(f'Unexpected template DLL. Incomplete destination retained: {target}')
         target.unlink()  # Do not write through a hardlink or symlink into the base.
         shutil.copy2(compiled, target)
     metadata = destination / 'compatibilitytool.vdf'
     metadata.write_text('"compatibilitytools"\n{\n "compat_tools"\n {\n  "' + TOOL_ID +
-                        '"\n  {\n   "install_path" "."\n   "display_name" "GE-Proton11-7-ESO Hotpatch (ARM64, experimental)"\n'
+                        '"\n  {\n   "install_path" "."\n   "display_name" "Proton 11.0 ESO Hotpatch (official base, ARM64, experimental)"\n'
                         '   "from_oslist" "windows"\n   "to_oslist" "linux"\n  }\n }\n}\n')
     notice = destination / 'eso-hotpatch'
     notice.mkdir(exist_ok=True)
     for directory in ['docs', 'scripts', 'patches', 'bin', 'evidence', 'LICENSES']:
         shutil.copytree(ROOT / directory, notice / directory, dirs_exist_ok=True)
-    for name in ['README.md', 'LICENSE']:
+    for name in ['README.md', 'LICENSE', 'source-manifest.json']:
         shutil.copy2(ROOT / name, notice / name)
-    (notice / 'component-hashes.json').write_text(json.dumps({'baseline': BASE_HASHES, 'patched_kernel32': PATCHED}, indent=2) + '\n')
+    (notice / 'component-hashes.json').write_text(json.dumps({'baseline': BASE_HASHES, 'baseline_unix': BASE_UNIX_HASHES, 'patched_kernel32': PATCHED}, indent=2) + '\n')
     print('Installed separate experimental tool. Base runtime and game prefix unchanged.')
 
 

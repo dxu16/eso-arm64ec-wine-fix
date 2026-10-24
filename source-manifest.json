@@ -1,0 +1,17 @@
+{
+  "base": "Valve Proton 11.0-2e ARM64",
+  "assets": [
+    {
+      "name": "Valve-Wine-e60892cc2398-sources.tar.gz",
+      "url": "https://codeload.github.com/ValveSoftware/wine/tar.gz/e60892cc2398b0a83c332a2078c7b85e47bdb42b",
+      "sha256": "d61805d35fb3da26fe3e0f77d68268eb81ceb97cfda326d2d58725be43897416",
+      "size_bytes": 56624839
+    },
+    {
+      "name": "Valve-Proton-bc896217ffcd-sources.tar.gz",
+      "url": "https://codeload.github.com/ValveSoftware/Proton/tar.gz/bc896217ffcd67f892f952b010f898fe7bd0f0a1",
+      "sha256": "be18d77ae5f9e5ce21318d151c692648e5cb7c5ffa50dea2dcac6c408966b077",
+      "size_bytes": 93595375
+    }
+  ]
+}

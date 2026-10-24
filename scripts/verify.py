@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify the manifest, exact DLL reproduction, rejection guards and optional release assets."""
 import argparse
+import ast
 import hashlib
 import json
 from pathlib import Path
@@ -10,8 +11,8 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = 'fed36267d61204658b96a976e4cf19ab1053c49a466ca58c2bde6089148773cb'
-PATCHED = '5b9c2d116f93a307e7b69c31544e52b7a5081fa7caa384020b1c09f948664d5b'
+BASE = '472d5a6b9906e90262dfacb5ed7ced11c76e8dbdd95037e424cf4fd7412299c6'
+PATCHED = 'dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257'
 
 
 def check(value, message):
@@ -31,6 +32,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--release-assets', action='store_true')
     args = parser.parse_args()
+    measured = json.loads((ROOT/'evidence/validation-results.json').read_text())['input_component_hashes']
+    installer = ast.parse((ROOT/'scripts/install.py').read_text())
+    for statement in installer.body:
+        if isinstance(statement, ast.Assign) and any(isinstance(t, ast.Name) and t.id in {'BASE_HASHES', 'BASE_UNIX_HASHES'} for t in statement.targets):
+            for name, value in ast.literal_eval(statement.value).items():
+                check(len(value) == 64 and all(c in '0123456789abcdef' for c in value), 'Malformed installer hash: '+name)
+                check(value == measured[name], 'Installer hash differs from measured baseline: '+name)
     patched = (ROOT / 'bin/kernel32-eso-hotpatch.dll').read_bytes()
     check(hashlib.sha256(patched).hexdigest() == PATCHED, 'Compiled DLL checksum failed')
     manifest = json.loads((ROOT / 'patches/kernel32-hotpatch-thunks.json').read_text())

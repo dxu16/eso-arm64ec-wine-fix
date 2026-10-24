@@ -1,15 +1,10 @@
-# Local release assets
+# Official-base release assets
 
-This directory is excluded from Git except for this README. Put these files
-in a GitHub Release alongside the repository source archive:
+This directory's large files are excluded from Git. The current release ships:
 
-- `GE-Proton11-7-ESO-Hotpatch-arm64.tar.gz`: complete compiled tool, not just a DLL.
-- `Bnet1-component-sources.tar.gz`: exact prepared baseline Wine/FEX component sources and build recipes.
-- `GE-Proton11-7-upstream-sources.tar.zst`: corresponding GE upstream sources.
-- `GE-Proton11-7-extras-sources.tar.zst`: corresponding GE extra-component sources.
-- `SHA256SUMS`: checksums for these release assets.
+- Proton-11.0-ESO-Official-Hotpatch-arm64-overlay.tar.gz: precompiled DLL plus installer, launcher, recipe, documentation, and notices.
+- Valve-Wine-e60892cc2398-sources.tar.gz: exact full source of the modified Wine component.
+- Valve-Proton-bc896217ffcd-sources.tar.gz: exact Proton root source and build recipes; not a recursive entire-runtime source bundle.
+- SHA256SUMS and release-manifest.json: outer download hashes and sizes.
 
-The three source archives are unchanged BNet1 release assets. The repository
-supplies the deterministic transformation used to modify the baseline Wine
-DLL. `python3 scripts/fetch-sources.py` downloads and verifies source archives
-that are missing. Do not commit the multi-hundred-megabyte assets to Git.
+Steam supplies the unchanged official runtime. No BNet installation or compiler is needed. The earlier full BNet runtime archive is no longer published. Private device backups and caches must never be included.

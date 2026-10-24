@@ -1,27 +1,24 @@
 {
   "project": "eso-arm64ec-wine-fix",
-  "status": "experimental; title screen only",
+  "version": "v0.2.0-experimental",
+  "base": "Valve Proton 11.0-2e ARM64",
+  "delivery": "precompiled Wine DLL overlay; unchanged runtime obtained from Steam",
   "date": "2026-10-24",
   "assets": [
     {
-      "name": "Bnet1-component-sources.tar.gz",
-      "size_bytes": 89758586,
-      "sha256": "480d39c59c4a9d755334379d7545fa844b88ea705c9e92d7e699026730e068e7"
+      "name": "Proton-11.0-ESO-Official-Hotpatch-arm64-overlay.tar.gz",
+      "size_bytes": 320511,
+      "sha256": "83cc0272639dc836adb4091aea5e62ecfdf8d2588e48db524e7175dc36be57a7"
     },
     {
-      "name": "GE-Proton11-7-ESO-Hotpatch-arm64.tar.gz",
-      "size_bytes": 708366246,
-      "sha256": "6dcce2da3359b81fb105b41773961992b1b2bacf9165fece26e6e8ff5037c817"
+      "name": "Valve-Wine-e60892cc2398-sources.tar.gz",
+      "size_bytes": 56624839,
+      "sha256": "d61805d35fb3da26fe3e0f77d68268eb81ceb97cfda326d2d58725be43897416"
     },
     {
-      "name": "GE-Proton11-7-extras-sources.tar.zst",
-      "size_bytes": 240882697,
-      "sha256": "8a972f75e4ebc9eea5a874d69988d5a33a30265a2b7efa147c914762dde1f142"
-    },
-    {
-      "name": "GE-Proton11-7-upstream-sources.tar.zst",
-      "size_bytes": 985964469,
-      "sha256": "62700f9eedaf153705193f2d72964f986eb56f45672ec86033a945cd4e89599f"
+      "name": "Valve-Proton-bc896217ffcd-sources.tar.gz",
+      "size_bytes": 93595375,
+      "sha256": "be18d77ae5f9e5ce21318d151c692648e5cb7c5ffa50dea2dcac6c408966b077"
     }
   ]
 }

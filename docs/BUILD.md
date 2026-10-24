@@ -1,74 +1,41 @@
-# Reproduction and provenance
+# Exact DLL reproduction
 
-## Supported binary input
+## What was built?
 
-The baseline is `files/lib/wine/aarch64-windows/kernel32.dll` from
-[mrdidit/bnet-arm release BNet1](https://github.com/mrdidit/bnet-arm/releases/tag/BNet1),
-distributed as [GE-Proton11-7-Bnet1-arm64.tar.gz](https://github.com/mrdidit/bnet-arm/releases/download/BNet1/GE-Proton11-7-Bnet1-arm64.tar.gz):
+The shipped file is Valve's precompiled Wine kernel32 after a deterministic **post-link binary transformation**. Wine was not recompiled. There is not yet a source-level Wine/LLVM linker patch for this change.
 
-```text
-fed36267d61204658b96a976e4cf19ab1053c49a466ca58c2bde6089148773cb
-```
-
-The tested ARM64X output is:
+Input: `files/lib/wine/aarch64-windows/kernel32.dll` from Steam's `1791559733 proton-11.0-2e-arm64`.
 
 ```text
-5b9c2d116f93a307e7b69c31544e52b7a5081fa7caa384020b1c09f948664d5b
+Input SHA256:  472d5a6b9906e90262dfacb5ed7ced11c76e8dbdd95037e424cf4fd7412299c6
+Output SHA256: dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257
 ```
 
-Run from the repository root with a new output filename:
+## Reproduce
 
 ```bash
 python3 scripts/reproduce-kernel32-hotpatch.py original-kernel32.dll new-kernel32.dll
 python3 scripts/verify.py
 ```
 
-The input is never written. Existing outputs, input/output aliasing, unknown
-baseline hashes, mismatching bytes, and changed import-slot targets are
-rejected. Guards remain enabled under Python's `-O` option.
+No compiler or third-party Python modules are required. The script checks the exact input hash, verifies each original 16-byte slot, inserts the eight-byte `lea rsp,[rsp+0]` prolog, adjusts each RIP-relative jump displacement by -8, verifies the unchanged import-slot address, and checks the final output hash. It rejects unknown inputs, input/output aliasing, and an existing output; guards remain active under Python `-O`.
 
-Verification independently reverses the recorded replacements to recover
-the original hash, runs the actual CLI transformation, compares its output
-byte-for-byte with the compiled DLL, and exercises rejection cases. This
-requires no ESO installation, remote access, or third-party Python packages.
+`patches/kernel32-hotpatch-thunks.json` is the complete change manifest. All 796 replacements preserve exported addresses and import targets. File size, native ARM64 instructions, import/export tables, and hybrid metadata are unchanged. `scripts/verify.py` independently reconstructs the original DLL from the compiled output, reproduces the patch through the CLI, and exercises rejection cases.
 
-## Baseline source build
+## Baseline source and build recipes
 
-`evidence/bnet-source-pins.json` retains BNet's source revisions and patch
-identities. The prepared Wine/FEX source and baseline build recipes are in
-`Bnet1-component-sources.tar.gz`. The other two source archives cover the
-unchanged GE base and dependencies. They are obtained with:
+- [Valve Proton](https://github.com/ValveSoftware/Proton), tag `proton-11.0-2e`, commit `bc896217ffcd67f892f952b010f898fe7bd0f0a1`.
+- [Valve Wine](https://github.com/ValveSoftware/wine), commit `e60892cc2398b0a83c332a2078c7b85e47bdb42b`.
+- FEX submodule: `1cc4b93e7a71c883ec021b71359f136394dc1f3c`; its binaries are unchanged.
+
+The release supplies the exact Wine source archive and Proton build-recipe archive. `source-manifest.json` records URLs and hashes; `scripts/fetch-sources.py` retrieves and verifies them. The Proton archive is the root build-recipe repository, not a recursively populated whole-runtime source bundle. Wine's full source is supplied separately for the modified DLL. Rebuilding Valve's original binary byte-for-byte has not been demonstrated; another input hash is intentionally rejected.
+
+## Package the precompiled overlay
 
 ```bash
-python3 scripts/fetch-sources.py
+python3 scripts/package-overlay.py --output release-assets/Proton-11.0-ESO-Official-Hotpatch-arm64-overlay.tar.gz
 ```
 
-The tested DLL was made by transforming the original BNet binary, not by
-substituting an independently rebuilt Wine. Building the baseline sources
-is useful for development but has not been established to reproduce BNet's
-binary byte-for-byte. A newly built kernel32 with another hash is rejected.
+This collects the compiled DLL, transformation, installer, launcher, documentation, sanitized evidence, and notices. It excludes runtime/prefix directories, private backups, bytecode caches, and release source archives. It creates internal per-file checksums. The separate release SHA256SUMS and release-manifest.json describe outer downloads; they are not recursively embedded in their own overlay.
 
-The patch has not yet been expressed as a source-level Wine/LLVM linker
-change. The manifest and transformation script are the complete recipe for
-this binary modification; they do not contain proprietary game code.
-
-## Complete runtime archive
-
-The compiled release is a copy of the tested BNet runtime with two DLL copies
-updated: the ARM64 runtime kernel32 and its default ARM64 prefix template.
-Its compatibility tool ID/display name are distinct. FEX, ntdll, kernelbase,
-and the rest of the base runtime payload retain their baseline versions.
-Baseline BNet build records describe the base; this repository's records
-describe the additional kernel32 transformation.
-
-Original tested BNet hashes:
-
-| File | SHA256 |
-| --- | --- |
-| libarm64ecfex.dll | `27e2b27b7c11e847ac4687614ebcedc02854938427b43eefb5e64b099bad2733` |
-| ntdll.dll | `e28f25f21ecf34a32ee2ce24672f023e436da08a88a01c6d4e93757633c9ba47` |
-| kernelbase.dll | `37530751e58f312a2f6aa0d72a9005b86d5e75c347b3c7ec52dca1051f33f5f1` |
-
-Compiled tool and source asset checksums are in `release-manifest.json` and
-`release-assets/SHA256SUMS`. Archive compression/timestamps are not claimed
-to be reproducible; the patched DLL itself is exactly reproducible.
+The installed full compatibility tool is assembled locally from the official Steam runtime. The overlay does not redistribute Valve's unchanged binary bundle.

@@ -1,9 +1,0 @@
-kbvm-proc 0.2.0
-
-Upstream license declaration: MIT OR Apache-2.0
-License selected for this distribution: Apache License 2.0.
-See LICENSE-APACHE-2.0.txt for the complete standard license text.
-
-Repository: https://github.com/mahkoh/kbvm
-
-The original Cargo.toml metadata and available upstream README files are retained here. Original inline legal notices, where present, are retained in inline-notices/.

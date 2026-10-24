@@ -8,3 +8,10 @@ __pycache__/
 .pytest_cache/
 *.tmp
 eso-hotpatch-verify-*/
+**/__pycache__/
+*.log
+*.reg
+**/pfx/
+**/compatdata/
+device-investigation-backup*/
+privacy-audit*/

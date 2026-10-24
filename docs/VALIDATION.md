@@ -1,32 +1,21 @@
 # Validation
 
-Date: 24 October 2026. Device: KONKR Pocket FIT, Armada OS, Linux aarch64,
-kernel 7.2.6. Base compatibility tool: GE-Proton11-7-Bnet1-arm64.
+Tests performed 24 October 2026 on an Armada OS Linux aarch64 handheld, kernel 7.2.6. Base: Valve `1791559733 proton-11.0-2e-arm64`. Source revision and component hashes are in `evidence/official-source-pins.json` and `evidence/validation-results.json`.
 
-| Configuration | Observation |
+| Case | Outcome |
 | --- | --- |
-| Original BNet ARM64EC | Repeated self-exit `0x1100` around 305 seconds |
-| Native Windows, same game hash | Responsive at login for at least 413 seconds; closed normally |
-| Native x64 Proton 11.0 on Deck | Title screen; survived 345-second timeout |
-| Kernel32 correction + earlier context experiments | Title screen; survived 420-second timeout; no shutdown thread |
-| Kernel32 correction + original BNet FEX/ntdll/kernelbase | Title screen; survived 420-second timeout |
+| Stock official runtime, fresh Wine prefix | Shutdown thread; exit 0x1101 after 305.807 game seconds; not the decisive control |
+| Stock official runtime, cloned Steam-initialized prefix | 28 API-entry reports; shutdown thread; exit 0x1100 after 305.376 game seconds |
+| Official runtime + kernel32 correction, identically initialized prefix | Zero API-entry reports; no observed shutdown thread; animated title screen; survived 420-second timeout |
+| Actual packaged installer and dependency-preserving launcher | Zero API-entry reports; survived a second 420-second timeout |
 
-Both corrected full runs ended with wrapper status **124**, from the explicit
-test timeout. Neither logged a game `NtTerminateProcess` call. Stream-filter
-wall times were 422.034 and 422.020 seconds; these include wrapper overhead
-and are not a claim that the title screen was displayed for the entire time.
+The successful wrappers returned **124**, from the explicit timeout. Filter wall times were about 422 seconds including wrapper overhead; this is not a claim that the title screen was shown for that entire interval. The first patched run had SEH tracing and an empty shutdown-thread log. The installer/launcher run had process/module tracing without SEH tracing, so shutdown-thread absence was not measured by that method in the second run.
 
-The short instrumented startup capture reported zero API-hook records after
-the correction. The fully instrumented long run had an empty timer-thread
-log and no detected timer TID. SEH tracing was disabled for the minimal run,
-so timer absence was not measured by the same trace method in that run.
+The fresh and Steam-initialized prefixes differed beyond just their runtime. The distinct 0x1101 result was not isolated to a particular missing redistributable. Both decisive A/B runs copied the same existing ESO Steam prefix. No manual changes were made to that original prefix.
 
-The working-set API probe retained FALSE/error 120 and untouched buffers.
-The architecture/LastError probe retained its original ARM64EC results and
-preserved handler/resume LastError values. These are narrow regression
-checks, not comprehensive Wine or FEX conformance testing.
+Loaded prefix hashes confirmed stock Valve FEX, ntdll, kernelbase, and the WOW64 translator. A baseline prefix audit found 504 matching official Wine DLLs and no differing Wine-builtin DLL among the inspected ARM64 system DLLs. The candidate differs only in kernel32's entry-layout correction; custom tool registration and helper files do not change FEX or Wine implementations.
 
-Conservative FEX options used for both full controls:
+Conservative options:
 
 ```text
 FEX_SMC_CHECKS=full
@@ -38,26 +27,8 @@ FEX_X87REDUCEDPRECISION=0
 FEX_MULTIBLOCK=0
 ```
 
-No login, server connection, gameplay, long-session stability, default-setting
-performance, alternate OS, or alternate runtime/game version was verified.
-The original installed BNet components retained their original hashes.
+**No login or gameplay was tested.** Long-session stability, account enforcement, other platforms/builds, performance, and minimum required FEX settings remain unknown. Modified DLL bytes can be detected by other checks. Passing this startup test does not establish approval or account safety.
 
-Account-safety and downstream integrity-check behavior were not established.
-The modified entry bytes remain observable, even though the recorded import
-targets and behavior are preserved. The title-screen result is not evidence
-that other checks cannot flag the runtime or that account enforcement is
-excluded. No detection/enforcement probability can be inferred from these tests.
+## Earlier result
 
-Machine-readable records: [`../evidence/`](../evidence/).
-
-## Repository packaging checks
-
-The reproduction and rejection checks passed on Windows and Armada Linux.
-Linux disposable-fixture checks verified separate installation, preservation
-of baseline components, replacement of the template DLL, rejection of an
-existing/nested destination and unsupported baseline, and the installed
-embedded verifier. The portable launcher fixture checked prefix preparation,
-the conservative environment, arguments, lock cleanup and active-lock
-rejection. Shell syntax and the repository's local documentation links were
-also checked. These helper tests did not launch ESO and do not extend the
-game-validation scope above.
+The BNet-based proof also survived two seven-minute controls. The new official-base comparison shows that BNet's additional Wine/FEX changes are not required for the measured self-exit. Scrubbed BNet source history remains at the `v0.1.0-experimental` Git tag; its release has been removed.

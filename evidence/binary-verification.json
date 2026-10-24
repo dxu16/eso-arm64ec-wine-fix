@@ -1,7 +1,9 @@
 {
-  "same_file_size": 1376256,
-  "modified_bytes": 7963,
+  "input_sha256": "472d5a6b9906e90262dfacb5ed7ced11c76e8dbdd95037e424cf4fd7412299c6",
+  "output_sha256": "dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257",
+  "file_size_bytes": 1376256,
+  "same_file_size": true,
+  "changed_bytes": 7963,
   "thunk_count": 796,
-  "changed_only_recorded_thunk_slots": true,
-  "headers_exports_imports_arm64_code_metadata_unchanged": true
+  "export_addresses_import_targets_arm64_code_and_hybrid_metadata_preserved": true
 }

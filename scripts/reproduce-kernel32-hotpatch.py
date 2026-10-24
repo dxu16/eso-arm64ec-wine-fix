@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Reproduce the private BNet1 imported-export hotpatch-prolog experiment.
+"""Reproduce the Valve Proton 11.0-2e ARM64 imported-export hotpatch prologs.
 
 Reads the original DLL and writes a separate output. Never modifies ESO or input.
-Requires the adjacent recorded manifest; refuses unknown runtime versions.
+Uses patches/kernel32-hotpatch-thunks.json; refuses unknown runtime versions.
 """
 import argparse
 import hashlib
@@ -10,8 +10,8 @@ import json
 from pathlib import Path
 import struct
 
-BASE_SHA = 'fed36267d61204658b96a976e4cf19ab1053c49a466ca58c2bde6089148773cb'
-OUT_SHA = '5b9c2d116f93a307e7b69c31544e52b7a5081fa7caa384020b1c09f948664d5b'
+BASE_SHA = '472d5a6b9906e90262dfacb5ed7ced11c76e8dbdd95037e424cf4fd7412299c6'
+OUT_SHA = 'dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257'
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('input', type=Path)
 parser.add_argument('output', type=Path)

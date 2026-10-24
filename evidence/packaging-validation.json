@@ -1,25 +1,16 @@
 {
-  "date": "2026-10-24",
-  "dll_verification": {
-    "exact_reproduction": true,
-    "all_796_import_targets_preserved": true,
-    "unknown_baseline_rejected": true,
-    "input_output_alias_rejected": true,
-    "existing_output_rejected": true,
-    "guards_enforced_under_python_optimized_mode": true
-  },
-  "linux_checks": {
-    "bash_syntax": true,
-    "installer_disposable_fixture": true,
-    "base_components_preserved": true,
-    "default_prefix_template_patched": true,
-    "existing_destination_rejected": true,
-    "destination_inside_base_rejected": true,
-    "unsupported_base_rejected": true,
-    "installed_embedded_verifier": true,
-    "portable_launcher_disposable_fixture": true,
-    "launcher_prefix_and_environment": true,
-    "launcher_lock_cleanup_and_active_lock_rejection": true
-  },
-  "scope": "Packaging/helper checks only; no additional ESO gameplay validation"
+  "precompiled_overlay_checksums": true,
+  "exact_dll_reproduction": true,
+  "version_hashes_match_recorded_baseline": true,
+  "linux_shell_syntax": true,
+  "installer_source_preserved": true,
+  "template_relative_symlink_retained": true,
+  "existing_nested_or_unsupported_destination_rejected": true,
+  "launcher_preserves_initialized_prefix_data": true,
+  "runtime_socket_data_skipped": true,
+  "launcher_environment_and_arguments": true,
+  "launcher_lock_cleanup_and_rejection": true,
+  "copy_completion_guard": true,
+  "privacy_guard_positive_and_negative_fixtures": true,
+  "real_installer_launcher_survived_420_second_timeout": true
 }

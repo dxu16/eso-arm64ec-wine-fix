@@ -1,0 +1,11 @@
+{
+  "scope": "Published Git history and the initial compiled archive; private backups excluded",
+  "credentials_private_keys_lan_addresses_or_steam_account_ids_found": false,
+  "git_blob_versions_checked": 645,
+  "compiled_archive_members_checked": 12346,
+  "unnecessary_environment_record_removed_from_history": true,
+  "cached_python_bytecode_with_device_paths_removed": true,
+  "legacy_bnet_release_deleted": true,
+  "upstream_copyright_and_attribution_preserved": true,
+  "limits": "Automated pattern scans and manual review do not prove absence of every possible identifier; external clones and GitHub cached objects are outside a history rewrite."
+}

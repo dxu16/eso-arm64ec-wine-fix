@@ -1,20 +1,65 @@
 {
-  "run-hotpatch-long-20261024-133936": {
-    "wrapper_exit": 124,
-    "wall_elapsed": 422.0340528488159,
-    "timeout_seconds": 420,
-    "termination_records": [],
-    "title_screen_verified": true,
-    "runtime": "private x87/context components plus kernel32 fix",
-    "timer_tid": null,
-    "timer_log_bytes": 0
+  "base": "Valve Proton 11.0-2e ARM64",
+  "version": "1791559733 proton-11.0-2e-arm64",
+  "input_component_hashes": {
+    "kernel32.dll": "472d5a6b9906e90262dfacb5ed7ced11c76e8dbdd95037e424cf4fd7412299c6",
+    "ntdll.dll": "5bab1f413ea1032ba9d1fd8a500b83d0248092e1911ba487a96d797fe062b71f",
+    "kernelbase.dll": "79c431521972199646099466da254993e278f7e2053245dfb741f116cd96586c",
+    "libarm64ecfex.dll": "fb9e057a719540626a1399c8b91501ebc57cdde7a623d280616a67234808c3fe",
+    "libwow64fex.dll": "e7cdc7e0df3f1f222238cb7d16ac35257bfcd6ecf417d7ac7fdf2083a581d948",
+    "libarm64ecfex.so": "dc8f21f75ee11c3829b346d5a8d60ee87d24091f5e6ed901b5c36c739832ac53",
+    "libwow64fex.so": "257041413ae02eb5e2ba31fd16d991478f3a3b53f8ed48b3cc356e42f77649be"
   },
-  "run-hotpatch-stock-20261024-134704": {
-    "wrapper_exit": 124,
-    "wall_elapsed": 422.01971459388733,
-    "timeout_seconds": 420,
-    "termination_records": [],
-    "title_screen_verified": true,
-    "runtime": "original BNet FEX/ntdll/kernelbase plus kernel32 fix"
-  }
+  "patched_kernel32_sha256": "dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257",
+  "tests": [
+    {
+      "case": "stock_fresh_prefix",
+      "wrapper_exit": 1,
+      "wall_elapsed_seconds": 309.0454332828522,
+      "timeout_seconds": 420,
+      "game_exit_codes": [
+        4353
+      ],
+      "seh_tracing_enabled": true,
+      "shutdown_thread_seen": true,
+      "game_seconds_until_exit": 305.80699999999933,
+      "control_limitation": "Not initialized through the same Steam path; reason for the distinct exit code was not isolated. Not the decisive A/B comparison."
+    },
+    {
+      "case": "stock_steam_initialized",
+      "wrapper_exit": 1,
+      "wall_elapsed_seconds": 308.48229813575745,
+      "timeout_seconds": 420,
+      "game_exit_codes": [
+        4352
+      ],
+      "api_reports": 28,
+      "seh_tracing_enabled": true,
+      "shutdown_thread_seen": true,
+      "game_seconds_until_exit": 305.3760000000002
+    },
+    {
+      "case": "patched_official",
+      "wrapper_exit": 124,
+      "wall_elapsed_seconds": 422.0328266620636,
+      "timeout_seconds": 420,
+      "game_exit_codes": [],
+      "api_reports": 0,
+      "seh_tracing_enabled": true,
+      "shutdown_thread_seen": false,
+      "title_screen_visually_verified": true
+    },
+    {
+      "case": "packaged_installer_and_launcher",
+      "wrapper_exit": 124,
+      "wall_elapsed_seconds": 422.01344633102417,
+      "timeout_seconds": 420,
+      "game_exit_codes": [],
+      "api_reports": 0,
+      "seh_tracing_enabled": false
+    }
+  ],
+  "login_or_gameplay_tested": false,
+  "source_steam_prefix_modified_manually": false,
+  "launcher_lock_cleaned": true
 }

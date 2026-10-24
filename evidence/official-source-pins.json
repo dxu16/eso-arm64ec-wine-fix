@@ -1,0 +1,44 @@
+{
+  "repository": "https://github.com/ValveSoftware/Proton",
+  "tag": "proton-11.0-2e",
+  "commit": "bc896217ffcd67f892f952b010f898fe7bd0f0a1",
+  "steam_version": "1791559733 proton-11.0-2e-arm64",
+  "component_entries": [
+    {
+      "name": ".gitmodules",
+      "sha": "09fc03927a9d72e8f63ec9d51be1c1e88d5e87a0",
+      "type": "file",
+      "url": "https://github.com/ValveSoftware/Proton/blob/proton-11.0-2e/.gitmodules"
+    },
+    {
+      "name": "FEX",
+      "sha": "1cc4b93e7a71c883ec021b71359f136394dc1f3c",
+      "type": "file",
+      "url": "https://github.com/FEX-Emu/FEX/tree/1cc4b93e7a71c883ec021b71359f136394dc1f3c"
+    },
+    {
+      "name": "dxvk",
+      "sha": "a6764047e587178283fcde4073ae6e1410af594f",
+      "type": "file",
+      "url": "https://github.com/doitsujin/dxvk/tree/a6764047e587178283fcde4073ae6e1410af594f"
+    },
+    {
+      "name": "proton",
+      "sha": "a2aef17f1c5ece518719450c296853ebe76bc3f6",
+      "type": "file",
+      "url": "https://github.com/ValveSoftware/Proton/blob/proton-11.0-2e/proton"
+    },
+    {
+      "name": "vkd3d-proton",
+      "sha": "212991fc2c266bc0d59f4c4ce8f80f7126508d71",
+      "type": "file",
+      "url": "https://github.com/HansKristian-Work/vkd3d-proton/tree/212991fc2c266bc0d59f4c4ce8f80f7126508d71"
+    },
+    {
+      "name": "wine",
+      "sha": "e60892cc2398b0a83c332a2078c7b85e47bdb42b",
+      "type": "file",
+      "url": "https://github.com/ValveSoftware/wine/tree/e60892cc2398b0a83c332a2078c7b85e47bdb42b"
+    }
+  ]
+}
