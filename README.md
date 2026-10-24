@@ -1,6 +1,6 @@
 # ESO on Armada OS: Wine ARM64EC import-thunk fix
 
-An experimental compatibility fix for **The Elder Scrolls Online's `0x1100` self-exit after about 305 seconds** on Linux ARM64 using **GE-Proton11-7-Bnet1-arm64** and FEX.
+An experimental compatibility fix for **The Elder Scrolls Online's `0x1100` self-exit after about 305 seconds** on Linux ARM64 using **[GE-Proton11-7-Bnet1-arm64 (BNet1)](https://github.com/mrdidit/bnet-arm/releases/tag/BNet1)** and FEX.
 
 **[Download the complete compiled tool](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.1.0-experimental/GE-Proton11-7-ESO-Hotpatch-arm64.tar.gz)** · [Checksums](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.1.0-experimental/SHA256SUMS) · [Experimental release and corresponding sources](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.1.0-experimental)
 
@@ -11,6 +11,14 @@ ESO's startup API-entry checks classify legitimate Wine ARM64EC `kernel32.dll` i
 Two patched runs reached the animated **“Press A to Start”** screen and survived a 420-second test timeout. One used the original BNet FEX, ntdll, and kernelbase, with only kernel32 changed. The startup capture had no reported API hooks and no five-minute shutdown thread.
 
 **Login, server connection, gameplay, long sessions, and other runtime versions remain untested.** The tests used conservative FEX settings; performance has not been evaluated. This is an experimental compatibility fix, not an official BNet, Wine, or FEX release.
+
+## Does this require BNet?
+
+**The complete download is self-contained:** it already includes the BNet-based runtime, so you do not need to install BNet separately.
+
+**The patch and installer target one exact baseline:** [mrdidit/bnet-arm, release BNet1](https://github.com/mrdidit/bnet-arm/releases/tag/BNet1), specifically [GE-Proton11-7-Bnet1-arm64.tar.gz](https://github.com/mrdidit/bnet-arm/releases/download/BNet1/GE-Proton11-7-Bnet1-arm64.tar.gz). They verify the exact DLL hashes and reject other builds. Do not copy this DLL into an arbitrary Proton installation.
+
+The underlying entry-layout correction is not inherently BNet-specific. It could be ported to other ARM64EC Wine/Proton builds, but that requires inspecting their thunks, adapting the transformation or build process, and testing them. We have not established whether upstream Proton or another Wine/FEX combination can run ESO with this correction alone.
 
 ## Install
 

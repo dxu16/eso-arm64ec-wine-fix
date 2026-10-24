@@ -1,8 +1,9 @@
 # Install and rollback
 
 Requirements: Linux ARM64, Python 3.9+, GNU tar/gzip, Steam and its
-SteamLinuxRuntime_4-arm64 runtime, the exact supported BNet build, and an
-existing ESO installation. This is not a Windows DLL replacement.
+SteamLinuxRuntime_4-arm64 runtime, and an existing ESO installation.
+The complete tool download is self-contained and does not require BNet to
+be installed separately. This is not a Windows DLL replacement.
 
 Stop ESO before installation or prefix preparation.
 
@@ -29,6 +30,13 @@ Run commands individually and stop if a command fails. Extraction creates a
 separate tool. Do not extract over a previous installation.
 
 ## Build the tool from an installed BNet runtime
+
+This alternative installation method requires the exact
+[BNet1 release from mrdidit/bnet-arm](https://github.com/mrdidit/bnet-arm/releases/tag/BNet1):
+[download GE-Proton11-7-Bnet1-arm64.tar.gz](https://github.com/mrdidit/bnet-arm/releases/download/BNet1/GE-Proton11-7-Bnet1-arm64.tar.gz).
+Other builds are rejected because the transformation and validation are
+version-bound. The underlying compatibility idea could be ported, but other
+bases have not been tested.
 
 ```bash
 python3 scripts/install.py \

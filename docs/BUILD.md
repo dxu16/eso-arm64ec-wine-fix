@@ -2,7 +2,9 @@
 
 ## Supported binary input
 
-The baseline is `files/lib/wine/aarch64-windows/kernel32.dll` from BNet1:
+The baseline is `files/lib/wine/aarch64-windows/kernel32.dll` from
+[mrdidit/bnet-arm release BNet1](https://github.com/mrdidit/bnet-arm/releases/tag/BNet1),
+distributed as [GE-Proton11-7-Bnet1-arm64.tar.gz](https://github.com/mrdidit/bnet-arm/releases/download/BNet1/GE-Proton11-7-Bnet1-arm64.tar.gz):
 
 ```text
 fed36267d61204658b96a976e4cf19ab1053c49a466ca58c2bde6089148773cb

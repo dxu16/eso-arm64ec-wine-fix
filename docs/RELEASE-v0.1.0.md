@@ -1,7 +1,7 @@
 # ESO ARM64EC Wine fix v0.1.0 — experimental
 
 This release addresses ESO's repeatable `0x1100` self-exit around 305 seconds
-on the tested Armada OS / GE-Proton11-7-Bnet1-arm64 setup.
+on the tested Armada OS / [GE-Proton11-7-Bnet1-arm64 (BNet1)](https://github.com/mrdidit/bnet-arm/releases/tag/BNet1) setup.
 
 Wine's legitimate ARM64EC kernel32 imported-export jump thunks triggered
 ESO's API-entry hook checks. Adding the hotpatch entry prolog used by working
@@ -16,6 +16,12 @@ import targets, implementations, and native ARM64 code are preserved.
 - GitHub's repository source archives contain the additional patch manifest, deterministic transformation script, helper scripts, documentation, and notices.
 
 ## Install
+
+The compiled tool is self-contained; BNet does not need to be installed
+separately. The alternative patch/installer method requires the exact
+[BNet1 baseline archive](https://github.com/mrdidit/bnet-arm/releases/download/BNet1/GE-Proton11-7-Bnet1-arm64.tar.gz).
+The underlying entry-layout correction may be portable, but other bases
+have not been tested and are not accepted by the version-checked installer.
 
 Verify the downloaded runtime against SHA256SUMS. Extract the tool into
 `~/.local/share/Steam/compatibilitytools.d/` without overwriting an existing
