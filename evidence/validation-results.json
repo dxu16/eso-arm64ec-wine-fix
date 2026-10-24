@@ -1,0 +1,20 @@
+{
+  "run-hotpatch-long-20261024-133936": {
+    "wrapper_exit": 124,
+    "wall_elapsed": 422.0340528488159,
+    "timeout_seconds": 420,
+    "termination_records": [],
+    "title_screen_verified": true,
+    "runtime": "private x87/context components plus kernel32 fix",
+    "timer_tid": null,
+    "timer_log_bytes": 0
+  },
+  "run-hotpatch-stock-20261024-134704": {
+    "wrapper_exit": 124,
+    "wall_elapsed": 422.01971459388733,
+    "timeout_seconds": 420,
+    "termination_records": [],
+    "title_screen_verified": true,
+    "runtime": "original BNet FEX/ntdll/kernelbase plus kernel32 fix"
+  }
+}

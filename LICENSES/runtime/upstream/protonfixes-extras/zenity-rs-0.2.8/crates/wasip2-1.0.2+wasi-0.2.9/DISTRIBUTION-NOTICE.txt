@@ -1,0 +1,9 @@
+wasip2 1.0.2+wasi-0.2.9
+
+Upstream license declaration: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
+License selected for this distribution: Apache License 2.0.
+See LICENSE-APACHE-2.0.txt for the complete standard license text.
+
+Repository: https://github.com/bytecodealliance/wasi-rs
+
+The original Cargo.toml metadata and available upstream README files are retained here. Original inline legal notices, where present, are retained in inline-notices/.

@@ -1,0 +1,16 @@
+/// An iterator over the [`MatchRule`] in a table.
+///
+/// This type is created using [`ComposeTable::iter`].
+///
+/// This type does not implement `Iterator` because the returned values borrow from the
+/// iterator. Call [`Iter::next`] manually instead.
+///
+/// # Example
+///
+/// ```xcompose
+/// <Multi_key> <a>: at
+/// <Multi_key> <c>: copyright
+/// ```
+///
+/// This rule returns two elements, one for `<Multi_key> <a>` and one for
+/// `<Multi_key> <c>`.

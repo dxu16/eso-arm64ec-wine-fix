@@ -1,0 +1,12 @@
+/* This file is part of libmspack.
+ * (C) 2003-2010 Stuart Caie.
+ *
+ * SZDD is a format used in the MS-DOS commands COMPRESS.EXE and
+ * EXPAND.EXE. The compression method is attributed to Steven Zeck,
+ * however it's pretty much identical to LZSS.
+ *
+ * libmspack is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License (LGPL) version 2.1
+ *
+ * For further details, see the file COPYING.LIB distributed with libmspack
+ */

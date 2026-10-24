@@ -1,0 +1,3 @@
+/* These are the four functions used in the four steps of the MD5 algorithm
+   and defined in the RFC 1321.  The first function is a little bit optimized
+   (as found in Colin Plumbs public domain implementation).  */

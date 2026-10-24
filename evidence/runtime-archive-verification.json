@@ -1,0 +1,12 @@
+{
+  "members": 12346,
+  "components": {
+    "kernelbase.dll": "37530751e58f312a2f6aa0d72a9005b86d5e75c347b3c7ec52dca1051f33f5f1",
+    "libarm64ecfex.dll": "27e2b27b7c11e847ac4687614ebcedc02854938427b43eefb5e64b099bad2733",
+    "ntdll.dll": "e28f25f21ecf34a32ee2ce24672f023e436da08a88a01c6d4e93757633c9ba47",
+    "kernel32.dll": "5b9c2d116f93a307e7b69c31544e52b7a5081fa7caa384020b1c09f948664d5b"
+  },
+  "single_tool_root": "GE-Proton11-7-ESO-Hotpatch-arm64",
+  "added_repository_notes": true,
+  "embedded_notes": "Current repository helpers, documentation, compiled DLL and complete license collection; release archives excluded"
+}

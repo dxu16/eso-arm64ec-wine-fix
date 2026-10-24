@@ -1,0 +1,12 @@
+name: Verify patch package
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -B scripts/verify.py
+      - run: bash -n scripts/launch-eso.sh scripts/launch-tested-prefix.sh

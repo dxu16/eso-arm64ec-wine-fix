@@ -1,0 +1,10 @@
+release-assets/*
+!release-assets/README.md
+*.tar.gz
+*.tar.zst
+*.zip
+__pycache__/
+*.pyc
+.pytest_cache/
+*.tmp
+eso-hotpatch-verify-*/
