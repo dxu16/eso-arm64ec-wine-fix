@@ -42,6 +42,12 @@ No login, server connection, gameplay, long-session stability, default-setting
 performance, alternate OS, or alternate runtime/game version was verified.
 The original installed BNet components retained their original hashes.
 
+Account-safety and downstream integrity-check behavior were not established.
+The modified entry bytes remain observable, even though the recorded import
+targets and behavior are preserved. The title-screen result is not evidence
+that other checks cannot flag the runtime or that account enforcement is
+excluded. No detection/enforcement probability can be inferred from these tests.
+
 Machine-readable records: [`../evidence/`](../evidence/).
 
 ## Repository packaging checks

@@ -38,6 +38,11 @@ and kernelbase; only Wine's kernel32 and its default-prefix copy were changed.
 
 **Login, server connection, gameplay, long-session stability, performance,
 other devices, other game versions, and other runtime versions remain untested.**
+**Detection and account-safety risk are unknown.** The Wine entry bytes are
+modified and could be noticed or rejected by other integrity checks or future
+updates. Passing the measured startup check is not a guarantee of approval,
+undetectability, or protection from account enforcement. No logged-in session
+was tested.
 Existing Steam prefixes may need their builtin DLLs refreshed; the verified
 result used an explicitly prepared isolated prefix. The original ARM64EC
 thunks are valid code; this is an entry-layout compatibility workaround.

@@ -12,6 +12,8 @@ Two patched runs reached the animated **“Press A to Start”** screen and surv
 
 **Login, server connection, gameplay, long sessions, and other runtime versions remain untested.** The tests used conservative FEX settings; performance has not been evaluated. This is an experimental compatibility fix, not an official BNet, Wine, or FEX release.
 
+**Detection and account-safety risk are unknown.** The correction changes Wine DLL entry bytes. Other integrity checks or future updates could detect or reject those changes. Passing the observed startup check does not establish that the runtime is undetectable, approved by ZeniMax, or safe from account enforcement. No logged-in session was tested.
+
 ## Does this require BNet?
 
 **The complete download is self-contained:** it already includes the BNet-based runtime, so you do not need to install BNet separately.
