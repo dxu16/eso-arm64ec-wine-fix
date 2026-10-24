@@ -1,10 +1,10 @@
 # ESO on official Proton 11 ARM64
 
-An experimental Wine compatibility fix for ESO's repeatable **0x1100 self-exit after about 305 seconds**, tested on **Valve Proton 11.0-2e ARM64**. **BNet is not required.**
+An experimental Wine compatibility fix for ESO's repeatable **0x1100 self-exit after about 305 seconds**, tested on **Valve Proton 11.0-2e ARM64**.
 
 **[Download the precompiled patch and installer](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.2.0-experimental/Proton-11.0-ESO-Official-Hotpatch-arm64-overlay.tar.gz)** · [Checksums](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.2.0-experimental/SHA256SUMS) · [Release and source archives](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.2.0-experimental)
 
-The installer clones your Steam-installed official runtime into a separate compatibility tool and applies the **already compiled kernel32.dll**. No compiler or BNet download is needed. The unchanged Valve runtime is supplied by Steam rather than redistributed in this small overlay.
+The installer clones your Steam-installed official runtime into a separate compatibility tool and applies the **already compiled kernel32.dll**. No compiler is needed. The unchanged Valve runtime is supplied by Steam rather than redistributed in this small overlay.
 
 ## What changed?
 
@@ -60,7 +60,5 @@ The script reproduces the shipped DLL byte-for-byte. There is **not yet a source
 [Findings](docs/FINDINGS.md) · [Validation](docs/VALIDATION.md) · [Installation](docs/INSTALL.md) · [Sources and licenses](docs/SOURCES-AND-LICENSES.md) · [Privacy](docs/PRIVACY.md)
 
 This idea may apply to other ARM64EC builds, but the current binary patch and compiled DLL support only the exact tested baseline. Do not copy the DLL into arbitrary Proton or Windows installations.
-
-The earlier BNet experiment established the cause; its scrubbed commits remain in the `v0.1.0-experimental` Git tag. Its release was removed. The only current release is the official-Proton approach.
 
 Wine, Valve Proton, FEX, LLVM and dependency authors retain their licenses and credit. The compiled Wine DLL retains Wine's LGPL terms. New helpers and documentation have the scoped [MIT license](LICENSE). This is not an official Valve, Wine, FEX, or ESO release.
