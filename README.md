@@ -22,7 +22,9 @@ With copies of the same Steam-initialized ESO prefix:
 | Same runtime with only the kernel32 correction | Zero API-entry reports; no observed shutdown thread; animated title screen; survived 420-second timeout |
 | Packaged installer and launcher | Zero API-entry reports; survived a second 420-second timeout |
 
-**Login, server connection, gameplay, long sessions, other builds, and performance remain untested. Detection and account-safety risk are unknown.** Other integrity checks or future updates could notice or reject the changed entry bytes. The title-screen result is not a guarantee of approval or protection from enforcement.
+The user also confirmed that ESO works when launched directly through Steam with the installed hotfixed compatibility tool, without `launch-eso.sh`. The controlled measurements above used the isolated launcher; no duration or gameplay scope was recorded for the user's Steam confirmation.
+
+**The controlled tests did not cover login, server connection, gameplay, long sessions, other builds, or performance. Detection and account-safety risk are unknown.** Other integrity checks or future updates could notice or reject the changed entry bytes. Successful launches are not a guarantee of approval or protection from enforcement.
 
 ## Install
 
@@ -33,12 +35,24 @@ With copies of the same Steam-initialized ESO prefix:
 ```bash
 python3 scripts/verify.py
 python3 scripts/install.py
+```
+
+The installer creates **Proton-11.0-ESO-Official-Hotpatch-arm64** in `~/.local/share/Steam/compatibilitytools.d/`. It preserves the official installed runtime.
+
+4. Restart Steam. Open ESO's **Properties → Compatibility**, enable **Force the use of a specific Steam Play compatibility tool**, and select **Proton 11.0 ESO Hotpatch (official base, ARM64, experimental)**.
+5. Launch ESO normally through Steam. The launch script is not required.
+
+[Paths, overrides, and rollback](docs/INSTALL.md).
+
+## Optional developer launch script
+
+`scripts/launch-eso.sh` is available for development, troubleshooting, and reproducing the controlled tests:
+
+```bash
 bash scripts/launch-eso.sh
 ```
 
-The installer creates **Proton-11.0-ESO-Official-Hotpatch-arm64** beside your existing compatibility tools. It preserves the official installed runtime. The launcher clones an existing Steam-initialized ESO prefix into its own compatibility directory, skipping transient sockets and locks. It preserves the source prefix and refreshes the clone's Wine/FEX core DLLs from the selected tool.
-
-Restart Steam to see **Proton 11.0 ESO Hotpatch (official base, ARM64, experimental)**. The controlled tests used the isolated launcher; selecting the tool in Steam with another prefix has not been separately validated. [Paths, overrides, and rollback](docs/INSTALL.md).
+It clones an existing Steam-initialized ESO prefix into a separate compatibility directory, refreshes five core DLLs from the selected tool, verifies the patched kernel32 hash, and launches `eso64.exe` directly with explicit FEX settings. It preserves the source prefix. These extra steps are not needed for the user-confirmed normal Steam launch. See [launcher paths and overrides](docs/INSTALL.md).
 
 ## Is the DLL build method included?
 
