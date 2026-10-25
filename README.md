@@ -2,9 +2,9 @@
 
 An experimental Wine compatibility and performance fix for ESO on **Valve Proton 11.0-2e ARM64**. The default package includes both the kernel32 startup fix and the ntdll performance correction.
 
-**[Ready-to-use compatibility tool (~582 MB)](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.3.0-experimental/Proton-11.0-ESO-Performance-Hotpatch-arm64.tar.gz)** Â· [Small overlay and installer (~1 MB)](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.3.0-experimental/Proton-11.0-ESO-Performance-Hotpatch-arm64-overlay.tar.gz) Â· [Checksums and sources](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.3.0-experimental)
+**[Download the prebuilt compatibility tool (~582 MB)](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.3.0-experimental/Proton-11.0-ESO-Performance-Hotpatch-arm64.tar.gz)** | [Small overlay and installer (~1 MB)](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.3.0-experimental/Proton-11.0-ESO-Performance-Hotpatch-arm64-overlay.tar.gz) | [Checksums and sources](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.3.0-experimental)
 
-The ready-to-use archive includes the full official-base compatibility tool with both DLL fixes applied. Extract it into Steamâ€™s compatibility-tools folder and select it. No compiler, manual installer command, or separate base-Proton installation is needed. Steamâ€™s ARM64 Linux runtime and FEX rootfs remain prerequisites, as for official ARM64 Proton.
+The ready-to-use archive includes the full official-base compatibility tool with both DLL fixes applied. Extract it into Steam's compatibility-tools folder and select it. No compiler, manual installer command, or separate base-Proton installation is needed. Steam's ARM64 Linux runtime and FEX rootfs remain prerequisites, as for official ARM64 Proton.
 
 The smaller overlay remains available for users who already have the exact official Proton baseline installed.
 
@@ -37,7 +37,7 @@ mkdir -p ~/.local/share/Steam/compatibilitytools.d
 tar -xzf Proton-11.0-ESO-Performance-Hotpatch-arm64.tar.gz -C ~/.local/share/Steam/compatibilitytools.d
 ```
 
-Restart Steam. In ESOâ€™s **Properties â†’ Compatibility**, force **Proton 11.0 ESO Performance Hotpatch (ARM64, experimental)** and launch normally. Allow Steamâ€™s first-run prerequisites to finish. The first launch creates its private default prefix and may take longer.
+Restart Steam. In ESO's **Properties > Compatibility**, force **Proton 11.0 ESO Performance Hotpatch (ARM64, experimental)** and launch normally. Allow Steam's first-run prerequisites to finish. The first launch creates its private default prefix and may take longer.
 
 If that tool folder already exists, keep it or move it aside first; do not extract over a running or immutable-protected tool. The full archive and overlay contain the same patched DLLs. [Detailed installation](docs/READY-TO-USE.md).
 
@@ -52,7 +52,7 @@ python3 scripts/verify.py
 python3 scripts/install.py
 ```
 
-4. Restart Steam. In ESO's **Properties Ã¢â€ â€™ Compatibility**, enable **Force the use of a specific Steam Play compatibility tool** and select **Proton 11.0 ESO Performance Hotpatch (ARM64, experimental)**.
+4. Restart Steam. In ESO's **Properties > Compatibility**, enable **Force the use of a specific Steam Play compatibility tool** and select **Proton 11.0 ESO Performance Hotpatch (ARM64, experimental)**.
 5. Launch normally through Steam. No launch script is required.
 
 The default destination is `~/.local/share/Steam/compatibilitytools.d/Proton-11.0-ESO-Performance-Hotpatch-arm64`. The original Valve runtime is preserved. Existing kernel32-only tools are left available as fallbacks; switch ESO to the new tool explicitly. [Paths, protection, and rollback](docs/INSTALL.md).
@@ -78,7 +78,7 @@ The repository includes both compiled DLLs, complete binary change manifests, th
 
 ## Documentation
 
-[Findings](docs/FINDINGS.md) Ã‚Â· [Validation](docs/VALIDATION.md) Ã‚Â· [Installation](docs/INSTALL.md) Ã‚Â· [Sources and licenses](docs/SOURCES-AND-LICENSES.md) Ã‚Â· [Privacy](docs/PRIVACY.md)
+[Findings](docs/FINDINGS.md) | [Validation](docs/VALIDATION.md) | [Installation](docs/INSTALL.md) | [Sources and licenses](docs/SOURCES-AND-LICENSES.md) | [Privacy](docs/PRIVACY.md)
 
 Only the exact tested baseline is supported. Do not copy these DLLs into arbitrary Proton or Windows installations.
 

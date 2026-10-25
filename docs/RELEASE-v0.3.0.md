@@ -1,4 +1,4 @@
-# ESO ARM64EC Wine fix v0.3.0 â€” performance correction
+# ESO ARM64EC Wine fix v0.3.0 - performance correction
 
 This is the default recommended experimental package for the exact Valve Proton 11.0-2e ARM64 baseline. It includes the existing kernel32 startup fix and the new ntdll ARM64EC call-checker correction. FEX, kernelbase, WOW64, and GPU components remain unchanged.
 
@@ -12,6 +12,6 @@ Both precompiled DLLs, exact post-link reproduction scripts, complete change man
 
 ## Ready-to-use full tool
 
-A full ready-to-extract `Proton-11.0-ESO-Performance-Hotpatch-arm64.tar.gz` is also available. Extract its tool folder into `~/.local/share/Steam/compatibilitytools.d/`, restart Steam, and select the tool for ESO. No manual installer or separate base-Proton installation is required. Steam’s Linux ARM64 runtime and FEX rootfs remain prerequisites. The small overlay remains available.
+A full ready-to-extract `Proton-11.0-ESO-Performance-Hotpatch-arm64.tar.gz` is also available. Extract its tool folder into `~/.local/share/Steam/compatibilitytools.d/`, restart Steam, and select the tool for ESO. No manual installer or separate base-Proton installation is required. Steam's Linux ARM64 runtime and FEX rootfs remain prerequisites. The small overlay remains available.
 
 The full archive excludes generated prefixes, caches, logs and device data, and includes canonical metadata and internal file hashes. Matching component source archives and patch sources are supplied in the separate runtime-sources archive. The DLLs are identical in both downloads.
