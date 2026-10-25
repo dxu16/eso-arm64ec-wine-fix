@@ -1,0 +1,707 @@
+{
+  "sources": [
+    {
+      "path": "FEX",
+      "repository": "FEX-Emu/FEX",
+      "commit": "1cc4b93e7a71c883ec021b71359f136394dc1f3c",
+      "name": "FEX-Emu-FEX-1cc4b93e7a71.tar.gz",
+      "url": "https://codeload.github.com/FEX-Emu/FEX/tar.gz/1cc4b93e7a71c883ec021b71359f136394dc1f3c",
+      "sha256": "efc74785a634fb9f1ed9ed618ccd5cdff1df0d18cd4a615bfcf35fe1fcc38c62",
+      "size_bytes": 2527693
+    },
+    {
+      "path": "FEX/External/Catch2",
+      "repository": "catchorg/Catch2",
+      "commit": "b3fb4b9feafcd8d91c5cb510a4775143fdbef02f",
+      "name": "catchorg-Catch2-b3fb4b9feafc.tar.gz",
+      "url": "https://codeload.github.com/catchorg/Catch2/tar.gz/b3fb4b9feafcd8d91c5cb510a4775143fdbef02f",
+      "sha256": "46081f8fc9ae9dd2bc5eab0e4e4472791f9c9027dd83ea60d32cf696f33e9319",
+      "size_bytes": 1412187
+    },
+    {
+      "path": "FEX/External/Vulkan-Headers",
+      "repository": "KhronosGroup/Vulkan-Headers",
+      "commit": "450bd2232225d6c7728a4108055ac2e37cef6475",
+      "name": "KhronosGroup-Vulkan-Headers-450bd2232225.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/Vulkan-Headers/tar.gz/450bd2232225d6c7728a4108055ac2e37cef6475",
+      "sha256": "26df9841c30806a994e2fdf42f7c87bcb1ced9db9a06033469123939fb3fa075",
+      "size_bytes": 2940820
+    },
+    {
+      "path": "FEX/External/drm-headers",
+      "repository": "FEX-Emu/drm-headers",
+      "commit": "3e49836995c1dcb3df709440ad2f270b569c6a5f",
+      "name": "FEX-Emu-drm-headers-3e49836995c1.tar.gz",
+      "url": "https://codeload.github.com/FEX-Emu/drm-headers/tar.gz/3e49836995c1dcb3df709440ad2f270b569c6a5f",
+      "sha256": "3d3653841f81ea5be1a15cd4b458f048c1fffbcd97fcc808454a7fbe7cf1a555",
+      "size_bytes": 239483
+    },
+    {
+      "path": "FEX/External/fmt",
+      "repository": "fmtlib/fmt",
+      "commit": "407c905e45ad75fc29bf0f9bb7c5c2fd3475976f",
+      "name": "fmtlib-fmt-407c905e45ad.tar.gz",
+      "url": "https://codeload.github.com/fmtlib/fmt/tar.gz/407c905e45ad75fc29bf0f9bb7c5c2fd3475976f",
+      "sha256": "2bc1fe4a5b6d5d6a614239b4ca1d520e66e152a02d3d262684d26dfd6ab3438a",
+      "size_bytes": 711737
+    },
+    {
+      "path": "FEX/External/jemalloc_glibc",
+      "repository": "FEX-Emu/jemalloc",
+      "commit": "8436195ad5e1bc347d9b39743af3d29abee59f06",
+      "name": "FEX-Emu-jemalloc-8436195ad5e1.tar.gz",
+      "url": "https://codeload.github.com/FEX-Emu/jemalloc/tar.gz/8436195ad5e1bc347d9b39743af3d29abee59f06",
+      "sha256": "800cc0653f5bc2f0ed2cc7bb383f8eeda1ff94b2e89eaee0ccc57bd5fb002fe4",
+      "size_bytes": 825254
+    },
+    {
+      "path": "FEX/External/range-v3",
+      "repository": "ericniebler/range-v3",
+      "commit": "ca1388fb9da8e69314dda222dc7b139ca84e092f",
+      "name": "ericniebler-range-v3-ca1388fb9da8.tar.gz",
+      "url": "https://codeload.github.com/ericniebler/range-v3/tar.gz/ca1388fb9da8e69314dda222dc7b139ca84e092f",
+      "sha256": "57a6fca5d60a85b84e8efecc62f0ca064e6b1f89b97b513284fe7f5bd43d49eb",
+      "size_bytes": 585661
+    },
+    {
+      "path": "FEX/External/rpmalloc",
+      "repository": "FEX-Emu/rpmalloc",
+      "commit": "1d85c246cd827ead6865f4f880d4fef53f2b1864",
+      "name": "FEX-Emu-rpmalloc-1d85c246cd82.tar.gz",
+      "url": "https://codeload.github.com/FEX-Emu/rpmalloc/tar.gz/1d85c246cd827ead6865f4f880d4fef53f2b1864",
+      "sha256": "201b7f48b1e0202967b816b833261d8aea2a4943e0da92c82107a54c0b89f62c",
+      "size_bytes": 76386
+    },
+    {
+      "path": "FEX/External/tracy",
+      "repository": "wolfpld/tracy",
+      "commit": "650c98ece70da9e155e7ba1c2b3ee16004aae118",
+      "name": "wolfpld-tracy-650c98ece70d.tar.gz",
+      "url": "https://codeload.github.com/wolfpld/tracy/tar.gz/650c98ece70da9e155e7ba1c2b3ee16004aae118",
+      "sha256": "4741e8d302e6f700a23e05f2271424bee9f701488376a552021c0c8b5cab993e",
+      "size_bytes": 4781353
+    },
+    {
+      "path": "FEX/External/unordered_dense",
+      "repository": "martinus/unordered_dense",
+      "commit": "3234af2c03549bc85656bfd3a86993bf1cd8aef1",
+      "name": "martinus-unordered_dense-3234af2c0354.tar.gz",
+      "url": "https://codeload.github.com/martinus/unordered_dense/tar.gz/3234af2c03549bc85656bfd3a86993bf1cd8aef1",
+      "sha256": "aa68d77ef88475db710bf647017f5ccb13ceec6f55f3defa37e995b043eb990b",
+      "size_bytes": 914070
+    },
+    {
+      "path": "FEX/External/vixl",
+      "repository": "FEX-Emu/vixl",
+      "commit": "5f418449c48f6ca3ad37c47ec632f17a561c0580",
+      "name": "FEX-Emu-vixl-5f418449c48f.tar.gz",
+      "url": "https://codeload.github.com/FEX-Emu/vixl/tar.gz/5f418449c48f6ca3ad37c47ec632f17a561c0580",
+      "sha256": "3190537598c3495442fe197f5e7b2adc5b75a744275752f700f6748813d43fc7",
+      "size_bytes": 26064781
+    },
+    {
+      "path": "FEX/External/xxhash",
+      "repository": "Cyan4973/xxHash",
+      "commit": "e626a72bc2321cd320e953a0ccf1584cad60f363",
+      "name": "Cyan4973-xxHash-e626a72bc232.tar.gz",
+      "url": "https://codeload.github.com/Cyan4973/xxHash/tar.gz/e626a72bc2321cd320e953a0ccf1584cad60f363",
+      "sha256": "34e71c085636fbc1726482996d92719d0a16e6a6097970ecf2990a27b3821162",
+      "size_bytes": 1147772
+    },
+    {
+      "path": "FEX/External/zydis",
+      "repository": "zyantific/zydis",
+      "commit": "9bfadd6a55fc92dbd37fa3ba089bf8b36622df4f",
+      "name": "zyantific-zydis-9bfadd6a55fc.tar.gz",
+      "url": "https://codeload.github.com/zyantific/zydis/tar.gz/9bfadd6a55fc92dbd37fa3ba089bf8b36622df4f",
+      "sha256": "2c168a83fc9f67c5abec287fde50d2b016757f159db8bf46aac138126d504edc",
+      "size_bytes": 1007069
+    },
+    {
+      "path": "FEX/External/zydis/dependencies/zycore",
+      "repository": "zyantific/zycore-c",
+      "commit": "75a36c45ae1ad382b0f4e0ede0af84c11ee69928",
+      "name": "zyantific-zycore-c-75a36c45ae1a.tar.gz",
+      "url": "https://codeload.github.com/zyantific/zycore-c/tar.gz/75a36c45ae1ad382b0f4e0ede0af84c11ee69928",
+      "sha256": "c24ebd402d0ce83cd54f08e68189e68d54e3b5938f65ca972dfdbac89757139b",
+      "size_bytes": 67032
+    },
+    {
+      "path": "FEX/Source/Common/cpp-optparse",
+      "repository": "Sonicadvance1/cpp-optparse",
+      "commit": "9f94388a339fcbb0bc95c17768eb786c85988f6e",
+      "name": "Sonicadvance1-cpp-optparse-9f94388a339f.tar.gz",
+      "url": "https://codeload.github.com/Sonicadvance1/cpp-optparse/tar.gz/9f94388a339fcbb0bc95c17768eb786c85988f6e",
+      "sha256": "68e6b500890270517d226abbc3610135de1600ddde29f44c9b68cca5e2a17f60",
+      "size_bytes": 13218
+    },
+    {
+      "path": "OpenXR-SDK",
+      "repository": "KhronosGroup/OpenXR-SDK",
+      "commit": "8899a91c17ce9618f565f42408b47db1d6e9ccc7",
+      "name": "KhronosGroup-OpenXR-SDK-8899a91c17ce.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/OpenXR-SDK/tar.gz/8899a91c17ce9618f565f42408b47db1d6e9ccc7",
+      "sha256": "431d8e0e7b2b5cee68613aafeed686f1ed46ee483a3727d3f905dac1a944b2b6",
+      "size_bytes": 614694
+    },
+    {
+      "path": "Proton",
+      "repository": "ValveSoftware/Proton",
+      "commit": "bc896217ffcd67f892f952b010f898fe7bd0f0a1",
+      "name": "Valve-Proton-bc896217ffcd-sources.tar.gz",
+      "url": "https://codeload.github.com/ValveSoftware/Proton/tar.gz/bc896217ffcd67f892f952b010f898fe7bd0f0a1",
+      "size_bytes": 93595375,
+      "sha256": "be18d77ae5f9e5ce21318d151c692648e5cb7c5ffa50dea2dcac6c408966b077"
+    },
+    {
+      "path": "SPIRV-Headers",
+      "repository": "KhronosGroup/SPIRV-Headers",
+      "commit": "6cae8216a6ea19ff3f237af01e54378c1ff81fcd",
+      "name": "KhronosGroup-SPIRV-Headers-6cae8216a6ea.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/SPIRV-Headers/tar.gz/6cae8216a6ea19ff3f237af01e54378c1ff81fcd",
+      "sha256": "626c56490aa4e9e126aa6e6a06c88d3eb90f629cbcf375aa298658198b97ea71",
+      "size_bytes": 414934
+    },
+    {
+      "path": "Vulkan-Headers",
+      "repository": "KhronosGroup/Vulkan-Headers",
+      "commit": "31aa7f634b052d87ede4664053e85f3f4d1d50d3",
+      "name": "KhronosGroup-Vulkan-Headers-31aa7f634b05.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/Vulkan-Headers/tar.gz/31aa7f634b052d87ede4664053e85f3f4d1d50d3",
+      "sha256": "a4b8c15f4bbbc9feb007bfb7131f0fb390af47508368fc765b99472cc4c74159",
+      "size_bytes": 2253807
+    },
+    {
+      "path": "dav1d",
+      "repository": "videolan/dav1d",
+      "commit": "8a6f054ef1e0f7886bc6e53e6be97c427154fe85",
+      "name": "videolan-dav1d-8a6f054ef1e0.tar.gz",
+      "url": "https://codeload.github.com/videolan/dav1d/tar.gz/8a6f054ef1e0f7886bc6e53e6be97c427154fe85",
+      "sha256": "60c703596bbd14a97a143fdeea19b58134a9202f3f5aeebe4dd1f47d97459923",
+      "size_bytes": 1478900
+    },
+    {
+      "path": "dxvk",
+      "repository": "doitsujin/dxvk",
+      "commit": "a6764047e587178283fcde4073ae6e1410af594f",
+      "name": "doitsujin-dxvk-a6764047e587.tar.gz",
+      "url": "https://codeload.github.com/doitsujin/dxvk/tar.gz/a6764047e587178283fcde4073ae6e1410af594f",
+      "sha256": "47c1b61d08fab8700d50fe8949809d15bbca0275934dcd5097235f3171f84d0f",
+      "size_bytes": 1270727
+    },
+    {
+      "path": "dxvk-nvapi",
+      "repository": "jp7677/dxvk-nvapi",
+      "commit": "f9fdf268e888d17ae9875a4f01908164ff05f740",
+      "name": "jp7677-dxvk-nvapi-f9fdf268e888.tar.gz",
+      "url": "https://codeload.github.com/jp7677/dxvk-nvapi/tar.gz/f9fdf268e888d17ae9875a4f01908164ff05f740",
+      "sha256": "16ecace6c927ba2bc05152a674c9364781d16a953ce8049192f6a54b125024db",
+      "size_bytes": 500566
+    },
+    {
+      "path": "dxvk-nvapi/external/DirectX-Headers",
+      "repository": "microsoft/DirectX-Headers",
+      "commit": "c94b9b23aaadc2034dd1cad656a5a69f1526f98a",
+      "name": "microsoft-DirectX-Headers-c94b9b23aaad.tar.gz",
+      "url": "https://codeload.github.com/microsoft/DirectX-Headers/tar.gz/c94b9b23aaadc2034dd1cad656a5a69f1526f98a",
+      "sha256": "7c8bfab3bba57643309e92fe823a6552bb2caa1ea00fd863521c253c7a8e2f36",
+      "size_bytes": 469228
+    },
+    {
+      "path": "dxvk-nvapi/external/Vulkan-Headers",
+      "repository": "KhronosGroup/Vulkan-Headers",
+      "commit": "2cd90f9d20df57eac214c148f3aed885372ddcfe",
+      "name": "KhronosGroup-Vulkan-Headers-2cd90f9d20df.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/Vulkan-Headers/tar.gz/2cd90f9d20df57eac214c148f3aed885372ddcfe",
+      "sha256": "e3865307e665f6a4ac4f7bbca7b3ba95e4191c7f8adf9f04b084ef514a2454e9",
+      "size_bytes": 2760645
+    },
+    {
+      "path": "dxvk-nvapi/external/nvapi",
+      "repository": "NVIDIA/nvapi",
+      "commit": "9b181ea572f680327fe01a14a0f1f41c78034104",
+      "name": "NVIDIA-nvapi-9b181ea572f6.tar.gz",
+      "url": "https://codeload.github.com/NVIDIA/nvapi/tar.gz/9b181ea572f680327fe01a14a0f1f41c78034104",
+      "sha256": "538177993bc5ae3aef52ea4932f1f25ee53afa56da38e2c6aa23087873340064",
+      "size_bytes": 7095067
+    },
+    {
+      "path": "dxvk-nvapi/external/vkroots",
+      "repository": "misyltoad/vkroots",
+      "commit": "ee76e620798612c52fb8dcc32a1058a0a3538930",
+      "name": "misyltoad-vkroots-ee76e6207986.tar.gz",
+      "url": "https://codeload.github.com/misyltoad/vkroots/tar.gz/ee76e620798612c52fb8dcc32a1058a0a3538930",
+      "sha256": "efa6759a42b05b1068d73ce660df35616067bec190bcdbad69abb05aa2bcbe37",
+      "size_bytes": 473784
+    },
+    {
+      "path": "dxvk/include/native/directx",
+      "repository": "Joshua-Ashton/mingw-directx-headers",
+      "commit": "9df86f2341616ef1888ae59919feaa6d4fad693d",
+      "name": "Joshua-Ashton-mingw-directx-headers-9df86f234161.tar.gz",
+      "url": "https://codeload.github.com/Joshua-Ashton/mingw-directx-headers/tar.gz/9df86f2341616ef1888ae59919feaa6d4fad693d",
+      "sha256": "9c1b8bbfd2d6c758fac4d93c2808a46bc1eee429fe656b4f21b29e02615aa8aa",
+      "size_bytes": 473287
+    },
+    {
+      "path": "dxvk/include/spirv",
+      "repository": "KhronosGroup/SPIRV-Headers",
+      "commit": "04f10f650d514df88b76d25e83db360142c7b174",
+      "name": "KhronosGroup-SPIRV-Headers-04f10f650d51.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/SPIRV-Headers/tar.gz/04f10f650d514df88b76d25e83db360142c7b174",
+      "sha256": "1b220e3eec1714f0451b0e3652979bd280edf10893f617837b88e6359a804ded",
+      "size_bytes": 561661
+    },
+    {
+      "path": "dxvk/include/vulkan",
+      "repository": "KhronosGroup/Vulkan-Headers",
+      "commit": "5d94bb4dcc968cccce1f601324fcaf3eda92a52b",
+      "name": "KhronosGroup-Vulkan-Headers-5d94bb4dcc96.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/Vulkan-Headers/tar.gz/5d94bb4dcc968cccce1f601324fcaf3eda92a52b",
+      "sha256": "76d4353587a983b2c77bbcfa86e32f8053e1c0dbc796c4469094f61322c1b669",
+      "size_bytes": 3058587
+    },
+    {
+      "path": "dxvk/subprojects/dxbc-spirv",
+      "repository": "doitsujin/dxbc-spirv",
+      "commit": "fe5a4ef1e99357c8b9f57e4cfb1195c3dae9707f",
+      "name": "doitsujin-dxbc-spirv-fe5a4ef1e993.tar.gz",
+      "url": "https://codeload.github.com/doitsujin/dxbc-spirv/tar.gz/fe5a4ef1e99357c8b9f57e4cfb1195c3dae9707f",
+      "sha256": "18d12adb91667a0b03e14eda962ec1867c6ec3aa08436bf96864ff779ef96b4c",
+      "size_bytes": 434671
+    },
+    {
+      "path": "dxvk/subprojects/dxbc-spirv/submodules/spirv_headers",
+      "repository": "KhronosGroup/SPIRV-Headers",
+      "commit": "c8ad050fcb29e42a2f57d9f59e97488f465c436d",
+      "name": "KhronosGroup-SPIRV-Headers-c8ad050fcb29.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/SPIRV-Headers/tar.gz/c8ad050fcb29e42a2f57d9f59e97488f465c436d",
+      "sha256": "5b6f38b430f1c68c7395c570053403da14eb4cecc7fcb4040e7a5248c2f63874",
+      "size_bytes": 542911
+    },
+    {
+      "path": "dxvk/subprojects/libdisplay-info",
+      "repository": "doitsujin/libdisplay-info",
+      "commit": "275e6459c7ab1ddd4b125f28d0440716e4888078",
+      "name": "doitsujin-libdisplay-info-275e6459c7ab.tar.gz",
+      "url": "https://codeload.github.com/doitsujin/libdisplay-info/tar.gz/275e6459c7ab1ddd4b125f28d0440716e4888078",
+      "sha256": "c83c3e600f90a3ac98932e9259de62ad8ad3a65dd5efb1d2abcb1e4d1c8f494a",
+      "size_bytes": 95114
+    },
+    {
+      "path": "espeak-ng",
+      "repository": "rhasspy/espeak-ng",
+      "commit": "0f65aa301e0d6bae5e172cc74197d32a6182200f",
+      "name": "rhasspy-espeak-ng-0f65aa301e0d.tar.gz",
+      "url": "https://codeload.github.com/rhasspy/espeak-ng/tar.gz/0f65aa301e0d6bae5e172cc74197d32a6182200f",
+      "sha256": "37ebbabb010200be8ec26c61b770e93f964f4503a329d7d74c239a1a40051e43",
+      "size_bytes": 16321475
+    },
+    {
+      "path": "ffmpeg",
+      "repository": "FFmpeg/FFmpeg",
+      "commit": "a77521cd5d27e955b16e8097eecefc779ffdcb6d",
+      "name": "FFmpeg-FFmpeg-a77521cd5d27.tar.gz",
+      "url": "https://codeload.github.com/FFmpeg/FFmpeg/tar.gz/a77521cd5d27e955b16e8097eecefc779ffdcb6d",
+      "sha256": "f9b9cbb16c11ee6fa47dacbd4a1a39b464e1f496b569af50d103b4f52e56833a",
+      "size_bytes": 13509010
+    },
+    {
+      "path": "fonts/liberation-fonts",
+      "repository": "liberationfonts/liberation-fonts",
+      "commit": "4b0192046158094654e865245832c66d2104219e",
+      "name": "liberationfonts-liberation-fonts-4b0192046158.tar.gz",
+      "url": "https://codeload.github.com/liberationfonts/liberation-fonts/tar.gz/4b0192046158094654e865245832c66d2104219e",
+      "sha256": "fa7bdde21ad476b24786f5563b468fd0dd4c5dd4b9ecf48a20f17b13d84f26a8",
+      "size_bytes": 5106369
+    },
+    {
+      "path": "glslang",
+      "repository": "KhronosGroup/glslang",
+      "commit": "df7fec2cfa966919172ee83bfcae6c9c9b3f91b8",
+      "name": "KhronosGroup-glslang-df7fec2cfa96.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/glslang/tar.gz/df7fec2cfa966919172ee83bfcae6c9c9b3f91b8",
+      "sha256": "68230153f6a89bebadd537078f8f51f9927b36de5c2359f748305e29e3756625",
+      "size_bytes": 3661106
+    },
+    {
+      "path": "graphene",
+      "repository": "ebassi/graphene",
+      "commit": "4e2578450809c2099400cf85caf18eafcd7100aa",
+      "name": "ebassi-graphene-4e2578450809.tar.gz",
+      "url": "https://codeload.github.com/ebassi/graphene/tar.gz/4e2578450809c2099400cf85caf18eafcd7100aa",
+      "sha256": "0737e4bf386d924104fc0a9a19441eb29ed7e8776a52308f0e68f28e94b08d35",
+      "size_bytes": 178701
+    },
+    {
+      "path": "graphene/subprojects/mutest",
+      "repository": "ebassi/mutest",
+      "commit": "f0dcb2a48a4a8ef3dc1f7327bb0d4056a798c1a7",
+      "name": "ebassi-mutest-f0dcb2a48a4a.tar.gz",
+      "url": "https://codeload.github.com/ebassi/mutest/tar.gz/f0dcb2a48a4a8ef3dc1f7327bb0d4056a798c1a7",
+      "sha256": "8e5728113f7247bd6f6655dae94642f646c03b747f44724a6dc2e5f95a627d99",
+      "size_bytes": 357095
+    },
+    {
+      "path": "gst-orc",
+      "repository": "GStreamer/orc",
+      "commit": "7d5bbada3f1c6cf34182abccf47a34d79b83fa97",
+      "name": "GStreamer-orc-7d5bbada3f1c.tar.gz",
+      "url": "https://codeload.github.com/GStreamer/orc/tar.gz/7d5bbada3f1c6cf34182abccf47a34d79b83fa97",
+      "sha256": "502c21dbc72b6873bd7c01f5c607fc9d75725cf5962ebdddcbc962233580b974",
+      "size_bytes": 299090
+    },
+    {
+      "path": "gst-plugins-rs",
+      "repository": "sdroege/gst-plugin-rs",
+      "commit": "0205aa43d6d8c5d0c9d4e4f83e0a3aaa94acef89",
+      "name": "sdroege-gst-plugin-rs-0205aa43d6d8.tar.gz",
+      "url": "https://codeload.github.com/sdroege/gst-plugin-rs/tar.gz/0205aa43d6d8c5d0c9d4e4f83e0a3aaa94acef89",
+      "sha256": "19deefcf09f1465b4bae52b88d079bd060b9f5a446250242929f4d6eb85e4bf2",
+      "size_bytes": 1891527
+    },
+    {
+      "path": "gstreamer",
+      "name": "GStreamer-gstreamer-bf6ce1d64a06.tar.gz",
+      "url": "https://codeload.github.com/GStreamer/gstreamer/tar.gz/bf6ce1d64a0697e7910826147b48f8f658366a5a",
+      "sha256": "0b0eb5f747ead7cf36cd229bd6d7efcf8df25e4329061a8391d44088706bfd92",
+      "size_bytes": 31969497
+    },
+    {
+      "path": "kaldi",
+      "repository": "alphacep/kaldi",
+      "commit": "a25f216f5ce4eec5e45a6ab7651e20c9840a05cd",
+      "name": "alphacep-kaldi-a25f216f5ce4.tar.gz",
+      "url": "https://codeload.github.com/alphacep/kaldi/tar.gz/a25f216f5ce4eec5e45a6ab7651e20c9840a05cd",
+      "sha256": "8b035dcde1da27951ae9dd8c9cc2b8790821a383779b49574289bda4886b891f",
+      "size_bytes": 12229333
+    },
+    {
+      "path": "libsoup",
+      "repository": "GNOME/libsoup",
+      "commit": "25eac153004f777581ca2d95e31a02ca96844332",
+      "name": "GNOME-libsoup-25eac153004f.tar.gz",
+      "url": "https://codeload.github.com/GNOME/libsoup/tar.gz/25eac153004f777581ca2d95e31a02ca96844332",
+      "sha256": "4d5e175511ad271cdfaf93cb339a8c6f281beae33b12e4777a0edb5df4e4fa68",
+      "size_bytes": 1925964
+    },
+    {
+      "path": "onnxruntime",
+      "repository": "microsoft/onnxruntime",
+      "commit": "c57cf374b67f72575546d7b4c69a1af4972e2b54",
+      "name": "microsoft-onnxruntime-c57cf374b67f.tar.gz",
+      "url": "https://codeload.github.com/microsoft/onnxruntime/tar.gz/c57cf374b67f72575546d7b4c69a1af4972e2b54",
+      "sha256": "cc34e612b93063f50a4094b9b4f85e2fdf4f4fc4bf7da0fe75ffbefde7e27620",
+      "size_bytes": 199532134
+    },
+    {
+      "path": "onnxruntime/cmake/external/eigen",
+      "repository": "gitlab:libeigen/eigen",
+      "commit": "d10b27fe37736d2944630ecd7557cefa95cf87c9",
+      "name": "gitlab-libeigen-eigen-d10b27fe3773.tar.gz",
+      "url": "https://gitlab.com/libeigen/eigen/-/archive/d10b27fe37736d2944630ecd7557cefa95cf87c9/eigen-d10b27fe37736d2944630ecd7557cefa95cf87c9.tar.gz",
+      "sha256": "a3c10a8c14f55e9f09f98b0a0ac6874c21bda91f65b7469d9b1f6925990e867b",
+      "size_bytes": 2640035
+    },
+    {
+      "path": "onnxruntime/cmake/external/emsdk",
+      "repository": "emscripten-core/emsdk",
+      "commit": "c220895fd1163c01f0a8b44229fb9e4fe0ae0958",
+      "name": "emscripten-core-emsdk-c220895fd116.tar.gz",
+      "url": "https://codeload.github.com/emscripten-core/emsdk/tar.gz/c220895fd1163c01f0a8b44229fb9e4fe0ae0958",
+      "sha256": "2483e8b4e2eaa64a9e6459e5355274370db8574855e4e1e77ba6f0fbf3cca507",
+      "size_bytes": 92319
+    },
+    {
+      "path": "onnxruntime/cmake/external/libprotobuf-mutator",
+      "repository": "google/libprotobuf-mutator",
+      "commit": "7a2ed51a6b682a83e345ff49fc4cfd7ca47550db",
+      "name": "google-libprotobuf-mutator-7a2ed51a6b68.tar.gz",
+      "url": "https://codeload.github.com/google/libprotobuf-mutator/tar.gz/7a2ed51a6b682a83e345ff49fc4cfd7ca47550db",
+      "sha256": "d51365191580c4bf5e9ff104eebcfe34f7ff5f471006d7a460c15dcb3657501c",
+      "size_bytes": 38336
+    },
+    {
+      "path": "onnxruntime/cmake/external/onnx",
+      "repository": "onnx/onnx",
+      "commit": "9b7bca2a723ff94edcd007d93b5d0cf1838591dc",
+      "name": "onnx-onnx-9b7bca2a723f.tar.gz",
+      "url": "https://codeload.github.com/onnx/onnx/tar.gz/9b7bca2a723ff94edcd007d93b5d0cf1838591dc",
+      "sha256": "882490d12a241ee5112ea2c88c8afc8e89c597a2cf8113d9e7427cb58c5d407d",
+      "size_bytes": 10771682
+    },
+    {
+      "path": "onnxruntime/cmake/external/onnx/third_party/benchmark",
+      "repository": "google/benchmark",
+      "commit": "0d98dba29d66e93259db7daa53a9327df767a415",
+      "name": "google-benchmark-0d98dba29d66.tar.gz",
+      "url": "https://codeload.github.com/google/benchmark/tar.gz/0d98dba29d66e93259db7daa53a9327df767a415",
+      "sha256": "39fa5d2b71845e39cd308eb05026fb851b4aa801d654970aa31532f2f6b04d69",
+      "size_bytes": 184709
+    },
+    {
+      "path": "onnxruntime/cmake/external/onnx/third_party/pybind11",
+      "repository": "pybind/pybind11",
+      "commit": "914c06fb252b6cc3727d0eedab6736e88a3fcb01",
+      "name": "pybind-pybind11-914c06fb252b.tar.gz",
+      "url": "https://codeload.github.com/pybind/pybind11/tar.gz/914c06fb252b6cc3727d0eedab6736e88a3fcb01",
+      "sha256": "3bace47041a3ce496fbc6165b0f183fe765ebee87aebca3a6be45383aa9493ee",
+      "size_bytes": 709742
+    },
+    {
+      "path": "onnxruntime/cmake/external/onnxruntime-extensions",
+      "repository": "microsoft/onnxruntime-extensions",
+      "commit": "81e7799c69044c745239202085eb0a98f102937b",
+      "name": "microsoft-onnxruntime-extensions-81e7799c6904.tar.gz",
+      "url": "https://codeload.github.com/microsoft/onnxruntime-extensions/tar.gz/81e7799c69044c745239202085eb0a98f102937b",
+      "sha256": "297c85581ae2135378fe27a2e589d9569fd2cc5d2f6aa5560fd1fc0025e2a0d2",
+      "size_bytes": 46315807
+    },
+    {
+      "path": "onnxruntime/cmake/external/protobuf",
+      "repository": "protocolbuffers/protobuf",
+      "commit": "a20c65f2cd549445fda907f7b83894c8eb7427d6",
+      "name": "protocolbuffers-protobuf-a20c65f2cd54.tar.gz",
+      "url": "https://codeload.github.com/protocolbuffers/protobuf/tar.gz/a20c65f2cd549445fda907f7b83894c8eb7427d6",
+      "sha256": "8fd5fcad2512a0c96ba7265fac90c804b57152d0341d7b43737a485083dbfce0",
+      "size_bytes": 5376429
+    },
+    {
+      "path": "onnxruntime/cmake/external/protobuf/third_party/benchmark",
+      "repository": "google/benchmark",
+      "commit": "5b7683f49e1e9223cf9927b24f6fd3d6bd82e3f8",
+      "name": "google-benchmark-5b7683f49e1e.tar.gz",
+      "url": "https://codeload.github.com/google/benchmark/tar.gz/5b7683f49e1e9223cf9927b24f6fd3d6bd82e3f8",
+      "sha256": "5dc92703f811f94e2aa63bdab07ab749f28a094befa6cdfd5fe177f947590a48",
+      "size_bytes": 102332
+    },
+    {
+      "path": "onnxruntime/cmake/external/protobuf/third_party/googletest",
+      "repository": "google/googletest",
+      "commit": "5ec7f0c4a113e2f18ac2c6cc7df51ad6afc24081",
+      "name": "google-googletest-5ec7f0c4a113.tar.gz",
+      "url": "https://codeload.github.com/google/googletest/tar.gz/5ec7f0c4a113e2f18ac2c6cc7df51ad6afc24081",
+      "sha256": "0e2f36e8e403c125fd0ab02171bdb786d3b6b3875b6ccf3b2eb7969be8faecd0",
+      "size_bytes": 961649
+    },
+    {
+      "path": "openfst",
+      "repository": "alphacep/openfst",
+      "commit": "18e94e63870ebcf79ebb42b7035cd3cb626ec090",
+      "name": "alphacep-openfst-18e94e63870e.tar.gz",
+      "url": "https://codeload.github.com/alphacep/openfst/tar.gz/18e94e63870ebcf79ebb42b7035cd3cb626ec090",
+      "sha256": "6cd619276b8064f1d27e0f58433e7611d62739c1d65f2ef91a2a9e93e30ce312",
+      "size_bytes": 924400
+    },
+    {
+      "path": "openvr",
+      "repository": "ValveSoftware/openvr",
+      "commit": "91825305130f446f82054c1ec3d416321ace0072",
+      "name": "ValveSoftware-openvr-91825305130f.tar.gz",
+      "url": "https://codeload.github.com/ValveSoftware/openvr/tar.gz/91825305130f446f82054c1ec3d416321ace0072",
+      "sha256": "1a89bef6a21de8272eddaa4137367433dc482719a98b6bd7871856b2a214b198",
+      "size_bytes": 154968513
+    },
+    {
+      "path": "piper",
+      "repository": "shaunren/piper",
+      "commit": "9d06b74959570772e8bcbe7a3f696664d2421167",
+      "name": "shaunren-piper-9d06b7495957.tar.gz",
+      "url": "https://codeload.github.com/shaunren/piper/tar.gz/9d06b74959570772e8bcbe7a3f696664d2421167",
+      "sha256": "d38edbd8ec8320c550c80607405a63aad76d07f94f841aae9d2b66e5f698947b",
+      "size_bytes": 25615186
+    },
+    {
+      "path": "piper-phonemize",
+      "repository": "shaunren/piper-phonemize",
+      "commit": "5ecbb9b59abcffe03a9775ae82491c9ac5037f4d",
+      "name": "shaunren-piper-phonemize-5ecbb9b59abc.tar.gz",
+      "url": "https://codeload.github.com/shaunren/piper-phonemize/tar.gz/5ecbb9b59abcffe03a9775ae82491c9ac5037f4d",
+      "sha256": "0e4c00064ee1ccd9d6a1b4c43f9a29f32b305012e2ae36977a6c753973bd93c2",
+      "size_bytes": 9788169
+    },
+    {
+      "path": "piper/external/fmt",
+      "repository": "fmtlib/fmt",
+      "commit": "a0b8a92e3d1532361c2f7feb63babc5c18d00ef2",
+      "name": "fmtlib-fmt-a0b8a92e3d15.tar.gz",
+      "url": "https://codeload.github.com/fmtlib/fmt/tar.gz/a0b8a92e3d1532361c2f7feb63babc5c18d00ef2",
+      "sha256": "2da863d7d454814286c48ef90c9b461a5d27834f026ed9472eed53bd6abbc426",
+      "size_bytes": 851975
+    },
+    {
+      "path": "piper/external/spdlog",
+      "repository": "gabime/spdlog",
+      "commit": "7e635fca68d014934b4af8a1cf874f63989352b7",
+      "name": "gabime-spdlog-7e635fca68d0.tar.gz",
+      "url": "https://codeload.github.com/gabime/spdlog/tar.gz/7e635fca68d014934b4af8a1cf874f63989352b7",
+      "sha256": "1010aa76cdea700e8c693aa29e58ceb0ea51c8f020e2b15c81318e2c05562aec",
+      "size_bytes": 251147
+    },
+    {
+      "path": "vkd3d",
+      "name": "WineHQ-vkd3d-1128125fbaf1.tar.gz",
+      "url": "https://gitlab.winehq.org/wine/vkd3d/-/archive/1128125fbaf133e120b7ddfec99a10bf20a2eb25/vkd3d-1128125fbaf133e120b7ddfec99a10bf20a2eb25.tar.gz",
+      "sha256": "2b4a925c5948c1b87e013e1941b9856c112a46f3719034b7f0bd4944aadfbe0a",
+      "size_bytes": 1643591
+    },
+    {
+      "path": "vkd3d-proton",
+      "repository": "HansKristian-Work/vkd3d-proton",
+      "commit": "212991fc2c266bc0d59f4c4ce8f80f7126508d71",
+      "name": "HansKristian-Work-vkd3d-proton-212991fc2c26.tar.gz",
+      "url": "https://codeload.github.com/HansKristian-Work/vkd3d-proton/tar.gz/212991fc2c266bc0d59f4c4ce8f80f7126508d71",
+      "sha256": "30d60fa995eb33eeb45b70de09b58f53d99ece26b7f99c2ecb9106dea75e18d5",
+      "size_bytes": 18820848
+    },
+    {
+      "path": "vkd3d-proton/khronos/SPIRV-Headers",
+      "repository": "KhronosGroup/SPIRV-Headers",
+      "commit": "f88a2d766840fc825af1fc065977953ba1fa4a91",
+      "name": "KhronosGroup-SPIRV-Headers-f88a2d766840.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/SPIRV-Headers/tar.gz/f88a2d766840fc825af1fc065977953ba1fa4a91",
+      "sha256": "028424e4934f2ed8567319939e79d0a87e529ac7c504501b8b406f98598bdadd",
+      "size_bytes": 562966
+    },
+    {
+      "path": "vkd3d-proton/khronos/Vulkan-Headers",
+      "repository": "KhronosGroup/Vulkan-Headers",
+      "commit": "ad9ce1235e88dc09287e19171dfac384db8ec32c",
+      "name": "KhronosGroup-Vulkan-Headers-ad9ce1235e88.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/Vulkan-Headers/tar.gz/ad9ce1235e88dc09287e19171dfac384db8ec32c",
+      "sha256": "7f85689bfbec9d16dd2621e5102bb7649fdff1d68b08e9c5a37eb891982ea5a7",
+      "size_bytes": 3019023
+    },
+    {
+      "path": "vkd3d-proton/subprojects/dxil-spirv",
+      "repository": "HansKristian-Work/dxil-spirv",
+      "commit": "219d770799606f15abb3c57a8a9b9d19c2ae94ca",
+      "name": "HansKristian-Work-dxil-spirv-219d77079960.tar.gz",
+      "url": "https://codeload.github.com/HansKristian-Work/dxil-spirv/tar.gz/219d770799606f15abb3c57a8a9b9d19c2ae94ca",
+      "sha256": "4fe3aa0cd0478016eecc2c1529662a88aceef08bd6ba829a2747b6b330bc5d8a",
+      "size_bytes": 1458818
+    },
+    {
+      "path": "vkd3d-proton/subprojects/dxil-spirv/subprojects/dxbc-spirv",
+      "repository": "doitsujin/dxbc-spirv",
+      "commit": "29c93aeecd55533a357fdd7c95be5587d1c1f506",
+      "name": "doitsujin-dxbc-spirv-29c93aeecd55.tar.gz",
+      "url": "https://codeload.github.com/doitsujin/dxbc-spirv/tar.gz/29c93aeecd55533a357fdd7c95be5587d1c1f506",
+      "sha256": "05d786a300b6701b7df05b99f2919f48de086df13c5d8a3d315499700ee15d05",
+      "size_bytes": 417352
+    },
+    {
+      "path": "vkd3d-proton/subprojects/dxil-spirv/third_party/SPIRV-Cross",
+      "repository": "KhronosGroup/SPIRV-Cross",
+      "commit": "4b7bcb7e5cf71015b3299088d22004bfe4e13a5e",
+      "name": "KhronosGroup-SPIRV-Cross-4b7bcb7e5cf7.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/SPIRV-Cross/tar.gz/4b7bcb7e5cf71015b3299088d22004bfe4e13a5e",
+      "sha256": "a5a23e973c3473d812feed8e72b61e1369421ba09746026a194a8967a117aed1",
+      "size_bytes": 1933901
+    },
+    {
+      "path": "vkd3d-proton/subprojects/dxil-spirv/third_party/SPIRV-Tools",
+      "repository": "KhronosGroup/SPIRV-Tools",
+      "commit": "64f5770f59db933d46b9cad6edc42b4186409ef4",
+      "name": "KhronosGroup-SPIRV-Tools-64f5770f59db.tar.gz",
+      "url": "https://codeload.github.com/KhronosGroup/SPIRV-Tools/tar.gz/64f5770f59db933d46b9cad6edc42b4186409ef4",
+      "sha256": "f827d18323c6d6cce0c4c5b59464f2706749c5ba47ba83526734582cef0b3248",
+      "size_bytes": 3479439
+    },
+    {
+      "path": "vosk-api",
+      "repository": "alphacep/vosk-api",
+      "commit": "12f29a3415e4967e088ed09202bfb0007e5a1787",
+      "name": "alphacep-vosk-api-12f29a3415e4.tar.gz",
+      "url": "https://codeload.github.com/alphacep/vosk-api/tar.gz/12f29a3415e4967e088ed09202bfb0007e5a1787",
+      "sha256": "b7bac75e8d9ff8a7d802bdfc24dc76896cb402fb589484e529df967c424c819d",
+      "size_bytes": 659371
+    },
+    {
+      "path": "wine",
+      "repository": "ValveSoftware/wine",
+      "commit": "e60892cc2398b0a83c332a2078c7b85e47bdb42b",
+      "name": "ValveSoftware-wine-e60892cc2398.tar.gz",
+      "url": "https://codeload.github.com/ValveSoftware/wine/tar.gz/e60892cc2398b0a83c332a2078c7b85e47bdb42b",
+      "sha256": "d61805d35fb3da26fe3e0f77d68268eb81ceb97cfda326d2d58725be43897416",
+      "size_bytes": 56624839
+    },
+    {
+      "path": "wine-gecko",
+      "name": "wine-gecko-2.47.4-src.tar.xz",
+      "url": "https://dl.winehq.org/wine/wine-gecko/2.47.4/wine-gecko-2.47.4-src.tar.xz",
+      "sha256": "bf31b6619570ce289f07298bdd670081635cd12104010050f06c16e44ccd153f",
+      "size_bytes": 197407844
+    },
+    {
+      "path": "wine-mono",
+      "name": "wine-mono-11.2.0-src.tar.xz",
+      "url": "https://github.com/wine-mono/wine-mono/releases/download/wine-mono-11.2.0/wine-mono-11.2.0-src.tar.xz",
+      "sha256": "aebef9b43dca80b3ebe4a0ada0f45925d833f371ba5b42f5acf9990461568ba9",
+      "size_bytes": 306514600
+    },
+    {
+      "path": "xalia",
+      "repository": "madewokherd/xalia",
+      "commit": "6d946216c29052c29c660ad4cac950a6bd08a2b4",
+      "name": "madewokherd-xalia-6d946216c290.tar.gz",
+      "url": "https://codeload.github.com/madewokherd/xalia/tar.gz/6d946216c29052c29c660ad4cac950a6bd08a2b4",
+      "sha256": "9724eb87184b467d7724d729e346b7fdc916644c0ecfa52395227a80589948a8",
+      "size_bytes": 185812
+    },
+    {
+      "path": "xalia/xalia/external/SDL3-CS",
+      "repository": "flibitijibibo/SDL3-CS",
+      "commit": "e26a111c1b90301e37475a4dfb6f5ce47447d677",
+      "name": "flibitijibibo-SDL3-CS-e26a111c1b90.tar.gz",
+      "url": "https://codeload.github.com/flibitijibibo/SDL3-CS/tar.gz/e26a111c1b90301e37475a4dfb6f5ce47447d677",
+      "sha256": "90802a2355edf53561fd25139c351e349661de3264482f17be2cee62fbebb478",
+      "size_bytes": 171020
+    }
+  ],
+  "errors": [],
+  "omitted_test_only_modules": [
+    {
+      "path": "FEX/External/fex-posixtest-bins",
+      "repository": "FEX-Emu/fex-posixtest-bins",
+      "commit": "9ae29638f8000c1603f16385ed1cf6c4c23ee414",
+      "name": "FEX-Emu-fex-posixtest-bins-9ae29638f800.tar.gz",
+      "url": "https://codeload.github.com/FEX-Emu/fex-posixtest-bins/tar.gz/9ae29638f8000c1603f16385ed1cf6c4c23ee414",
+      "sha256": "0deb5dae01d986a13bcff175deeee0b47bff3803d2e6d84d788aea76fbafa498",
+      "size_bytes": 2364686
+    },
+    {
+      "path": "FEX/External/fex-gcc-target-tests-bins",
+      "repository": "FEX-Emu/fex-gcc-target-tests-bins",
+      "commit": "442678a134e2d25e759c430cca32e06e9e142f1f",
+      "name": "FEX-Emu-fex-gcc-target-tests-bins-442678a134e2.tar.gz",
+      "url": "https://codeload.github.com/FEX-Emu/fex-gcc-target-tests-bins/tar.gz/442678a134e2d25e759c430cca32e06e9e142f1f",
+      "sha256": "0049766f096cd7d2d890df7edc5f73f59f05b85dafdbf3e7ed914c54387f3c68",
+      "size_bytes": 2912699
+    },
+    {
+      "path": "FEX/External/fex-gvisor-tests-bins",
+      "repository": "FEX-Emu/fex-gvisor-tests-bins",
+      "commit": "71349ae6d14ac2e3e792730e240aecd8076cee6c",
+      "name": "FEX-Emu-fex-gvisor-tests-bins-71349ae6d14a.tar.gz",
+      "url": "https://codeload.github.com/FEX-Emu/fex-gvisor-tests-bins/tar.gz/71349ae6d14ac2e3e792730e240aecd8076cee6c",
+      "sha256": "c5d2ae06d0ca0f581cecaed275c1f8ab0aec98cc5d1899c75ca32f570f020d30",
+      "size_bytes": 171541121
+    },
+    {
+      "path": "FEX/External/range-v3/doc/gh-pages",
+      "repository": "ericniebler/range-v3",
+      "commit": "2dae74bb693e42d850fb0adcc9045c5b71fbdeae",
+      "name": "ericniebler-range-v3-2dae74bb693e.tar.gz",
+      "url": "https://codeload.github.com/ericniebler/range-v3/tar.gz/2dae74bb693e42d850fb0adcc9045c5b71fbdeae",
+      "sha256": "8569c9bf5495b19b76ce6e2e53f40604c8618429ce728bf73b2406d1382fdc94",
+      "size_bytes": 1691420
+    },
+    {
+      "path": "gstreamer/subprojects/gst-integration-testsuites/medias",
+      "reason": "Test-media dataset not built into the runtime"
+    }
+  ],
+  "external_branch_note": "Piper upstream build downloads piper-phonemize pic by a mutable branch; supplied commit was last changed in 2024, before this Valve runtime build. Independently rebuilding the entire baseline byte-for-byte is not claimed.",
+  "base": "Valve Proton 11.0-2e ARM64"
+}

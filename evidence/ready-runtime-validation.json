@@ -1,0 +1,21 @@
+{
+  "archive_paths_and_symlinks_safe": true,
+  "canonical_archive_owners": true,
+  "generated_prefix_and_caches_excluded": true,
+  "default_prefix_generated_on_first_launch": true,
+  "cold_allocator_pair_ns": 221.56,
+  "title_wrapper_exit": 124,
+  "title_wall_seconds": 422.0327875614166,
+  "title_trace_seconds_after_load": 409.83100000000013,
+  "api_reports_last_observed": 0,
+  "api_checked_after_305_seconds": true,
+  "seh_tracing_enabled": false,
+  "title_test_archive_sha256": "79bdf7aebf63c15521d5a8fad2da20432bf4fa720ebabe93b6e64a1b69222c58",
+  "launch_method": "Fresh archive extraction; isolated Steam-initialized ESO prefix; Armada Default profile",
+  "title_test_archive_file_hashes_verified": 6634,
+  "final_archive_file_hashes_verified": 6636,
+  "final_archive_sha256": "87a5ec1bf065a26182bcf94b8b9579f996b5b37d3f127d3aaefbe607777e0c56",
+  "final_archive_changes_only_notices_and_source_metadata": true,
+  "runtime_symlinks_identical_to_title_test": true,
+  "source_archives_verified": 74
+}

@@ -3,12 +3,14 @@
 import argparse
 import ast
 import hashlib
+import io
 import json
 from pathlib import Path
 import struct
 import subprocess
 import sys
 import tempfile
+import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '472d5a6b9906e90262dfacb5ed7ced11c76e8dbdd95037e424cf4fd7412299c6'
@@ -95,6 +97,37 @@ def main():
             result = subprocess.run([sys.executable, '-B', '-O', script, str(src), str(dst)], capture_output=True)
             check(result.returncode != 0, 'ntdll guard accepted unsafe input/output')
         check(not (d/'rejected.dll').exists(), 'Rejected ntdll input created output')
+    with tempfile.TemporaryDirectory(prefix='eso-hotpatch-verify-', dir=ROOT) as temporary:
+        d = Path(temporary)
+        verifier = str(ROOT/'scripts/verify-runtime.py')
+        tool_id = 'Proton-11.0-ESO-Performance-Hotpatch-arm64'
+        valid = d/'valid-runtime.tar.gz'
+        entries = {'files/lib/wine/aarch64-windows/kernel32.dll': patched,
+                   'files/lib/wine/aarch64-windows/ntdll.dll': nt_patched,
+                   'steampipe_fixups.json': b'{"empty_dirs":[],"no_write_paths":[]}'}
+        with tarfile.open(valid, 'w:gz') as archive:
+            for name, payload in entries.items():
+                member = tarfile.TarInfo(tool_id+'/'+name)
+                member.size = len(payload)
+                archive.addfile(member, io.BytesIO(payload))
+            sums = ''.join(hashlib.sha256(value).hexdigest()+'  '+name+'\n' for name,value in entries.items()).encode()
+            member = tarfile.TarInfo(tool_id+'/eso-hotpatch/RUNTIME-SHA256SUMS')
+            member.size = len(sums)
+            archive.addfile(member, io.BytesIO(sums))
+        subprocess.run([sys.executable, '-B', verifier, str(valid)], check=True)
+        for kind, message in [('traversal','Unsafe'),('symlink','External'),('prefix','Generated'),('owner','Noncanonical')]:
+            path = d/(kind+'.tar.gz')
+            member = tarfile.TarInfo('../escape' if kind=='traversal' else tool_id+'/entry')
+            if kind=='symlink':
+                member.type, member.linkname = tarfile.SYMTYPE, '../../../outside'
+            if kind=='prefix':
+                member.name = tool_id+'/files/share/default_pfx_arm64/system.reg'
+            if kind=='owner':
+                member.uid = 12345
+            with tarfile.open(path, 'w:gz') as archive:
+                archive.addfile(member)
+            result = subprocess.run([sys.executable, '-B', verifier, str(path)], capture_output=True, text=True)
+            check(result.returncode != 0 and message in result.stderr, 'Runtime archive guard failed: '+kind)
     if (ROOT/'SHA256SUMS').exists():
         for line in (ROOT/'SHA256SUMS').read_text().splitlines():
             expected, name = line.split('  ',1)

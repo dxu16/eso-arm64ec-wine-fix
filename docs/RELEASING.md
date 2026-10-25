@@ -12,3 +12,5 @@ Current tag: v0.3.0-experimental. The earlier BNet release was deleted; its scru
 7. Verify GitHub's server asset digests, ensure CI passes, then publish as an experimental prerelease. Always explicitly preserve tag_name when updating the draft.
 
 Large source/download archives stay in GitHub Releases, not Git history. Do not upload an entire device runtime or Wine prefix. The overlay contains precompiled output and an installer, not a recompilation of Wine. An equivalent ntdll source patch is included but was not compiled into the shipped DLL.
+
+For the full tool, collect the component sources listed in runtime-source-manifest.json, preserve their notices, and supply the runtime source sidecar alongside the binary. Package with scripts/package-runtime.py and verify/extract-test it with scripts/verify-runtime.py. Check cold default-prefix generation before publishing. Upload the source sidecar before the full runtime, verify server digests, then update release metadata and checksums. Keep both large archives in release assets, not Git history.

@@ -48,3 +48,7 @@ The BNet-based proof also survived two seven-minute controls. The new official-b
 ## Standalone benchmark source
 
 `scripts/benchmark-api.c` contains the x64 Windows benchmark (no ESO code). Build with `zig cc -target x86_64-windows-gnu -O2 scripts/benchmark-api.c -o api-bench.exe`, and pass a writable Windows result-file path when running it under each isolated runtime. It performs one million 128-byte allocation/free pairs and also reports direct API timings. Compare warmed, repeated runs; it is not a game benchmark.
+
+## Ready-to-use archive validation
+
+The runtime archive passed its internal file-hash, canonical-metadata and symlink/path checks. A fresh extraction without any generated default prefix successfully created that prefix on first use and completed the standalone benchmark (221.56 ns per allocation/free pair). The extracted tool then survived a 420-second ESO timeout, with zero API-entry reports observed beyond the old five-minute exit point. It used an isolated Steam-initialized prefix and Armada Default settings, without SEH tracing. Final notice/source-metadata additions were verified not to change runtime file contents or symlink targets. All 74 component source archive contents were independently checked against their recorded hashes. See evidence/ready-runtime-validation.json.

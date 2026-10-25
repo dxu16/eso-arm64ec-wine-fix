@@ -1,5 +1,7 @@
 # Install and rollback
 
+For the full ready-to-use archive, follow [READY-TO-USE.md](READY-TO-USE.md). The requirements and commands below describe the smaller overlay installer and optional developer launcher.
+
 ## Requirements
 
 Linux ARM64, Python 3.9+, Steam, SteamLinuxRuntime_4-arm64, an existing ESO installation, and **Valve Proton 11.0-2e ARM64**. [Official Proton release](https://github.com/ValveSoftware/Proton/releases/tag/proton-11.0-2e).
