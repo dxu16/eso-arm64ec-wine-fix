@@ -2,9 +2,9 @@
 
 This directory's large files are excluded from Git. The current release ships:
 
-- Proton-11.0-ESO-Official-Hotpatch-arm64-overlay.tar.gz: precompiled DLL plus installer, launcher, recipe, documentation, and notices.
+- Proton-11.0-ESO-Performance-Hotpatch-arm64-overlay.tar.gz: both precompiled DLLs plus installer, launcher, recipe, documentation, and notices.
 - Valve-Wine-e60892cc2398-sources.tar.gz: exact full source of the modified Wine component.
 - Valve-Proton-bc896217ffcd-sources.tar.gz: exact Proton root source and build recipes; not a recursive entire-runtime source bundle.
 - SHA256SUMS and release-manifest.json: outer download hashes and sizes.
 
-Steam supplies the unchanged official runtime. No BNet installation or compiler is needed. The earlier full BNet runtime archive is no longer published. Private device backups and caches must never be included.
+Steam supplies the unchanged official runtime. No compiler is needed. The performance package is the default since v0.3.0-experimental. Private device backups and caches must never be included.
