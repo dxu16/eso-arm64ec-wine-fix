@@ -2,7 +2,7 @@
 # New isolated prefix; no Steam compatibility setting changes.
 set -euo pipefail
 STEAM_ROOT="${STEAM_ROOT:-$HOME/.local/share/Steam}"
-PROTON="${ESO_PROTON_PATH:-$STEAM_ROOT/compatibilitytools.d/Proton-11.0-ESO-Official-Hotpatch-arm64}"
+PROTON="${ESO_PROTON_PATH:-$STEAM_ROOT/compatibilitytools.d/Proton-11.0-ESO-Performance-Hotpatch-arm64}"
 RUNTIME="$STEAM_ROOT/steamapps/common/SteamLinuxRuntime_4-arm64"
 GAME="${ESO_GAME_PATH:-$STEAM_ROOT/steamapps/common/Zenimax Online/The Elder Scrolls Online/game/client/eso64.exe}"
 COMPAT="${ESO_COMPAT_DATA_PATH:-$HOME/.local/share/eso-arm64ec-wine-fix/compatdata}"
@@ -10,6 +10,9 @@ PREFIX_SOURCE="${ESO_PREFIX_SOURCE:-$STEAM_ROOT/steamapps/compatdata/306130}"
 EXPECTED=dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257
 ACTUAL=$(sha256sum "$PROTON/files/lib/wine/aarch64-windows/kernel32.dll")
 [[ ${ACTUAL%% *} == "$EXPECTED" ]] || { printf 'Unexpected kernel32 build.\n' >&2; exit 2; }
+NTDLL_EXPECTED=74e45da0005fa0c890bdb3cc78e14af1d590fc8e22bc51a633755e0f47426eb2
+NTDLL_ACTUAL=$(sha256sum "$PROTON/files/lib/wine/aarch64-windows/ntdll.dll")
+[[ ${NTDLL_ACTUAL%% *} == "$NTDLL_EXPECTED" ]] || { printf 'Unexpected ntdll build.\n' >&2; exit 2; }
 for required in "$PROTON/proton" "$RUNTIME/run" "$GAME"; do
     [[ -f "$required" ]] || { printf 'Missing required file: %s\n' "$required" >&2; exit 2; }
 done

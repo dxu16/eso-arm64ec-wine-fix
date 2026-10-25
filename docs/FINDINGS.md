@@ -25,8 +25,12 @@ The original thunks are valid code. This is a compatibility correction for a det
 
 ## What was not required
 
-The new control keeps Valve's original FEX, ntdll, kernelbase, and WOW64 translator. Earlier BNet/FEX exception-context and x87 experiments were not needed to resolve this particular self-exit and are not included. Replacing imports with ordinary PE forwarders caused earlier startup failure and was discarded.
+The original kernel32-only control kept Valve's FEX, ntdll, kernelbase, and WOW64 translator unchanged. The current default also corrects ntdll's call checker to preserve fast native import calls; FEX, kernelbase, and WOW64 remain unchanged. Earlier BNet/FEX exception-context and x87 experiments were not needed to resolve this particular self-exit and are not included. Replacing imports with ordinary PE forwarders caused earlier startup failure and was discarded.
 
 ## Scope
 
-The measurements apply to ESO executable SHA256 `187ed27fe474b5f702c16ed0d405d84c4070f73b055352defb96125ad89fde88` and the pinned runtime. They do not establish login/gameplay, account safety, general anti-tamper compatibility, or correctness of every FEX instruction/context path. No proprietary executable, decrypted game code, or raw process dump is distributed.
+The measurements apply to ESO executable SHA256 `187ed27fe474b5f702c16ed0d405d84c4070f73b055352defb96125ad89fde88` and the pinned runtime. Controlled measurements do not establish account safety, general anti-tamper compatibility, or correctness of every FEX instruction/context path. No proprietary executable, decrypted game code, or raw process dump is distributed.
+
+## Performance regression and correction
+
+Wine recognizes FF25 import-jump entries in its ARM64EC call checker. The added kernel32 identity LEA prevented that fast recognition for native callers, causing an emulation detour. Recognizing the prolog before the existing import check recovered near-stock CRT allocation/free performance. The user confirmed significantly improved ESO performance through Steam with both DLL corrections. See BUILD.md and VALIDATION.md for exact scope.

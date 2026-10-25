@@ -1,3 +1,15 @@
+# Current performance fix (v0.3.0)
+
+The default now patches both kernel32 and ntdll. The original kernel32-only tests below are historical controls.
+
+The standalone allocation/free benchmark measured medians of 218.205 ns stock, 550.910 ns kernel32-only, and 222.110 ns with the ntdll correction. This does not measure ESO FPS or load time.
+
+The performance candidate survived a 420-second timeout (422.021 wall seconds; 415.893 trace seconds after game load), with zero API-entry reports. It used a copy of the existing Steam prefix and unchanged shader cache, the Armada wrapper, and the existing Default FEX profile. A brief suspend was reported; this run is not a loading-time measurement. Native patch bytes were verified in the running process. SEH tracing was disabled, so shutdown-thread absence was not measured in this test.
+
+The user then selected the tool through Steam and reported significantly improved performance during play. No numeric FPS/loading measurements or long-session duration were supplied. This is user confirmation, not an independently instrumented gameplay benchmark. Evidence is in the performance JSON files under evidence/.
+
+# Earlier kernel32-only validation
+
 # Validation
 
 Tests performed 24 October 2026 on an Armada OS Linux aarch64 handheld, kernel 7.2.6. Base: Valve `1791559733 proton-11.0-2e-arm64`. Source revision and component hashes are in `evidence/official-source-pins.json` and `evidence/validation-results.json`.
@@ -32,3 +44,7 @@ FEX_MULTIBLOCK=0
 ## Earlier result
 
 The BNet-based proof also survived two seven-minute controls. The new official-base comparison shows that BNet's additional Wine/FEX changes are not required for the measured self-exit. Scrubbed BNet source history remains at the `v0.1.0-experimental` Git tag; its release has been removed.
+
+## Standalone benchmark source
+
+`scripts/benchmark-api.c` contains the x64 Windows benchmark (no ESO code). Build with `zig cc -target x86_64-windows-gnu -O2 scripts/benchmark-api.c -o api-bench.exe`, and pass a writable Windows result-file path when running it under each isolated runtime. It performs one million 128-byte allocation/free pairs and also reports direct API timings. Compare warmed, repeated runs; it is not a game benchmark.

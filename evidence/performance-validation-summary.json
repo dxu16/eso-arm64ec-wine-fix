@@ -1,0 +1,10 @@
+{
+  "wrapper_exit": 124,
+  "wall_elapsed_seconds": 422.0205748081207,
+  "trace_seconds_after_game_load": 415.89300000000003,
+  "api_reports": 0,
+  "launch_method": "Isolated copy of Steam-initialized prefix, Armada wrapper, existing Default FEX profile",
+  "brief_suspend_reported": true,
+  "fps_and_gameplay_not_measured": true,
+  "seh_tracing_enabled": false
+}

@@ -1,0 +1,21 @@
+{
+  "test_platform": "Linux ARM64",
+  "overlay_verifier_passed": true,
+  "shell_syntax_passed": true,
+  "fixture_cases": [
+    {
+      "template_type": "symlink",
+      "both_dlls_installed": true,
+      "source_preserved": true,
+      "existing_destination_rejected": true,
+      "unsupported_version_rejected": true
+    },
+    {
+      "template_type": "regular",
+      "both_dlls_installed": true,
+      "source_preserved": true,
+      "existing_destination_rejected": true,
+      "unsupported_version_rejected": true
+    }
+  ]
+}

@@ -71,6 +71,30 @@ def main():
             result = subprocess.run([sys.executable, '-B', '-O', script, str(source), str(destination)], capture_output=True)
             check(result.returncode != 0, 'Unsafe input/output was accepted')
         check(not (d/'rejected.dll').exists(), 'Rejected input created an output')
+    nt_manifest = json.loads((ROOT/'patches/ntdll-performance.json').read_text())
+    nt_patched = (ROOT/'bin/ntdll-eso-performance.dll').read_bytes()
+    check(hashlib.sha256(nt_patched).hexdigest() == nt_manifest['output_sha256'], 'ntdll checksum failed')
+    nt_original = bytearray(nt_patched)
+    for row in nt_manifest['changes']:
+        pos = int(row['file_offset'], 16)
+        old, new = bytes.fromhex(row['old']), bytes.fromhex(row['new'])
+        check(len(old) == len(new) and nt_original[pos:pos+len(new)] == new, 'ntdll manifest mismatch')
+        nt_original[pos:pos+len(old)] = old
+    check(hashlib.sha256(nt_original).hexdigest() == nt_manifest['input_sha256'], 'ntdll baseline reconstruction failed')
+    helper = struct.unpack_from('<8I', nt_patched, int(nt_manifest['helper_rva'], 16))
+    check(helper == (0x58000111, 0xeb11021f, 0x54000080, 0x58ec56b1, 0x17ff628b, 0xd503201f, 0x9100216b, 0x17ff62a4), 'Native helper differs from independently assembled reference')
+    with tempfile.TemporaryDirectory(prefix='eso-hotpatch-verify-', dir=ROOT) as temporary:
+        d = Path(temporary)
+        source, destination, unknown = d/'ntdll-original.dll', d/'ntdll-output.dll', d/'unknown.dll'
+        source.write_bytes(nt_original)
+        unknown.write_bytes(b'unsupported input')
+        script = str(ROOT/'scripts/reproduce-ntdll-performance.py')
+        subprocess.run([sys.executable, '-B', script, str(source), str(destination)], check=True)
+        check(destination.read_bytes() == nt_patched, 'ntdll CLI reproduction failed')
+        for src, dst in [(source,source), (source,destination), (unknown,d/'rejected.dll')]:
+            result = subprocess.run([sys.executable, '-B', '-O', script, str(src), str(dst)], capture_output=True)
+            check(result.returncode != 0, 'ntdll guard accepted unsafe input/output')
+        check(not (d/'rejected.dll').exists(), 'Rejected ntdll input created output')
     if (ROOT/'SHA256SUMS').exists():
         for line in (ROOT/'SHA256SUMS').read_text().splitlines():
             expected, name = line.split('  ',1)
@@ -81,7 +105,7 @@ def main():
             check(path.is_file(), 'Missing release asset: '+str(path))
             check(digest(path) == row['sha256'], 'Release checksum failed: '+row['name'])
             print('Verified release asset:', row['name'])
-    print('PASS: DLL, 796 preserved import targets, exact reproduction, and rejection guards')
+    print('PASS: both DLLs, 796 preserved import targets, native helper, exact reproduction, and rejection guards')
 
 
 if __name__ == '__main__':

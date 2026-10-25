@@ -7,8 +7,10 @@ from pathlib import Path
 import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOL_ID = 'Proton-11.0-ESO-Official-Hotpatch-arm64'
+TOOL_ID = 'Proton-11.0-ESO-Performance-Hotpatch-arm64'
 PATCHED = 'dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257'
+PATCHED_DLLS = {'kernel32.dll': ('kernel32-eso-hotpatch.dll', PATCHED),
+                'ntdll.dll': ('ntdll-eso-performance.dll', '74e45da0005fa0c890bdb3cc78e14af1d590fc8e22bc51a633755e0f47426eb2')}
 BASE_HASHES = {
     'kernel32.dll': '472d5a6b9906e90262dfacb5ed7ced11c76e8dbdd95037e424cf4fd7412299c6',
     'libarm64ecfex.dll': 'fb9e057a719540626a1399c8b91501ebc57cdde7a623d280616a67234808c3fe',
@@ -36,9 +38,9 @@ def main():
         parser.error('Destination must not exist; nothing will be overwritten.')
     if destination == base or base in destination.parents:
         parser.error('Destination must be outside the base runtime.')
-    compiled = ROOT / 'bin/kernel32-eso-hotpatch.dll'
-    if digest(compiled) != PATCHED:
-        parser.error('Bundled DLL checksum failed.')
+    for name, (asset, expected) in PATCHED_DLLS.items():
+        if digest(ROOT / 'bin' / asset) != expected:
+            parser.error('Bundled DLL checksum failed: ' + name)
     if (base / 'version').read_text().strip() != '1791559733 proton-11.0-2e-arm64':
         parser.error('Only the tested Valve Proton 11.0-2e ARM64 build is supported.')
     for name, expected in BASE_HASHES.items():
@@ -52,22 +54,23 @@ def main():
     destination.parent.mkdir(parents=True, exist_ok=True)
     print('Copying base runtime into', destination, flush=True)
     shutil.copytree(base, destination, symlinks=True)
-    for relative in ['files/lib/wine/aarch64-windows/kernel32.dll',
-                     'files/share/default_pfx_arm64/drive_c/windows/system32/kernel32.dll']:
-        target = destination / relative
-        if not target.parent.resolve().is_relative_to(destination):
-            raise SystemExit(f'Unexpected external directory symlink: {target.parent}')
-        if target.is_symlink() and target.resolve() == (destination / 'files/lib/wine/aarch64-windows/kernel32.dll').resolve():
-            if digest(target) != PATCHED:
-                raise SystemExit('Template symlink did not resolve to the patched DLL.')
-            continue
-        if digest(target) != BASE_HASHES['kernel32.dll']:
-            raise SystemExit(f'Unexpected template DLL. Incomplete destination retained: {target}')
-        target.unlink()  # Do not write through a hardlink or symlink into the base.
-        shutil.copy2(compiled, target)
+    for name, (asset, expected) in PATCHED_DLLS.items():
+        compiled = ROOT / 'bin' / asset
+        library = destination / 'files/lib/wine/aarch64-windows' / name
+        for target in [library, destination / 'files/share/default_pfx_arm64/drive_c/windows/system32' / name]:
+            if not target.parent.resolve().is_relative_to(destination):
+                raise SystemExit('Unexpected external directory symlink')
+            if target.is_symlink() and target.resolve() == library.resolve():
+                if digest(target) != expected:
+                    raise SystemExit('Template symlink did not resolve to the patched DLL')
+                continue
+            if digest(target) != BASE_HASHES[name]:
+                raise SystemExit('Unexpected template DLL; incomplete destination retained: ' + str(target))
+            target.unlink()  # Break links before copying, preserving the source runtime.
+            shutil.copy2(compiled, target)
     metadata = destination / 'compatibilitytool.vdf'
     metadata.write_text('"compatibilitytools"\n{\n "compat_tools"\n {\n  "' + TOOL_ID +
-                        '"\n  {\n   "install_path" "."\n   "display_name" "Proton 11.0 ESO Hotpatch (official base, ARM64, experimental)"\n'
+                        '"\n  {\n   "install_path" "."\n   "display_name" "Proton 11.0 ESO Performance Hotpatch (ARM64, experimental)"\n'
                         '   "from_oslist" "windows"\n   "to_oslist" "linux"\n  }\n }\n}\n')
     notice = destination / 'eso-hotpatch'
     notice.mkdir(exist_ok=True)
@@ -75,7 +78,7 @@ def main():
         shutil.copytree(ROOT / directory, notice / directory, dirs_exist_ok=True)
     for name in ['README.md', 'LICENSE', 'source-manifest.json']:
         shutil.copy2(ROOT / name, notice / name)
-    (notice / 'component-hashes.json').write_text(json.dumps({'baseline': BASE_HASHES, 'baseline_unix': BASE_UNIX_HASHES, 'patched_kernel32': PATCHED}, indent=2) + '\n')
+    (notice / 'component-hashes.json').write_text(json.dumps({'baseline': BASE_HASHES, 'baseline_unix': BASE_UNIX_HASHES, 'patched_dlls': {name: value[1] for name, value in PATCHED_DLLS.items()}}, indent=2) + '\n')
     print('Installed separate experimental tool. Base runtime and game prefix unchanged.')
 
 

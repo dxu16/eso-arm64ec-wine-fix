@@ -1,0 +1,27 @@
+--- a/dlls/ntdll/signal_arm64ec.c
++++ b/dlls/ntdll/signal_arm64ec.c
+@@ -1933,6 +1933,13 @@
+          "tst x11, #15\n\t"                 /* dest & 15 */
+          "b.ne .Ljmp\n\t"
+          "ldr x16, [x11]\n\t"               /* dest code */
++         /* skip the identity LEA used as an x64 hotpatch entry prolog */
++         "ldr x17, .Lhotpatch_prolog\n\t"
++         "cmp x16, x17\n\t"
++         "b.ne .Lfast_forward\n\t"
++         "add x11, x11, #8\n\t"
++         "b .Ljmp\n"
++         ".Lfast_forward:\n\t"
+          /* check for fast-forward sequence */
+          "ldr x17, .Lffwd_seq\n\t"
+          "cmp x16, x17\n\t"
+@@ -2003,6 +2010,10 @@
+          ".byte 0xc3\n\t"                   /* ret */
+          ".byte 0xcd, 0x2e\n\t"             /* 1: int $0x2e */
+          ".byte 0xc3"                       /* ret */
++         "\n\t.p2align 3\n"
++         ".Lhotpatch_prolog:\n\t"
++         ".byte 0x48, 0x8d, 0xa4, 0x24\n\t" /* lea rsp,[rsp+0] */
++         ".byte 0, 0, 0, 0\n\t"
+          :: "i" (__nb_syscalls) );
+ }
+ 

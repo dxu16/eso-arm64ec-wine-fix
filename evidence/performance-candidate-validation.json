@@ -1,0 +1,28 @@
+{
+  "component_hashes": {
+    "kernel32.dll": "dbf5fa3a80204259f8e42e9a4ebcbdd6769f3f86301aa9da39f22797e0e40257",
+    "libarm64ecfex.dll": "fb9e057a719540626a1399c8b91501ebc57cdde7a623d280616a67234808c3fe",
+    "libwow64fex.dll": "e7cdc7e0df3f1f222238cb7d16ac35257bfcd6ecf417d7ac7fdf2083a581d948",
+    "ntdll.dll": "74e45da0005fa0c890bdb3cc78e14af1d590fc8e22bc51a633755e0f47426eb2",
+    "kernelbase.dll": "79c431521972199646099466da254993e278f7e2053245dfb741f116cd96586c",
+    "libarm64ecfex.so": "dc8f21f75ee11c3829b346d5a8d60ee87d24091f5e6ed901b5c36c739832ac53",
+    "libwow64fex.so": "257041413ae02eb5e2ba31fd16d991478f3a3b53f8ed48b3cc356e42f77649be"
+  },
+  "loaded_ntdll_patch_and_helper_verified": true,
+  "fex_config": {
+    "HalfBarrierTSOEnabled": "1",
+    "MemcpySetTSOEnabled": "0",
+    "Multiblock": "1",
+    "TSOEnabled": "1",
+    "VectorTSOEnabled": "0",
+    "X87ReducedPrecision": "1"
+  },
+  "shader_cache_hashes": {
+    "Steam": "17352c2d781daecb48f3baf6006b1dd9161b00fd84146c8e1f27acc2521170c8",
+    "candidate": "17352c2d781daecb48f3baf6006b1dd9161b00fd84146c8e1f27acc2521170c8"
+  },
+  "brief_suspend_during_title_test_reported": true,
+  "independent_assembler_check_passed": true,
+  "source_level_patch_applies_to_pinned_source": true,
+  "source_level_patch_compiled": false
+}

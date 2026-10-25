@@ -1,34 +1,34 @@
 # ESO on official Proton 11 ARM64
 
-An experimental Wine compatibility fix for ESO's repeatable **0x1100 self-exit after about 305 seconds**, tested on **Valve Proton 11.0-2e ARM64**.
+An experimental Wine compatibility and performance fix for ESO on **Valve Proton 11.0-2e ARM64**. The default package includes both the kernel32 startup fix and the ntdll performance correction.
 
-**[Download the precompiled patch and installer](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.2.0-experimental/Proton-11.0-ESO-Official-Hotpatch-arm64-overlay.tar.gz)** · [Checksums](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.2.0-experimental/SHA256SUMS) · [Release and source archives](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.2.0-experimental)
+**[Download the precompiled patch and installer](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.3.0-experimental/Proton-11.0-ESO-Performance-Hotpatch-arm64-overlay.tar.gz)** · [Checksums](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.3.0-experimental/SHA256SUMS) · [Release and source archives](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.3.0-experimental)
 
-The installer clones your Steam-installed official runtime into a separate compatibility tool and applies the **already compiled kernel32.dll**. No compiler is needed. The unchanged Valve runtime is supplied by Steam rather than redistributed in this small overlay.
+No compiler is needed. Steam supplies the original Valve runtime; the installer copies it into a separate tool and applies the two precompiled Wine DLLs.
 
 ## What changed?
 
-ESO's startup API-entry checks mistake legitimate ARM64EC imported-function jump thunks for hooks. The patch gives 796 existing kernel32 import-thunk slots the harmless entry prolog used by working x64 Wine. Function addresses, import-slot targets, native ARM64 code, and hybrid metadata are preserved.
+- **kernel32.dll:** corrects 796 imported-function entry thunks that ESO mistakes for hooks, preventing the repeatable `0x1100` self-exit after about 305 seconds.
+- **ntdll.dll:** teaches Wine's ARM64EC call checker to recognize that entry prolog. Native callers keep the fast import-call path rather than detouring through x64 emulation.
 
-Only Wine's kernel32 entry bytes change. **FEX, ntdll, kernelbase, and the WOW64 translator remain Valve's originals.** This does not modify ESO's executable or disable its checks.
+**FEX, kernelbase, the WOW64 translator, and GPU components remain Valve's originals.** ESO's executable and its checks are unchanged. The ntdll correction changes native call-checker code and extends its ARM64EC code range; the kernel32 transformation preserves its native code and metadata.
 
-## Result and limits
+## Results and limits
 
-With copies of the same Steam-initialized ESO prefix:
-
-| Configuration | Outcome |
+| Test | Result |
 | --- | --- |
-| Official Proton 11.0-2e ARM64 | 28 API-entry reports; shutdown thread; 0x1100 exit at 305.376 seconds |
-| Same runtime with only the kernel32 correction | Zero API-entry reports; no observed shutdown thread; animated title screen; survived 420-second timeout |
-| Packaged installer and launcher | Zero API-entry reports; survived a second 420-second timeout |
+| Stock official runtime | 28 API-entry reports; `0x1100` at about 305 seconds |
+| Kernel32-only fix | Startup exit resolved, but introduced allocation/free overhead |
+| Both DLL fixes, Armada Default profile | Zero API-entry reports; survived the seven-minute title-screen test |
+| User's normal Steam launch and play comparison | User reports significantly improved performance |
 
-The user also confirmed that ESO works when launched directly through Steam with the installed hotfixed compatibility tool, without `launch-eso.sh`. The controlled measurements above used the isolated launcher; no duration or gameplay scope was recorded for the user's Steam confirmation.
+A standalone CRT allocation/free benchmark measured **218 ns stock, 551 ns with the kernel32-only fix, and 222 ns with both fixes**, per pair. This is not an ESO FPS or load-time measurement. The user did not supply measured FPS or loading times. The controlled title test included a brief device suspend and was not used to measure loading time.
 
-**The controlled tests did not cover login, server connection, gameplay, long sessions, other builds, or performance. Detection and account-safety risk are unknown.** Other integrity checks or future updates could notice or reject the changed entry bytes. Successful launches are not a guarantee of approval or protection from enforcement.
+**Long-session stability, other builds, and account-safety risk remain unestablished.** Successful tests do not establish approval or protection from enforcement. [Validation details](docs/VALIDATION.md).
 
-## Install
+## Install and launch through Steam
 
-1. Install **Proton 11.0 (ARM64)** through Steam. The supported build is `1791559733 proton-11.0-2e-arm64`; other component hashes are rejected.
+1. Install **Proton 11.0 (ARM64)** through Steam. The supported build is `1791559733 proton-11.0-2e-arm64`; the installer rejects other component hashes.
 2. Launch ESO through Steam once to initialize its prefix and prerequisites, then close it.
 3. Extract the overlay download, enter its `eso-arm64ec-wine-fix` directory, and run:
 
@@ -37,42 +37,34 @@ python3 scripts/verify.py
 python3 scripts/install.py
 ```
 
-The installer creates **Proton-11.0-ESO-Official-Hotpatch-arm64** in `~/.local/share/Steam/compatibilitytools.d/`. It preserves the official installed runtime.
+4. Restart Steam. In ESO's **Properties → Compatibility**, enable **Force the use of a specific Steam Play compatibility tool** and select **Proton 11.0 ESO Performance Hotpatch (ARM64, experimental)**.
+5. Launch normally through Steam. No launch script is required.
 
-4. Restart Steam. Open ESO's **Properties → Compatibility**, enable **Force the use of a specific Steam Play compatibility tool**, and select **Proton 11.0 ESO Hotpatch (official base, ARM64, experimental)**.
-5. Launch ESO normally through Steam. The launch script is not required.
-
-[Paths, overrides, and rollback](docs/INSTALL.md).
+The default destination is `~/.local/share/Steam/compatibilitytools.d/Proton-11.0-ESO-Performance-Hotpatch-arm64`. The original Valve runtime is preserved. Existing kernel32-only tools are left available as fallbacks; switch ESO to the new tool explicitly. [Paths, protection, and rollback](docs/INSTALL.md).
 
 ## Optional developer launch script
-
-`scripts/launch-eso.sh` is available for development, troubleshooting, and reproducing the controlled tests:
 
 ```bash
 bash scripts/launch-eso.sh
 ```
 
-It clones an existing Steam-initialized ESO prefix into a separate compatibility directory, refreshes five core DLLs from the selected tool, verifies the patched kernel32 hash, and launches `eso64.exe` directly with explicit FEX settings. It preserves the source prefix. These extra steps are not needed for the user-confirmed normal Steam launch. See [launcher paths and overrides](docs/INSTALL.md).
+This diagnostic helper clones the Steam-initialized prefix, refreshes five core DLLs, checks both patched DLL hashes, and launches `eso64.exe` directly with conservative FEX settings. Normal Steam launching is the default; the helper is for troubleshooting and reproducing earlier controlled tests.
 
-## Is the DLL build method included?
+## Are the DLL build methods included?
 
-**Yes: the exact post-link transformation is included. Wine was not recompiled.**
-
-- `scripts/reproduce-kernel32-hotpatch.py`: version-checked transformation, separate output only.
-- `patches/kernel32-hotpatch-thunks.json`: original and replacement bytes for every slot.
-- `bin/kernel32-eso-hotpatch.dll`: the tested precompiled output.
-- `evidence/official-source-pins.json` and `source-manifest.json`: exact Valve source revisions and source archive hashes.
+**Yes. Both shipped DLLs are reproduced by exact post-link transformations; Wine was not recompiled.**
 
 ```bash
-python3 scripts/reproduce-kernel32-hotpatch.py /path/to/original/kernel32.dll /path/to/new/kernel32.dll
+python3 scripts/reproduce-kernel32-hotpatch.py original-kernel32.dll new-kernel32.dll
+python3 scripts/reproduce-ntdll-performance.py original-ntdll.dll new-ntdll.dll
 ```
 
-The script reproduces the shipped DLL byte-for-byte. There is **not yet a source-level Wine/linker patch that emits this layout during compilation**, and independently rebuilding Valve's baseline byte-for-byte has not been demonstrated. [Method and sources](docs/BUILD.md).
+The repository includes both compiled DLLs, complete binary change manifests, the native helper assembly reference, and an equivalent Wine source-level call-checker patch. The source-level patch applies to the pinned Wine source but was not compiled to produce the shipped DLL. A source-level kernel32/linker change is not included. [Reproduction and sources](docs/BUILD.md).
 
 ## Documentation
 
 [Findings](docs/FINDINGS.md) · [Validation](docs/VALIDATION.md) · [Installation](docs/INSTALL.md) · [Sources and licenses](docs/SOURCES-AND-LICENSES.md) · [Privacy](docs/PRIVACY.md)
 
-This idea may apply to other ARM64EC builds, but the current binary patch and compiled DLL support only the exact tested baseline. Do not copy the DLL into arbitrary Proton or Windows installations.
+Only the exact tested baseline is supported. Do not copy these DLLs into arbitrary Proton or Windows installations.
 
-Wine, Valve Proton, FEX, LLVM and dependency authors retain their licenses and credit. The compiled Wine DLL retains Wine's LGPL terms. New helpers and documentation have the scoped [MIT license](LICENSE). This is not an official Valve, Wine, FEX, or ESO release.
+Wine, Valve Proton, FEX, LLVM, and dependency authors retain their licenses and credit. The Wine binaries and Wine source patch retain Wine's LGPL terms. New helper scripts and documentation have the scoped [MIT license](LICENSE). This is not an official Valve, Wine, FEX, or ESO release.

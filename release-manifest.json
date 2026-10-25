@@ -1,14 +1,14 @@
 {
   "project": "eso-arm64ec-wine-fix",
-  "version": "v0.2.0-experimental",
+  "version": "v0.3.0-experimental",
   "base": "Valve Proton 11.0-2e ARM64",
-  "delivery": "precompiled Wine DLL overlay; unchanged runtime obtained from Steam",
+  "delivery": "precompiled kernel32 and ntdll overlay; unchanged runtime obtained from Steam",
   "date": "2026-10-24",
   "assets": [
     {
-      "name": "Proton-11.0-ESO-Official-Hotpatch-arm64-overlay.tar.gz",
-      "size_bytes": 320511,
-      "sha256": "83cc0272639dc836adb4091aea5e62ecfdf8d2588e48db524e7175dc36be57a7"
+      "name": "Proton-11.0-ESO-Performance-Hotpatch-arm64-overlay.tar.gz",
+      "size_bytes": 1005888,
+      "sha256": "dd8ea2bf0fe4ef9f7c60a1de60f2e502d3c1f177a5d8e44b06448bcead06226c"
     },
     {
       "name": "Valve-Wine-e60892cc2398-sources.tar.gz",

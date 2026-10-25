@@ -6,3 +6,6 @@
 *.yml text eol=lf
 *.dll binary
 LICENSES/** -text
+*.patch text eol=lf
+*.s text eol=lf
+*.c text eol=lf

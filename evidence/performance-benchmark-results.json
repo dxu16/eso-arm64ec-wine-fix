@@ -1,0 +1,28 @@
+{
+  "stock": {
+    "crt_malloc_free_pair_ns": [
+      217.86,
+      218.55
+    ],
+    "median_ns": 218.205
+  },
+  "patched": {
+    "crt_malloc_free_pair_ns": [
+      550.52,
+      552.98,
+      550.7,
+      551.12
+    ],
+    "median_ns": 550.9100000000001
+  },
+  "fastcandidate": {
+    "crt_malloc_free_pair_ns": [
+      223.02,
+      221.2
+    ],
+    "median_ns": 222.11
+  },
+  "scope": "Standalone x64 MinGW CRT allocation/free benchmark, not ESO FPS or loading time",
+  "iterations_per_sample": 1000000,
+  "sleep_interruption": "ESO title validation only; benchmark completed before reported suspend"
+}

@@ -2,7 +2,7 @@
 
 ## What was built?
 
-The shipped file is Valve's precompiled Wine kernel32 after a deterministic **post-link binary transformation**. Wine was not recompiled. There is not yet a source-level Wine/LLVM linker patch for this change.
+The kernel32 file is Valve's precompiled Wine kernel32 after a deterministic **post-link binary transformation**. Wine was not recompiled. There is not yet a source-level Wine/LLVM linker patch for this change.
 
 Input: `files/lib/wine/aarch64-windows/kernel32.dll` from Steam's `1791559733 proton-11.0-2e-arm64`.
 
@@ -33,9 +33,21 @@ The release supplies the exact Wine source archive and Proton build-recipe archi
 ## Package the precompiled overlay
 
 ```bash
-python3 scripts/package-overlay.py --output release-assets/Proton-11.0-ESO-Official-Hotpatch-arm64-overlay.tar.gz
+python3 scripts/package-overlay.py --output release-assets/Proton-11.0-ESO-Performance-Hotpatch-arm64-overlay.tar.gz
 ```
 
 This collects the compiled DLL, transformation, installer, launcher, documentation, sanitized evidence, and notices. It excludes runtime/prefix directories, private backups, bytecode caches, and release source archives. It creates internal per-file checksums. The separate release SHA256SUMS and release-manifest.json describe outer downloads; they are not recursively embedded in their own overlay.
 
 The installed full compatibility tool is assembled locally from the official Steam runtime. The overlay does not redistribute Valve's unchanged binary bundle.
+
+## Ntdll performance correction (default since v0.3.0)
+
+Input SHA256: `5bab1f413ea1032ba9d1fd8a500b83d0248092e1911ba487a96d797fe062b71f`.
+Output SHA256: `74e45da0005fa0c890bdb3cc78e14af1d590fc8e22bc51a633755e0f47426eb2`.
+
+Run `python3 scripts/reproduce-ntdll-performance.py original-ntdll.dll new-ntdll.dll`.
+The script refuses unknown input, aliases, existing output, layout mismatches, or an unexpected output hash, including under Python `-O`.
+
+The exact 36 changed bytes occupy three manifest spans: a branch at RVA 0xc9278, a 40-byte native helper in zero-filled ARM64EC text padding at 0xf0840, and the ARM64EC code-range size. File size and import/export tables are unchanged. The helper recognizes the exact eight-byte identity LEA, advances past it, and resumes Wine's existing import-jump recognition. Other entries resume the original fast-forward comparison. It uses existing scratch registers and leaves the stack unchanged.
+
+`patches/ntdll-performance.json` records every changed span. `patches/ntdll-helper-reference.s` independently assembles the helper instructions. `patches/wine-arm64ec-hotpatch-prolog.patch` is an equivalent source-level Wine change, checked to apply to the pinned source but not compiled into the distributed binary. The preferred binary modification recipe and native assembly reference are supplied alongside the full original Wine source. The verifier reconstructs the original ntdll, reproduces the shipped output, checks helper encodings, and exercises rejection cases.
