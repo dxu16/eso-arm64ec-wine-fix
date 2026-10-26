@@ -1,0 +1,7 @@
+{
+  "date": "2026-10-25",
+  "source": "User report in the development conversation",
+  "reported_result": "BNet variant reduced stuttering relative to compared vanilla GE and Valve runtimes. User requested retaining BNet and making it the default.",
+  "numeric_frame_time_measurements_supplied": false,
+  "individual_patch_causality_established": false
+}

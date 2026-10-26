@@ -1,19 +1,19 @@
-# Sources, notices, and distribution
+# Sources, upstream credit and licenses
 
-The distributed binaries are modified Wine kernel32 and ntdll from official Valve Proton 11.0-2e ARM64. They retain Wine's LGPL-2.1-or-later terms. The root MIT license covers only new helper scripts and documentation, not third-party binaries, notices, or sources.
+The v0.4.0 runtime is derived from **[mrdidit/bnet-arm](https://github.com/mrdidit/bnet-arm)**, specifically [BNet1](https://github.com/mrdidit/bnet-arm/releases/tag/BNet1), on [GloriousEggroll's GE-Proton11-7](https://github.com/GloriousEggroll/proton-ge-custom/releases/tag/GE-Proton11-7). BNet's work is upstream work, not new FEX/Wine compatibility work claimed by this ESO project.
 
-Two downloads are available. The small overlay installer clones the user's Steam-installed runtime. The ready-to-use archive includes the full official-base compatibility tool, additional component notices, and access to its separate runtime source bundle. FEX and the other runtime libraries remain unchanged. Wine, Valve, FEX, LLVM, and dependency authors retain their respective rights and attribution.
+The original Blizzard Wine fixes are by [Dmage22](https://github.com/GameNative/proton-wine/pull/47). [GameNative's Wine integration](https://github.com/GameNative/proton-wine/pull/67) and its pinned FEX series include work by Dmage22, tarikbc and Utkarsh Dalal. Wine, FEX, GE-Proton, LLVM and other dependency authors retain their copyright and license terms. Exact revisions, patch ordering and hashes are in `bnet/upstream-source-pins.json`; copies of the original patches retain their attribution under `bnet/patches/`.
 
-The release includes:
+The release carries the same three corresponding-source downloads as BNet1, verified against their original SHA256 hashes:
 
-- Exact full Valve Wine source at e60892cc2398b0a83c332a2078c7b85e47bdb42b.
-- Proton root source/build recipes at bc896217ffcd67f892f952b010f898fe7bd0f0a1.
-- Both additional binary-transformation recipes and manifests, a native helper assembly reference, and an equivalent Wine source patch.
-- The Wine source patch retains Wine's LGPL terms; it is not relicensed under the root MIT license.
-- Relevant Wine and compiler-runtime notices under LICENSES/.
+- `Bnet1-component-sources.tar.gz`: prepared Wine/FEX sources, original patches, dependencies, build recipes and notices.
+- `GE-Proton11-7-upstream-sources.tar.zst`: GE sources, non-FEX submodules, preparation, Mono and Gecko sources.
+- `GE-Proton11-7-extras-sources.tar.zst`: additional GE component sources and locked crates.
 
-The original Proton root archive does not recursively include its submodules. The expanded runtime source bundle supplies the pinned component archives and nested dependencies, as well as the matching Wine Mono and Gecko source releases; test-only datasets are omitted. The overlay can still obtain unchanged runtime binaries from Steam. The full source of the modified Wine component is supplied separately. SOURCE archive hashes are in source-manifest.json and release-manifest.json. Independently rebuilding Valve's baseline byte-for-byte is not claimed.
+It also supplies `ESO-BNet-v0.4.0-patch-sources.tar.gz` with this project's exact post-link recipes, manifests, native assembly reference, equivalent Wine source patch, attribution and release evidence. `bnet/source-manifest.json` records the original source URLs, sizes and hashes. These actual source assets accompany the release; branch links are not used as a substitute.
 
-BNet and its credited GameNative authors helped establish the original diagnosis. Those earlier files and their notices remain in scrubbed Git history. This current official-base overlay does not contain BNet or GE-Proton runtime components. This project is not an official release or endorsement from Valve, Wine, FEX, or ZeniMax.
+Wine DLLs and Wine-derived patches/assembly retain LGPL-2.1-or-later terms. FEX retains its MIT terms; GE and dependencies retain their own terms. The repository MIT license applies to original project helpers/documentation, not third-party runtime binaries or Wine-derived code. The runtime preserves GE root notices and adds upstream component notices under `eso-bnet/LICENSES/runtime/`.
 
-The full runtime component source index is `runtime-source-manifest.json`. The binary archive retains the official LICENSE, LICENSE.OFL and PATENTS.AV1 files, and adds component notices under `eso-hotpatch/LICENSES/runtime/`. SteamLinuxRuntime_4-arm64 and the Steam FEX rootfs remain external dependencies and are not redistributed. The documented upstream mutable branch and whole-baseline rebuild limits also apply to this source bundle.
+Wine was not recompiled for the two ESO changes. Rebuilding the original entire baseline byte-for-byte is not claimed. The exact transformation is reproducible from the pinned precompiled DLLs with `bnet/reproduce.py`. Steam's external ARM64 runtime/rootfs are prerequisites and are not bundled.
+
+The older Valve source indexes at repository root and `scripts/` are historical v0.3.0 material. See [legacy source details](legacy-valve/SOURCES-AND-LICENSES.md).

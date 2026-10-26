@@ -1,34 +1,35 @@
 {
   "project": "eso-arm64ec-wine-fix",
-  "version": "v0.3.0-experimental",
-  "base": "Valve Proton 11.0-2e ARM64",
-  "delivery": "ready-to-extract full compatibility tool or small two-DLL overlay; matching runtime source sidecar supplied",
-  "date": "2026-10-24",
+  "version": "v0.4.0",
+  "date": "2026-10-25",
+  "base": "BNet1 on GE-Proton11-7 ARM64",
+  "upstream": "https://github.com/mrdidit/bnet-arm",
+  "delivery": "Complete ready-to-extract BNet ESO runtime, exact ESO patch sources, and all three original BNet/GE corresponding-source archives",
   "assets": [
     {
-      "name": "Proton-11.0-ESO-Performance-Hotpatch-arm64-overlay.tar.gz",
-      "size_bytes": 1005888,
-      "sha256": "dd8ea2bf0fe4ef9f7c60a1de60f2e502d3c1f177a5d8e44b06448bcead06226c"
+      "name": "GE-Proton11-7-ESO-BNet-arm64.tar.gz",
+      "size_bytes": 675555154,
+      "sha256": "7cfb4061e166587d7b4cfba00fd32e4b1b48d6c27119cebf3478bf42dd6c1fe6"
     },
     {
-      "name": "Valve-Wine-e60892cc2398-sources.tar.gz",
-      "size_bytes": 56624839,
-      "sha256": "d61805d35fb3da26fe3e0f77d68268eb81ceb97cfda326d2d58725be43897416"
+      "name": "ESO-BNet-v0.4.0-patch-sources.tar.gz",
+      "size_bytes": 1043911,
+      "sha256": "6a33de52ac05709cc5bafed03b564bc62e7a99f6530c4d3a4be753bc14b84f1c"
     },
     {
-      "name": "Valve-Proton-bc896217ffcd-sources.tar.gz",
-      "size_bytes": 93595375,
-      "sha256": "be18d77ae5f9e5ce21318d151c692648e5cb7c5ffa50dea2dcac6c408966b077"
+      "name": "Bnet1-component-sources.tar.gz",
+      "size_bytes": 89758586,
+      "sha256": "480d39c59c4a9d755334379d7545fa844b88ea705c9e92d7e699026730e068e7"
     },
     {
-      "name": "Proton-11.0-ESO-Performance-Hotpatch-arm64.tar.gz",
-      "size_bytes": 582440840,
-      "sha256": "87a5ec1bf065a26182bcf94b8b9579f996b5b37d3f127d3aaefbe607777e0c56"
+      "name": "GE-Proton11-7-upstream-sources.tar.zst",
+      "size_bytes": 985964469,
+      "sha256": "62700f9eedaf153705193f2d72964f986eb56f45672ec86033a945cd4e89599f"
     },
     {
-      "name": "Proton-11.0-ESO-Performance-Hotpatch-arm64-runtime-sources.tar.gz",
-      "size_bytes": 1290146384,
-      "sha256": "6ea9e34a02066e46b83228143fc1d060ab0cf6a8f02431044823a041004fd5bf"
+      "name": "GE-Proton11-7-extras-sources.tar.zst",
+      "size_bytes": 240882697,
+      "sha256": "8a972f75e4ebc9eea5a874d69988d5a33a30265a2b7efa147c914762dde1f142"
     }
   ]
 }

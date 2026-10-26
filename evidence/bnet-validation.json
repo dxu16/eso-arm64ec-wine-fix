@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-25",
+  "scope": "Isolated Steam-initialized prefixes; Armada wrapper; existing global FEX profile; no instrumented gameplay frame-time comparison.",
+  "variants": {
+    "ge": {
+      "benchmark_exit": 0,
+      "benchmark_output": "BENCH_STARTED\nround=0 module=kernel32 GetProcessHeap_ns=56.75 SetGetLastError_pair_ns=104.51 QueryPerformanceCounter_ns=120.54\nround=0 module=kernelbase GetProcessHeap_ns=49.09 SetGetLastError_pair_ns=100.28 QueryPerformanceCounter_ns=118.38\nround=1 module=kernel32 GetProcessHeap_ns=51.36 SetGetLastError_pair_ns=104.78 QueryPerformanceCounter_ns=120.56\nround=1 module=kernelbase GetProcessHeap_ns=49.10 SetGetLastError_pair_ns=99.91 QueryPerformanceCounter_ns=118.31\nround=2 module=kernel32 GetProcessHeap_ns=51.32 SetGetLastError_pair_ns=104.54 QueryPerformanceCounter_ns=120.59\nround=2 module=kernelbase GetProcessHeap_ns=49.17 SetGetLastError_pair_ns=100.59 QueryPerformanceCounter_ns=118.97\nCRT_malloc_free_pair_ns=195.47\n",
+      "window_capture_exit": 0,
+      "title_wrapper_exit": 124,
+      "title_wall_seconds": 420.82372741100016,
+      "survived_beyond_305_seconds": true,
+      "component_hashes_match": true
+    },
+    "bnet": {
+      "benchmark_exit": 0,
+      "benchmark_output": "BENCH_STARTED\nround=0 module=kernel32 GetProcessHeap_ns=57.39 SetGetLastError_pair_ns=104.66 QueryPerformanceCounter_ns=121.30\nround=0 module=kernelbase GetProcessHeap_ns=49.08 SetGetLastError_pair_ns=100.38 QueryPerformanceCounter_ns=118.28\nround=1 module=kernel32 GetProcessHeap_ns=51.43 SetGetLastError_pair_ns=104.87 QueryPerformanceCounter_ns=121.38\nround=1 module=kernelbase GetProcessHeap_ns=49.12 SetGetLastError_pair_ns=100.42 QueryPerformanceCounter_ns=118.57\nround=2 module=kernel32 GetProcessHeap_ns=51.51 SetGetLastError_pair_ns=104.83 QueryPerformanceCounter_ns=121.88\nround=2 module=kernelbase GetProcessHeap_ns=49.29 SetGetLastError_pair_ns=100.15 QueryPerformanceCounter_ns=117.93\nCRT_malloc_free_pair_ns=195.92\n",
+      "window_capture_exit": 0,
+      "title_wrapper_exit": 124,
+      "title_wall_seconds": 420.68652343199983,
+      "survived_beyond_305_seconds": true,
+      "component_hashes_match": true
+    }
+  },
+  "bnet_loaded_native_helper_verified": true,
+  "kernel32_entries_unchanged_after_load": 788,
+  "runtime_rewritten_entry_names": [
+    "CreateFileA",
+    "CreateFileW",
+    "LoadLibraryA",
+    "LoadLibraryExA",
+    "LoadLibraryExW",
+    "LoadLibraryW",
+    "Sleep",
+    "TerminateProcess"
+  ],
+  "independent_static_checks": {
+    "import_export_tables_unchanged": true,
+    "reversible": true,
+    "independent_assembly_matches": true,
+    "changed_byte_count": 36,
+    "output_sha256": "5da92139e0e34111acf952b4d7ba590da09d34fdb9e99b68086c6081bcda16ac"
+  },
+  "equivalent_source_patch_check": {
+    "equivalent_source_patch_applies": true,
+    "source_compiled": false
+  }
+}

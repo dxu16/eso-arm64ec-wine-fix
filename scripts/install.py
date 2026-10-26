@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Legacy Valve v0.3 helper; recommended BNet installation: docs/INSTALL.md.
 """Create a separate ESO tool from the exact tested Valve Proton 11 ARM64 build."""
 import argparse
 import hashlib

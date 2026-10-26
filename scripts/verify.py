@@ -34,6 +34,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--release-assets', action='store_true')
     args = parser.parse_args()
+    # Current repository checks include BNet; standalone historical Valve overlays
+    # retain their original verification path when the BNet directory is absent.
+    for current in ['verify.py', 'test_runtime.py']:
+        script = ROOT/'bnet'/current
+        if script.is_file():
+            subprocess.run([sys.executable, '-B', str(script)], check=True)
     measured = json.loads((ROOT/'evidence/validation-results.json').read_text())['input_component_hashes']
     installer = ast.parse((ROOT/'scripts/install.py').read_text())
     for statement in installer.body:

@@ -1,0 +1,81 @@
+{
+  "project": "BNet",
+  "release": "BNet1",
+  "tool_id": "GE-Proton11-7-Bnet1-arm64",
+  "base": {
+    "repository": "https://github.com/GloriousEggroll/proton-ge-custom",
+    "tag": "GE-Proton11-7",
+    "commit": "c191f35dcebbeccfacd3b4c6f6eea026e588c1c2",
+    "archive": "GE-Proton11-7-aarch64.tar.gz",
+    "sha256": "b77ac906186568c2f3c66674b85c712b145ccf73ff2718a50dd7bf6248b67ba3"
+  },
+  "wine": {
+    "base_repository": "https://github.com/ValveSoftware/wine",
+    "base_commit": "46b29104e3741fe23bf5e2547196a253aab88c89",
+    "preparation": "Full GE-Proton11-7 Wine preparation, followed by the three listed ntdll patches.",
+    "patch_repository": "https://github.com/GameNative/proton-wine",
+    "patch_commit": "a88a1f91186c8f49cb25c8c58f36b0a3dfdd6095",
+    "original_fixes_author": "Dmage22",
+    "integration_author": "Utkarsh Dalal"
+  },
+  "fex": {
+    "base_repository": "https://github.com/FEX-Emu/FEX",
+    "base_tag": "FEX-2610",
+    "base_commit": "14c92681f4d62cf84d901460e0358de09c8847a7",
+    "patch_repository": "https://github.com/GameNative/FEX",
+    "patch_commit": "ae5b5a79d1ce63b9a7f2d624e38db8232d071865",
+    "patch_order": [
+      "patches/fex/0001-windows-fixes-for-protected-launchers-that-decry.patch",
+      "patches/fex/0002-arm64ec-load-ntdllredirectionlutsize-as-32-bits-.patch",
+      "patches/fex/0003-windows-anti-tamper-stepping-and-fault-delivery-.patch",
+      "patches/fex/0004-arm64ec-export-btcpu64notifynonimageviews-so-ntd.patch"
+    ]
+  },
+  "patches": [
+    {
+      "path": "patches/wine/dlls_ntdll_ntdll_spec.patch",
+      "sha256": "230db9f84ee6ad3da93332375dd1f20ec00329006650347d80ec4ba0a8a99a9f",
+      "applied": true
+    },
+    {
+      "path": "patches/wine/dlls_ntdll_signal_arm64ec_c.patch",
+      "sha256": "9a17c2ab695a11c071ec9003a663080fdca105c141dd31edc33bf7481bf2745b",
+      "applied": true
+    },
+    {
+      "path": "patches/wine/dlls_ntdll_unwind_h.patch",
+      "sha256": "cbe79e1e43ef6f5427c60ae33fb094e95b53310632c0fe0f3957e1d616859d13",
+      "applied": true
+    },
+    {
+      "path": "patches/fex/0001-windows-fixes-for-protected-launchers-that-decry.patch",
+      "sha256": "e9fff4dfa84fb52e1112fc8b16f3eef7143b52f233410572f35c2a19bb00b4d5",
+      "applied": true
+    },
+    {
+      "path": "patches/fex/0002-arm64ec-load-ntdllredirectionlutsize-as-32-bits-.patch",
+      "sha256": "efd67f1fce2bec5e7bfdf0c47d18532ccaf44a587ae8c43977638eff48f63b0a",
+      "applied": true
+    },
+    {
+      "path": "patches/fex/0003-windows-anti-tamper-stepping-and-fault-delivery-.patch",
+      "sha256": "9d95c4e20c2a331ad14fb3d0d8248de8850ed046961128fb51cb7a25e7fb3912",
+      "applied": true
+    },
+    {
+      "path": "patches/fex/0004-arm64ec-export-btcpu64notifynonimageviews-so-ntd.patch",
+      "sha256": "bdc7fd8380dee4956b43ab4d0d43e1de961814dcaea8ba60b2b280efea6c50a9",
+      "applied": true
+    },
+    {
+      "path": "patches/wine/optional/dlls_sechost_makefile_in.patch",
+      "sha256": "7f8c461b4b815867f53584040d7e89c31d79bcdfd7b5f902731010f4d6e70b0e",
+      "applied": false
+    },
+    {
+      "path": "patches/wine/optional/optional-sechost-rpcrt4-ge.patch",
+      "sha256": "5d92887e1a51364290e6f4b59ea75a0c69f283f5ccbe96a7db2dbd64fd2d9e19",
+      "applied": false
+    }
+  ]
+}

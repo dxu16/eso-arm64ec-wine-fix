@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Legacy Valve v0.3 helper; recommended BNet installation: docs/INSTALL.md.
 # New isolated prefix; no Steam compatibility setting changes.
 set -euo pipefail
 STEAM_ROOT="${STEAM_ROOT:-$HOME/.local/share/Steam}"

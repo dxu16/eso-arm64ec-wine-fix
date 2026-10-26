@@ -1,0 +1,32 @@
+{
+  "input_sha256": "e28f25f21ecf34a32ee2ce24672f023e436da08a88a01c6d4e93757633c9ba47",
+  "output_sha256": "5da92139e0e34111acf952b4d7ba590da09d34fdb9e99b68086c6081bcda16ac",
+  "helper_rva": "0xf1210",
+  "resume_rva": "0xc991c",
+  "jump_check_rva": "0xc998c",
+  "original_literal_rva": "0xc99c0",
+  "changed_byte_count": 36,
+  "changes": [
+    {
+      "name": "call_checker_branch",
+      "rva": "0xc9918",
+      "file_offset": "0xc9918",
+      "old": "51050058",
+      "new": "3e9e0014"
+    },
+    {
+      "name": "native_helper",
+      "rva": "0xf1210",
+      "file_offset": "0xf1210",
+      "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "new": "110100581f0211eb80000054313dec58bf61ff171f2003d56b210091d861ff17488da42400000000"
+    },
+    {
+      "name": "arm64ec_code_range_size",
+      "rva": "0x13acb1",
+      "file_offset": "0x13acb1",
+      "old": "04e20600",
+      "new": "38e20600"
+    }
+  ]
+}
