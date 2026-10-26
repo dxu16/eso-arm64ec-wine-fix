@@ -6,6 +6,10 @@ The recommended runtime is now **GE-Proton11-7 ESO BNet (ARM64, experimental)**:
 
 Extract its tool folder into `~/.local/share/Steam/compatibilitytools.d/`, restart Steam, then select **GE-Proton11-7 ESO BNet (ARM64, experimental)** in ESO's Compatibility settings. No compiler, installer, separate BNet installation, or separate GE installation is needed. Steam's Linux ARM64 runtime and FEX rootfs remain prerequisites. [Installation and rollback](docs/INSTALL.md).
 
+## Disclaimer
+
+This patch modifies Wine runtime DLLs to work around what appears to be a false positive in ESO's anti-tampering mechanism. Although ESO appears to be welcoming toward Linux gaming, there is no guarantee that using this patch will not result in an account ban. Additionally, this patch was made autonomously by GPT 6.1 Sol. Use it at your own risk.
+
 ## Why BNet is the default
 
 The user observed intermittent stutters with the Valve-based ESO fix and vanilla GE-Proton11-7 with the same ESO corrections. In their comparison, the BNet variant stuttered less. This is a user-reported result on one handheld, not an instrumented frame-time benchmark or proof identifying one specific BNet patch. It is the reason this release recommends the BNet base.
