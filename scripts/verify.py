@@ -36,7 +36,7 @@ def main():
     args = parser.parse_args()
     # Current repository checks include BNet; standalone historical Valve overlays
     # retain their original verification path when the BNet directory is absent.
-    for current in ['verify.py', 'test_runtime.py']:
+    for current in ['verify.py', 'test_runtime.py', 'test_font_repair.py']:
         script = ROOT/'bnet'/current
         if script.is_file():
             subprocess.run([sys.executable, '-B', str(script)], check=True)

@@ -1,0 +1,21 @@
+Fix bundled font registration when creating fresh ESO prefixes
+
+Expose Proton's bundled fonts before wineboot initializes a new template.
+The v0.4.0 package could create a prefix missing ten font registrations,
+causing the 32-bit Bethesda launcher to overflow its stack even though the
+font files were already present. Established prefixes could retain the
+registrations from an earlier runtime and avoid the failure.
+
+Add a reproducible launcher transformation, a verified candidate repacker,
+and an existing-prefix repair helper with registry backup and active-prefix
+guards. Preserve all six pinned Wine/FEX components and both ESO DLL fixes.
+Document the confirmed manual prefix reset and the Steam menu option's
+failure to clear the prefix in the tested Armada setup.
+
+Validation: isolate the Fonts registry key by bisection; verify a repair
+adding only the ten missing registrations; test automatic initialization
+with a fresh runtime template and game prefix; confirm the launcher reaches
+PLAY through Steam; record user-confirmed in-game success and a subsequent
+successful first launch after manually clearing the prefix path. Four repair
+safety tests and independent candidate archive verification pass. Odin 3
+validation and long-session testing remain outstanding.

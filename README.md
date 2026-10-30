@@ -1,10 +1,14 @@
 # ESO on BNet / GE-Proton 11 ARM64
 
-The recommended runtime is now **GE-Proton11-7 ESO BNet (ARM64, experimental)**: [BNet1](https://github.com/mrdidit/bnet-arm) plus the ESO startup and native-call performance corrections.
+The recommended runtime is **GE-Proton11-7 ESO BNet (ARM64, experimental)**: [BNet1](https://github.com/mrdidit/bnet-arm) plus the ESO startup and native-call performance corrections, with the v0.4.1 font-initialization fix for fresh prefixes.
 
-**[Download the complete runtime](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.4.0/GE-Proton11-7-ESO-BNet-arm64.tar.gz)** | [Release, checksums and sources](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.0)
+**[Download the complete font-fixed runtime](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.4.1/GE-Proton11-7-ESO-BNet-arm64.tar.gz)** | [v0.4.1 release, checksums and sources](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.1) | [Release notes](docs/RELEASE-v0.4.1.md)
+
+The previously published [v0.4.0 release](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.0) does not include the fresh-prefix font fix.
 
 Extract its tool folder into `~/.local/share/Steam/compatibilitytools.d/`, restart Steam, then select **GE-Proton11-7 ESO BNet (ARM64, experimental)** in ESO's Compatibility settings. No compiler, installer, separate BNet installation, or separate GE installation is needed. Steam's Linux ARM64 runtime and FEX rootfs remain prerequisites. [Installation and rollback](docs/INSTALL.md).
+
+For a clean reset with the fixed runtime, close ESO and move or rename `steamapps/compatdata/306130` so that the exact `306130` path is absent, then launch through Steam. Preserve the old prefix until the new setup works. Steam's **Developer > Delete Proton Files** option did not clear the prefix in our Armada test. An existing prefix can instead use the included [font-registration repair helper](docs/INSTALL.md#fresh-prefix-launcher-failure-in-v040).
 
 ## Disclaimer
 
@@ -21,8 +25,11 @@ Both comparison variants passed seven-minute startup checks and produced similar
 - Starts with GE-Proton11-7 ARM64 and the original BNet1 Wine/FEX component replacements.
 - Adds 796 kernel32 imported-entry prologs to resolve the previously measured ESO five-minute self-exit.
 - Adds the matching ntdll ARM64EC call-checker correction so those prologs retain the native import-call path.
+- v0.4.1 makes bundled fonts available before Wine initializes a new template, preventing the reproduced fresh-prefix launcher stack overflow. Fresh Steam startup and in-game operation were confirmed on the test handheld; Odin 3 validation is still outstanding.
 
 The BNet FEX binaries and GE graphics components are preserved. No FEX profile is forced, and ESO's executable is not modified. Wine was not recompiled: the two ESO DLL changes are reproducible post-link transformations. Exact recipes, manifests, an assembly reference, and corresponding sources accompany the release. [Build details](docs/BUILD.md).
+
+The font-fix tools also live in this repository: [existing-prefix repair](bnet/repair-launcher-fonts.py), [automatic launcher patch](bnet/patch-proton-font-init.py), [complete fixed-runtime packager](bnet/package-font-fixed-runtime.py), and [repair tests](bnet/test_font_repair.py). [Source index and build command](bnet/README.md).
 
 ## Upstream credit
 

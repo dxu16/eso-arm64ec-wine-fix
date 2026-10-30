@@ -1,20 +1,15 @@
 {
   "project": "eso-arm64ec-wine-fix",
-  "version": "v0.4.0",
-  "date": "2026-10-25",
+  "version": "v0.4.1",
+  "date": "2026-10-30",
   "base": "BNet1 on GE-Proton11-7 ARM64",
   "upstream": "https://github.com/mrdidit/bnet-arm",
-  "delivery": "Complete ready-to-extract BNet ESO runtime, exact ESO patch sources, and all three original BNet/GE corresponding-source archives",
+  "delivery": "Complete font-fixed runtime, all fix and packaging sources in the main repository and source bundle, and three original BNet/GE corresponding-source archives",
   "assets": [
     {
-      "name": "GE-Proton11-7-ESO-BNet-arm64.tar.gz",
-      "size_bytes": 675555154,
-      "sha256": "7cfb4061e166587d7b4cfba00fd32e4b1b48d6c27119cebf3478bf42dd6c1fe6"
-    },
-    {
-      "name": "ESO-BNet-v0.4.0-patch-sources.tar.gz",
-      "size_bytes": 1043911,
-      "sha256": "6a33de52ac05709cc5bafed03b564bc62e7a99f6530c4d3a4be753bc14b84f1c"
+      "name": "ESO-BNet-v0.4.1-patch-sources.tar.gz",
+      "size_bytes": 2023052,
+      "sha256": "10e53b421fae1b3225e68c0ef681eeca83949536cbf0ccd2758ba56ebe1ae5e0"
     },
     {
       "name": "Bnet1-component-sources.tar.gz",
@@ -30,6 +25,11 @@
       "name": "GE-Proton11-7-extras-sources.tar.zst",
       "size_bytes": 240882697,
       "sha256": "8a972f75e4ebc9eea5a874d69988d5a33a30265a2b7efa147c914762dde1f142"
+    },
+    {
+      "name": "GE-Proton11-7-ESO-BNet-arm64.tar.gz",
+      "size_bytes": 675565442,
+      "sha256": "b0baff9b9fe2996e648030e74ff19d5a8aa803b5ddd6c5a191c354110e8842d6"
     }
   ]
 }

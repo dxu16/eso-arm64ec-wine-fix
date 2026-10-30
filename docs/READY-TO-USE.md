@@ -1,6 +1,6 @@
 # Ready-to-use BNet runtime
 
-The default download is `GE-Proton11-7-ESO-BNet-arm64.tar.gz` from [v0.4.0](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.0). Follow [INSTALL.md](INSTALL.md).
+The font-fixed complete runtime is `GE-Proton11-7-ESO-BNet-arm64.tar.gz` from [v0.4.1](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.1). [Release notes](RELEASE-v0.4.1.md). Follow [INSTALL.md](INSTALL.md).
 
 The archive has one tool folder, canonical ownership/timestamps, safe relative symlinks, all runtime licenses, and an internal per-file SHA256 index. It excludes generated prefixes, registries from those prefixes, bytecode caches, device settings, and logs from the investigation.
 

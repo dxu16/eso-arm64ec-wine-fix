@@ -24,3 +24,17 @@ kernel32 gets 796 identity-LEA prologs inside existing 16-byte imported-entry sl
 Package a runtime snapshot with `python3 -B bnet/package.py --input runtime-input.tar --output GE-Proton11-7-ESO-BNet-arm64.tar.gz`. Input must contain exactly the retained BNet comparison tool, not a prefix or investigation directory. The packager checks core hashes, removes generated templates/caches, replaces comparison metadata with release metadata, preserves notices, creates internal checksums, and calls the independent archive verifier. Corresponding-source assets are indexed in `bnet/source-manifest.json`.
 
 The v0.3.0 Valve reproduction material remains under `scripts/`, `bin/`, and [legacy build notes](legacy-valve/BUILD.md). Its hashes and offsets must not be used for BNet.
+
+## Font-initialization fix
+
+`bnet/patch-proton-font-init.py` accepts only the exact released v0.4.0 Proton launcher, SHA256 `c0fe398829c78c82b26d39c20fbeb6b28d1e46941723962d794d7e5f67d402be`. It links the runtime's bundled fonts into a new template before its first `wineboot`. This lets Wine register the fonts during initialization; previously the game prefix received the symlinks after the template's font registry had already been created.
+
+To create a separate fixed runtime from the exact public v0.4.0 archive:
+
+```sh
+python3 bnet/package-font-fixed-runtime.py GE-Proton11-7-ESO-BNet-arm64.tar.gz GE-Proton11-7-ESO-BNet-arm64-fontfix-v0.4.1.tar.gz
+```
+
+The recipe checks the input archive's SHA256, changes the Proton Python launcher and release metadata, bundles the additional preferred source and existing-prefix repair helper, regenerates the file index, and runs the independent runtime verifier. It preserves all six pinned Wine/FEX component hashes. Generated templates and personal prefixes remain excluded. The output retains the existing Steam tool identifier and should be extracted into a fresh destination after preserving any existing installation.
+
+`python3 -B bnet/test_font_repair.py` checks backup preservation, idempotence, missing-font refusal, duplicate-section refusal, and active-prefix refusal. The release uses the same tested Proton launcher change.

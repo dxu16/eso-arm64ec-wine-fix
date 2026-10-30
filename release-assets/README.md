@@ -1,6 +1,6 @@
 # Release assets
 
-v0.4.0 recommends the complete `GE-Proton11-7-ESO-BNet-arm64.tar.gz` runtime.
+v0.4.1 recommends the complete `GE-Proton11-7-ESO-BNet-arm64.tar.gz` runtime.
 The release also includes the ESO patch-source archive, all three original
 BNet/GE corresponding-source archives, their source index, a release manifest,
 and SHA256SUMS. Large downloads stay out of Git.
