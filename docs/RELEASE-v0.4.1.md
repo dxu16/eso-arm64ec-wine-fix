@@ -4,11 +4,13 @@
 
 This update fixes a reproduced startup failure where a new prefix could not keep the ESO launcher open. The correction is in Proton's initial font setup; the existing ESO startup and native-call performance corrections are retained.
 
+**Setup update (31 October 2026): initialize fresh prefixes with official Proton first, then switch to this runtime.** An Odin 3 tester reports that this is still needed with v0.4.1. The font fix resolved the reproduced failure on the original test handheld, but does not establish that direct fresh-prefix startup works on every device. Follow the updated steps below.
+
 ## What caused the failure?
 
 The v0.4.0 package rebuilds its Wine template on first use. During that process, ten bundled fonts—including Arial and Tahoma—could be linked into the game prefix after Wine had already built the template's font registry. The files existed, but their registrations were missing. In the reproduced case, the 32-bit Bethesda launcher encountered a stack overflow and closed.
 
-An established prefix could already contain the registrations from an earlier runtime. The test handheld's working prefix had them, and a clean official Proton 11.0-2e ARM64 control supplied them too. This explains how the same BNet runtime could work with an established prefix while failing with a new one. The Odin 3 report prompted the investigation, but the fix has not yet been validated on that device.
+An established prefix could already contain the registrations from an earlier runtime. The test handheld's working prefix had them, and a clean official Proton 11.0-2e ARM64 control supplied them too. This explains how the same BNet runtime could work with an established prefix while failing with a new one. The Odin 3 report prompted the investigation; subsequent tester feedback indicates that official-runtime initialization is still needed with v0.4.1 on their device. The cause of that remaining failure has not been established.
 
 The runtime makes the fonts available **before Wine initializes its template**, so new prefixes receive the registrations automatically. No additional font download is required.
 
@@ -16,9 +18,10 @@ The runtime makes the fonts available **before Wine initializes its template**, 
 
 1. Close ESO and fully exit Steam. Back up any prefix settings or add-ons you want to keep.
 2. Preserve the old runtime folder outside `compatibilitytools.d`, then extract the fixed runtime into a fresh destination under `~/.local/share/Steam/compatibilitytools.d/`. Do not merge it into an existing tool folder.
-3. Restart Steam and select **GE-Proton11-7 ESO BNet (ARM64, experimental)** for ESO.
-4. For a clean reset, close ESO and move or rename its `steamapps/compatdata/306130` folder so that the exact `306130` path no longer exists. Keep the backup until the replacement setup works.
-5. Launch ESO normally. Steam recreates the prefix and runs its first-time prerequisites, which can take longer than a subsequent launch.
+3. Before restarting Steam, move or rename ESO's `steamapps/compatdata/306130` folder so that the exact `306130` path no longer exists. Use the Steam library containing ESO. Keep the backup until the replacement setup works.
+4. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime for ESO (the version used in our control test).
+5. Launch ESO, allow first-time prerequisites to finish, and wait until the launcher opens with **PLAY** available. Close the launcher and wait for Steam to show the game has stopped. You do not need to enter the game with official Proton, which may still encounter the original five-minute exit.
+6. Switch ESO's Compatibility setting to **GE-Proton11-7 ESO BNet (ARM64, experimental)**, then launch again. **Keep the prefix initialized by official Proton; do not delete or reset it between runtimes.**
 
 Steam's **Developer → Delete Proton Files** option did not clear the active prefix in our Armada test. Moving the prefix aside and verifying that `compatdata/306130` was absent did produce a working first launch. This is an observation about the tested setup, not a claim that the menu option fails everywhere.
 
@@ -46,6 +49,8 @@ Adjust the paths for a different Steam installation or library. The helper adds 
 - Independently verified the release archive's indexed files, symlinks and all six pinned Wine/FEX components.
 
 The in-game session duration was not specified. These results do not establish long-session stability or compatibility on other devices.
+
+The official-Proton-first sequence was also tested successfully on the original handheld, followed by switching the same prefix to the original patched v0.4.0 runtime. The later Odin 3 report says that official-runtime initialization is still needed with v0.4.1; direct fresh-prefix startup with v0.4.1 remains unresolved on that device.
 
 ## Runtime components and credits
 

@@ -8,7 +8,14 @@ The previously published [v0.4.0 release](https://github.com/dxu16/eso-arm64ec-w
 
 Extract its tool folder into `~/.local/share/Steam/compatibilitytools.d/`, restart Steam, then select **GE-Proton11-7 ESO BNet (ARM64, experimental)** in ESO's Compatibility settings. No compiler, installer, separate BNet installation, or separate GE installation is needed. Steam's Linux ARM64 runtime and FEX rootfs remain prerequisites. [Installation and rollback](docs/INSTALL.md).
 
-For a clean reset with the fixed runtime, close ESO and move or rename `steamapps/compatdata/306130` so that the exact `306130` path is absent, then launch through Steam. Preserve the old prefix until the new setup works. Steam's **Developer > Delete Proton Files** option did not clear the prefix in our Armada test. An existing prefix can instead use the included [font-registration repair helper](docs/INSTALL.md#fresh-prefix-launcher-failure-in-v040).
+**For a fresh prefix, initialize it with official Proton before switching to the patched runtime, including with v0.4.1.** A tester reports that the latest fix still requires this sequence on their Odin 3:
+
+1. Close ESO and fully exit Steam. Back up the existing `steamapps/compatdata/306130` folder, then move or rename it so that the exact `306130` path is absent. Use the Steam library containing ESO.
+2. Start Steam and select the official **Proton 11.0-2e ARM64** runtime for ESO (the version used in our control test).
+3. Launch ESO and allow first-time prerequisites to finish. Wait until the launcher opens with **PLAY** available, then close the launcher and wait for Steam to show the game has stopped. Starting the game under official Proton is unnecessary; it may still encounter the original five-minute exit.
+4. Switch ESO's Compatibility setting to **GE-Proton11-7 ESO BNet (ARM64, experimental)** and launch again. **Keep the prefix created by official Proton; do not reset it between runtimes.**
+
+Preserve the old prefix until the new setup works. Steam's **Developer > Delete Proton Files** option did not clear the prefix in our Armada test; verify the `306130` path is absent before the official-runtime first launch. This sequence also worked on the test handheld. An existing prefix with missing font registrations can instead use the included [font-registration repair helper](docs/INSTALL.md#fresh-prefix-launcher-failure-in-v040), but that repair has not been shown to resolve the tester's remaining v0.4.1 failure.
 
 ## Disclaimer
 
@@ -25,7 +32,7 @@ Both comparison variants passed seven-minute startup checks and produced similar
 - Starts with GE-Proton11-7 ARM64 and the original BNet1 Wine/FEX component replacements.
 - Adds 796 kernel32 imported-entry prologs to resolve the previously measured ESO five-minute self-exit.
 - Adds the matching ntdll ARM64EC call-checker correction so those prologs retain the native import-call path.
-- v0.4.1 makes bundled fonts available before Wine initializes a new template, preventing the reproduced fresh-prefix launcher stack overflow. Fresh Steam startup and in-game operation were confirmed on the test handheld; Odin 3 validation is still outstanding.
+- v0.4.1 makes bundled fonts available before Wine initializes a new template, preventing the reproduced fresh-prefix launcher stack overflow on the test handheld. Fresh Steam startup and in-game operation were confirmed there. An Odin 3 tester still needed official Proton to initialize a fresh prefix before switching to v0.4.1; follow the sequence above.
 
 The BNet FEX binaries and GE graphics components are preserved. No FEX profile is forced, and ESO's executable is not modified. Wine was not recompiled: the two ESO DLL changes are reproducible post-link transformations. Exact recipes, manifests, an assembly reference, and corresponding sources accompany the release. [Build details](docs/BUILD.md).
 

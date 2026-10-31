@@ -5,8 +5,11 @@ Requirements: Linux ARM64, Steam, ESO, SteamLinuxRuntime_4-arm64, and the Steam 
 1. Download `GE-Proton11-7-ESO-BNet-arm64.tar.gz` and `SHA256SUMS` from [v0.4.1](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.1).
 2. Verify the archive: `sha256sum -c SHA256SUMS --ignore-missing`.
 3. With Steam fully closed, preserve an existing tool folder outside `compatibilitytools.d`, then extract the archive into a fresh destination under `~/.local/share/Steam/compatibilitytools.d/`. The archive contains one `GE-Proton11-7-ESO-BNet-arm64` tool folder; do not merge installations.
-4. Restart Steam and choose **GE-Proton11-7 ESO BNet (ARM64, experimental)** under ESO > Properties > Compatibility.
-5. For a clean prefix, close ESO and move or rename its `steamapps/compatdata/306130` folder so that the exact `306130` path is absent, then launch normally. Preserve the backup until the new setup works. Steam's Developer > Delete Proton Files option did not clear this path in our Armada test.
+4. For a fresh prefix, before restarting Steam, back up and move or rename ESO's `steamapps/compatdata/306130` folder so that the exact `306130` path is absent. Use the Steam library containing ESO. Preserve the backup until the new setup works. Steam's Developer > Delete Proton Files option did not clear this path in our Armada test.
+5. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime under ESO > Properties > Compatibility. Launch ESO, let first-time prerequisites finish, and wait until the launcher opens with **PLAY** available. Close the launcher and wait for Steam to show the game has stopped. There is no need to enter the game with official Proton, which may still encounter the original five-minute exit.
+6. Switch ESO to **GE-Proton11-7 ESO BNet (ARM64, experimental)** and launch again. **Keep the same prefix; do not reset it between runtimes.** For an already working prefix, retain it and select the patched runtime directly.
+
+Initialize fresh prefixes with official Proton first even when using v0.4.1: an Odin 3 tester reports that this sequence is still needed with the latest font fix. The same sequence worked on the original test handheld. The remaining direct-start failure on the tester's device has not been diagnosed.
 
 No Python installer, compiler, or separate original BNet/GE download is required. Steam still supplies external runtime dependencies and ESO's first-run prerequisites. First launch can take longer while Proton creates its template prefix. Keep your shader caches and known-working FEX settings for comparison.
 
@@ -28,4 +31,4 @@ python3 bnet/repair-launcher-fonts.py "$HOME/.local/share/Steam/steamapps/compat
 
 Adjust the path if ESO's prefix is in another Steam library. The helper adds only missing registrations for ten existing font files, preserves existing values, and saves a byte-for-byte `system.reg.before-eso-font-repair-*` backup beside `system.reg`. It refuses active prefixes and missing fonts. It does not download fonts or replace Wine/FEX DLLs. Running it again makes no further changes.
 
-v0.4.1 makes the fonts visible before Wine generates its template, so new prefixes receive the registrations automatically. Existing affected prefixes still need the helper above or a clean prefix. The reproduction recipe is in [BUILD.md](BUILD.md). Other-device validation remains outstanding.
+v0.4.1 makes the fonts visible before Wine generates its template, supplying the registrations automatically in the tested fresh-prefix setup. An Odin 3 tester still needed the official-Proton-first sequence above with v0.4.1. The helper addresses the identified missing registrations; it has not been shown to resolve that tester's remaining failure. The reproduction recipe is in [BUILD.md](BUILD.md).
