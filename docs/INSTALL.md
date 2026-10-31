@@ -4,10 +4,12 @@ Requirements: Linux ARM64, Steam, ESO, SteamLinuxRuntime_4-arm64, and the Steam 
 
 1. Download `GE-Proton11-7-ESO-BNet-arm64.tar.gz` and `SHA256SUMS` from [v0.4.1](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.1).
 2. Verify the archive: `sha256sum -c SHA256SUMS --ignore-missing`.
-3. With Steam fully closed, preserve an existing tool folder outside `compatibilitytools.d`, then extract the archive into a fresh destination under `~/.local/share/Steam/compatibilitytools.d/`. The archive contains one `GE-Proton11-7-ESO-BNet-arm64` tool folder; do not merge installations.
-4. For a fresh prefix, before restarting Steam, back up and move or rename ESO's `steamapps/compatdata/306130` folder so that the exact `306130` path is absent. Use the Steam library containing ESO. Preserve the backup until the new setup works. Steam's Developer > Delete Proton Files option did not clear this path in our Armada test.
-5. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime under ESO > Properties > Compatibility. Launch ESO, let first-time prerequisites finish, and wait until the launcher opens with **PLAY** available. Close the launcher and wait for Steam to show the game has stopped. There is no need to enter the game with official Proton, which may still encounter the original five-minute exit.
-6. Switch ESO to **GE-Proton11-7 ESO BNet (ARM64, experimental)** and launch again. **Keep the same prefix; do not reset it between runtimes.** For an already working prefix, retain it and select the patched runtime directly.
+3. Fully exit Steam and extract the archive's `GE-Proton11-7-ESO-BNet-arm64` tool folder into `~/.local/share/Steam/compatibilitytools.d/`.
+4. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime under ESO > Properties > Compatibility.
+5. Launch ESO, let first-time prerequisites finish, and wait until the launcher opens with **PLAY** available. Close the launcher and wait for Steam to show the game has stopped.
+6. Switch ESO to **GE-Proton11-7 ESO BNet (ARM64, experimental)** and launch again. Keep the same prefix when switching runtimes.
+
+These steps assume a first-time setup. If you initialized the prefix with the patched runtime and the launcher crashes on startup, fully exit Steam and delete `~/.local/share/Steam/steamapps/compatdata/306130`, then repeat steps 4–6. For another Steam library, use its `steamapps/compatdata/306130` folder. Steam's Developer > Delete Proton Files option did not clear this path in our Armada test; verify the folder is absent before starting again with official Proton.
 
 Initialize fresh prefixes with official Proton first even when using v0.4.1: an Odin 3 tester reports that this sequence is still needed with the latest font fix. The same sequence worked on the original test handheld. The remaining direct-start failure on the tester's device has not been diagnosed.
 

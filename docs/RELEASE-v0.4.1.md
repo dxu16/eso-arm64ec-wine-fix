@@ -16,12 +16,12 @@ The runtime makes the fonts available **before Wine initializes its template**, 
 
 ## Install and start fresh
 
-1. Close ESO and fully exit Steam. Back up any prefix settings or add-ons you want to keep.
-2. Preserve the old runtime folder outside `compatibilitytools.d`, then extract the fixed runtime into a fresh destination under `~/.local/share/Steam/compatibilitytools.d/`. Do not merge it into an existing tool folder.
-3. Before restarting Steam, move or rename ESO's `steamapps/compatdata/306130` folder so that the exact `306130` path no longer exists. Use the Steam library containing ESO. Keep the backup until the replacement setup works.
-4. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime for ESO (the version used in our control test).
-5. Launch ESO, allow first-time prerequisites to finish, and wait until the launcher opens with **PLAY** available. Close the launcher and wait for Steam to show the game has stopped. You do not need to enter the game with official Proton, which may still encounter the original five-minute exit.
-6. Switch ESO's Compatibility setting to **GE-Proton11-7 ESO BNet (ARM64, experimental)**, then launch again. **Keep the prefix initialized by official Proton; do not delete or reset it between runtimes.**
+1. Fully exit Steam. Extract the downloaded runtime's `GE-Proton11-7-ESO-BNet-arm64` tool folder into `~/.local/share/Steam/compatibilitytools.d/`.
+2. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime in ESO's Compatibility settings.
+3. Launch ESO, allow first-time prerequisites to finish, and wait until the launcher opens with **PLAY** available. Close the launcher and wait for Steam to show the game has stopped.
+4. Switch ESO's Compatibility setting to **GE-Proton11-7 ESO BNet (ARM64, experimental)**, then launch again. Keep the prefix initialized by official Proton when switching runtimes.
+
+These steps assume a first-time setup. If you initialized the prefix with the patched runtime and the launcher crashes on startup, fully exit Steam and delete `~/.local/share/Steam/steamapps/compatdata/306130`, then repeat steps 2–4. For another Steam library, use its `steamapps/compatdata/306130` folder.
 
 Steam's **Developer → Delete Proton Files** option did not clear the active prefix in our Armada test. Moving the prefix aside and verifying that `compatdata/306130` was absent did produce a working first launch. This is an observation about the tested setup, not a claim that the menu option fails everywhere.
 
@@ -36,6 +36,8 @@ python3 "$HOME/.local/share/Steam/compatibilitytools.d/GE-Proton11-7-ESO-BNet-ar
 ```
 
 Adjust the paths for a different Steam installation or library. The helper adds only missing registrations for the ten existing font files and saves a byte-for-byte registry backup first. It preserves existing values, refuses active prefixes and missing fonts, and makes no further changes when run again.
+
+This helper addresses the missing registrations identified in the v0.4.0 investigation. It has not been shown to resolve the tester's remaining v0.4.1 startup failure; use the official-Proton-first setup above for that case.
 
 ## Validation
 

@@ -4,16 +4,16 @@ The recommended runtime is **GE-Proton11-7 ESO BNet (ARM64, experimental)**: [BN
 
 **[Download the complete font-fixed runtime](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.4.1/GE-Proton11-7-ESO-BNet-arm64.tar.gz)** | [v0.4.1 release, checksums and sources](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.1) | [Release notes](docs/RELEASE-v0.4.1.md)
 
-The previously published [v0.4.0 release](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.0) does not include the fresh-prefix font fix.
-
-**For a fresh prefix, initialize it with official Proton before switching to the patched runtime, including with v0.4.1.** A tester reports that the latest fix still requires this sequence on their Odin 3:
+**For a fresh prefix, initialize it with official Proton before switching to the patched runtime**:
 
 1. Fully exit Steam. Extract the downloaded runtime's `GE-Proton11-7-ESO-BNet-arm64` tool folder into `~/.local/share/Steam/compatibilitytools.d/`.
-2. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime in ESO's Compatibility settings (the version used in our control test).
-3. Launch ESO and allow first-time prerequisites to finish. Wait until the launcher opens with **PLAY** available, then close the launcher and wait for Steam to show the game has stopped. Starting the game under official Proton is unnecessary; it may still encounter the original five-minute exit.
-4. Switch ESO's Compatibility setting to **GE-Proton11-7 ESO BNet (ARM64, experimental)** and launch again. **Keep the prefix created by official Proton; do not reset it between runtimes.**
+2. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime in ESO's Compatibility settings.
+3. Launch ESO and allow first-time prerequisites to finish. Wait until the launcher opens with **PLAY** available, then close the launcher and wait for Steam to show the game has stopped.
+4. Switch ESO's Compatibility setting to **GE-Proton11-7 ESO BNet (ARM64, experimental)** and launch again.
 
-No compiler, installer, separate BNet installation, or separate GE installation is needed. Steam's Linux ARM64 runtime and FEX rootfs remain prerequisites. These steps assume a first-time setup. [Detailed installation and troubleshooting](docs/INSTALL.md).
+If you first set up ESO with the patched runtime and the launcher crashes on startup, fully exit Steam, delete the game prefix at `~/.local/share/Steam/steamapps/compatdata/306130`, then repeat steps 2–4. For another Steam library, use its `steamapps/compatdata/306130` folder. Keep the prefix when switching from official Proton to the patched runtime.
+
+No compiler, installer, separate BNet installation, or separate GE installation is needed. Steam's Linux ARM64 runtime and FEX rootfs remain prerequisites. [Detailed installation and troubleshooting](docs/INSTALL.md).
 
 ## Disclaimer
 
@@ -30,7 +30,7 @@ Both comparison variants passed seven-minute startup checks and produced similar
 - Starts with GE-Proton11-7 ARM64 and the original BNet1 Wine/FEX component replacements.
 - Adds 796 kernel32 imported-entry prologs to resolve the previously measured ESO five-minute self-exit.
 - Adds the matching ntdll ARM64EC call-checker correction so those prologs retain the native import-call path.
-- v0.4.1 makes bundled fonts available before Wine initializes a new template, preventing the reproduced fresh-prefix launcher stack overflow on the test handheld. Fresh Steam startup and in-game operation were confirmed there. An Odin 3 tester still needed official Proton to initialize a fresh prefix before switching to v0.4.1; follow the sequence above.
+- v0.4.1 makes bundled fonts available before Wine initializes a new template, preventing the reproduced fresh-prefix launcher stack overflow on the test handheld. Fresh Steam startup and in-game operation were confirmed there. However, another tester reported that they still needed official Proton to initialize a fresh prefix before switching to v0.4.1; follow the sequence above.
 
 The BNet FEX binaries and GE graphics components are preserved. No FEX profile is forced, and ESO's executable is not modified. Wine was not recompiled: the two ESO DLL changes are reproducible post-link transformations. Exact recipes, manifests, an assembly reference, and corresponding sources accompany the release. [Build details](docs/BUILD.md).
 
