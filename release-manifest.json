@@ -1,15 +1,15 @@
 {
   "project": "eso-arm64ec-wine-fix",
-  "version": "v0.4.1",
-  "date": "2026-10-30",
-  "base": "BNet1 on GE-Proton11-7 ARM64",
+  "version": "v0.4.2",
+  "date": "2026-11-08",
+  "base": "BNet1 on GE-Proton11-7 ARM64 with the v0.4.1 font initialization fix",
   "upstream": "https://github.com/mrdidit/bnet-arm",
-  "delivery": "Complete font-fixed runtime, all fix and packaging sources in the main repository and source bundle, and three original BNet/GE corresponding-source archives",
+  "delivery": "Complete runtime with graphics-probe isolation, additional fix and packaging sources, and the original BNet/GE corresponding sources",
   "assets": [
     {
-      "name": "ESO-BNet-v0.4.1-patch-sources.tar.gz",
-      "size_bytes": 2023052,
-      "sha256": "10e53b421fae1b3225e68c0ef681eeca83949536cbf0ccd2758ba56ebe1ae5e0"
+      "name": "ESO-BNet-v0.4.2-patch-sources.tar.gz",
+      "size_bytes": 2031975,
+      "sha256": "bb5c57fe2d08ec9141cd33fc39c1d32997d37f31f7a3f8e8325671e9ff701195"
     },
     {
       "name": "Bnet1-component-sources.tar.gz",
@@ -28,8 +28,8 @@
     },
     {
       "name": "GE-Proton11-7-ESO-BNet-arm64.tar.gz",
-      "size_bytes": 675565442,
-      "sha256": "b0baff9b9fe2996e648030e74ff19d5a8aa803b5ddd6c5a191c354110e8842d6"
+      "size_bytes": 675574469,
+      "sha256": "0b280451b3f32215d97eab55e6f596ef83a9820e5808babd396663cce8155a2f"
     }
   ]
 }

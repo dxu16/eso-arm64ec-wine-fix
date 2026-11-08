@@ -36,7 +36,7 @@ def main():
     args = parser.parse_args()
     # Current repository checks include BNet; standalone historical Valve overlays
     # retain their original verification path when the BNet directory is absent.
-    for current in ['verify.py', 'test_runtime.py', 'test_font_repair.py']:
+    for current in ['verify.py', 'test_runtime.py', 'test_font_repair.py', 'test_probe_wrapper.py']:
         script = ROOT/'bnet'/current
         if script.is_file():
             subprocess.run([sys.executable, '-B', str(script)], check=True)
@@ -139,8 +139,11 @@ def main():
             expected, name = line.split('  ',1)
             check(digest(ROOT/name) == expected, 'Repository checksum failed: '+name)
     if args.release_assets:
-        for row in json.loads((ROOT/'release-manifest.json').read_text())['assets']:
-            path = ROOT/'release-assets'/row['name']
+        release = json.loads((ROOT/'release-manifest.json').read_text())
+        for row in release['assets']:
+            path = ROOT/'release-assets'/release['version']/row['name']
+            if not path.is_file():
+                path = ROOT/'release-assets'/row['name']
             check(path.is_file(), 'Missing release asset: '+str(path))
             check(digest(path) == row['sha256'], 'Release checksum failed: '+row['name'])
             print('Verified release asset:', row['name'])

@@ -37,3 +37,7 @@ project helpers retain the repository license; third-party code retains its own 
 
 See [installation](../docs/INSTALL.md), [validation](../docs/VALIDATION.md), and
 [source/license details](../docs/SOURCES-AND-LICENSES.md).
+
+## Graphics probe isolation
+
+The v0.4.2 wrapper, existing-runtime installer, regression tests, and complete-runtime packager are maintained here. See [the probe documentation](../docs/GRAPHICS-PROBES.md) and [build instructions](../docs/BUILD.md#graphics-probe-wrapper-package).

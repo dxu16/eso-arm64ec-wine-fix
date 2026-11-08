@@ -1,8 +1,8 @@
 # ESO on BNet / GE-Proton 11 ARM64
 
-The recommended runtime is **GE-Proton11-7 ESO BNet (ARM64, experimental)**: [BNet1](https://github.com/mrdidit/bnet-arm) plus the ESO startup and native-call performance corrections, with the v0.4.1 font-initialization fix for fresh prefixes.
+The recommended runtime is **GE-Proton11-7 ESO BNet (ARM64, experimental)**: [BNet1](https://github.com/mrdidit/bnet-arm) plus the ESO startup and native-call performance corrections, with the v0.4.1 font-initialization fix and v0.4.2 graphics-probe isolation.
 
-**[Download the complete font-fixed runtime](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.4.1/GE-Proton11-7-ESO-BNet-arm64.tar.gz)** | [v0.4.1 release, checksums and sources](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.1) | [Release notes](docs/RELEASE-v0.4.1.md)
+**[Download the complete runtime](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/download/v0.4.2/GE-Proton11-7-ESO-BNet-arm64.tar.gz)** | [v0.4.2 release, checksums and sources](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.2) | [Release notes](docs/RELEASE-v0.4.2.md)
 
 **For a fresh prefix, initialize it with official Proton before switching to the patched runtime**:
 
@@ -31,6 +31,8 @@ Both comparison variants passed seven-minute startup checks and produced similar
 - Adds 796 kernel32 imported-entry prologs to resolve the previously measured ESO five-minute self-exit.
 - Adds the matching ntdll ARM64EC call-checker correction so those prologs retain the native import-call path.
 - v0.4.1 makes bundled fonts available before Wine initializes a new template, preventing the reproduced fresh-prefix launcher stack overflow on the test handheld. Fresh Steam startup and in-game operation were confirmed there. However, another tester reported that they still needed official Proton to initialize a fresh prefix before switching to v0.4.1; follow the sequence above.
+
+- v0.4.2 gives Steam's automatic graphics probes dedicated prefixes to prevent cross-runtime DLL overwrites. Game launch options stay the same. [Details](docs/GRAPHICS-PROBES.md).
 
 The BNet FEX binaries and GE graphics components are preserved. No FEX profile is forced, and ESO's executable is not modified. Wine was not recompiled: the two ESO DLL changes are reproducible post-link transformations. Exact recipes, manifests, an assembly reference, and corresponding sources accompany the release. [Build details](docs/BUILD.md).
 

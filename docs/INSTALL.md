@@ -2,7 +2,7 @@
 
 Requirements: Linux ARM64, Steam, ESO, SteamLinuxRuntime_4-arm64, and the Steam FEX rootfs. The complete archive includes GE-Proton11-7, BNet1's matching Wine/FEX components, and both ESO corrections.
 
-1. Download `GE-Proton11-7-ESO-BNet-arm64.tar.gz` and `SHA256SUMS` from [v0.4.1](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.1).
+1. Download `GE-Proton11-7-ESO-BNet-arm64.tar.gz` and `SHA256SUMS` from [v0.4.2](https://github.com/dxu16/eso-arm64ec-wine-fix/releases/tag/v0.4.2).
 2. Verify the archive: `sha256sum -c SHA256SUMS --ignore-missing`.
 3. Fully exit Steam and extract the archive's `GE-Proton11-7-ESO-BNet-arm64` tool folder into `~/.local/share/Steam/compatibilitytools.d/`.
 4. Restart Steam and select the official **Proton 11.0-2e ARM64** runtime under ESO > Properties > Compatibility.
@@ -34,3 +34,7 @@ python3 bnet/repair-launcher-fonts.py "$HOME/.local/share/Steam/steamapps/compat
 Adjust the path if ESO's prefix is in another Steam library. The helper adds only missing registrations for ten existing font files, preserves existing values, and saves a byte-for-byte `system.reg.before-eso-font-repair-*` backup beside `system.reg`. It refuses active prefixes and missing fonts. It does not download fonts or replace Wine/FEX DLLs. Running it again makes no further changes.
 
 v0.4.1 makes the fonts visible before Wine generates its template, supplying the registrations automatically in the tested fresh-prefix setup. An Odin 3 tester still needed the official-Proton-first sequence above with v0.4.1. The helper addresses the identified missing registrations; it has not been shown to resolve that tester's remaining failure. The reproduction recipe is in [BUILD.md](BUILD.md).
+
+## Graphics probe isolation
+
+The v0.4.2 runtime includes graphics-probe isolation automatically. Keep the existing ESO target and launch options. Probe prefixes are cached separately from game prefixes. See [GRAPHICS-PROBES.md](GRAPHICS-PROBES.md) for the mechanism, existing-runtime installation, verification, and cleanup.

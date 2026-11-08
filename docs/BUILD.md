@@ -38,3 +38,13 @@ python3 bnet/package-font-fixed-runtime.py GE-Proton11-7-ESO-BNet-arm64.tar.gz G
 The recipe checks the input archive's SHA256, changes the Proton Python launcher and release metadata, bundles the additional preferred source and existing-prefix repair helper, regenerates the file index, and runs the independent runtime verifier. It preserves all six pinned Wine/FEX component hashes. Generated templates and personal prefixes remain excluded. The output retains the existing Steam tool identifier and should be extracted into a fresh destination after preserving any existing installation.
 
 `python3 -B bnet/test_font_repair.py` checks backup preservation, idempotence, missing-font refusal, duplicate-section refusal, and active-prefix refusal. The release uses the same tested Proton launcher change.
+
+## Graphics probe wrapper package
+
+Build v0.4.2 from the exact v0.4.1 runtime download, with an unused output path:
+
+```sh
+python3 -B bnet/package-probe-safe-runtime.py v0.4.1/GE-Proton11-7-ESO-BNet-arm64.tar.gz v0.4.2/GE-Proton11-7-ESO-BNet-arm64.tar.gz
+```
+
+The recipe verifies the input archive hash, preserves the existing Proton font fix and binary components, adds the probe wrapper, changes the manifest entry point, refreshes bundled sources/documentation, and regenerates and verifies the runtime file index. See [GRAPHICS-PROBES.md](GRAPHICS-PROBES.md).
