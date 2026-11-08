@@ -8,8 +8,8 @@
   "assets": [
     {
       "name": "ESO-BNet-v0.4.2-patch-sources.tar.gz",
-      "size_bytes": 2031975,
-      "sha256": "bb5c57fe2d08ec9141cd33fc39c1d32997d37f31f7a3f8e8325671e9ff701195"
+      "size_bytes": 2031968,
+      "sha256": "91342fad2132623d8d8fd7eb93fddc9bbf6aafa860e5ea98ef5e979d4b588da3"
     },
     {
       "name": "Bnet1-component-sources.tar.gz",
@@ -28,8 +28,8 @@
     },
     {
       "name": "GE-Proton11-7-ESO-BNet-arm64.tar.gz",
-      "size_bytes": 675574469,
-      "sha256": "0b280451b3f32215d97eab55e6f596ef83a9820e5808babd396663cce8155a2f"
+      "size_bytes": 675574472,
+      "sha256": "672f83435ca802172963af55579ce046fee09147bef34e8e7bcdebba5172e217"
     }
   ]
 }

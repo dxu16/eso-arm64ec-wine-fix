@@ -1,4 +1,4 @@
-# v0.4.2 — Isolate Steam graphics probes
+# v0.4.2 â€” Isolate Steam graphics probes
 
 This maintenance release retains the v0.4.1 font initialization fix and the existing ESO startup and native-call corrections. Steam's automatic graphics probes now use separate prefixes for each runtime, probe executable, and DirectX mode. This prevents the shared compatdata/0 prefix from linking different Wine builds during probe initialization.
 
